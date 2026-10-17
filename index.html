@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#26122F">
-<title>Una carta</title>
+<title>Una carta para Arianna</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
@@ -245,9 +245,7 @@
     background: radial-gradient(closest-side, rgba(255,80,130,.38), transparent); animation: glowPulse 3.2s ease-in-out infinite; }
   @keyframes glowPulse { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
   .pre { font: 500 1.7rem var(--hand); color: #FFD6E0; margin: 0 0 -4px; animation: fadeup 1s .2s both; }
-  .pg .k, .pg h4, .pg p, .pg .sig, .pg .num, .ded .wd, .cover h3, .cover .who { filter: blur(7px); }
-  .cz { display: inline-block; filter: blur(7px); }
-  .name { filter: blur(12px); margin: 0; font: 700 clamp(4.4rem, 24vw, 6.6rem)/1 var(--hand); color: #FFF0F4;
+  .name { margin: 0; font: 700 clamp(4.4rem, 24vw, 6.6rem)/1 var(--hand); color: #FFF0F4;
     text-shadow: 0 0 10px rgba(255,130,165,.9), 0 0 28px rgba(255,70,120,.6); }
   .name span { display: inline-block; animation: letterIn .95s cubic-bezier(.2,1.25,.3,1) calc(.5s + var(--i) * .11s) both, wave 3.4s ease-in-out calc(2.2s + var(--i) * .14s) infinite; }
   @keyframes letterIn { from { opacity: 0; transform: translateY(40px) scale(.4) rotate(-14deg); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
@@ -333,6 +331,85 @@
   .dots { display: flex; gap: 5px; } .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,214,224,.3); transition: transform .3s, background .3s; }
   .dot.on { background: #FFD6E0; transform: scale(1.5); }
 
+  /* ===== Onomatopeyas de cómic cuando el "No" se escapa ===== */
+  .pow { position: fixed; z-index: 12; width: 150px; height: 124px; margin: -62px 0 0 -75px; pointer-events: none; display: grid; place-items: center;
+    background: #3B1530; -webkit-clip-path: polygon(50.0% 0.0%, 57.3% 17.8%, 70.0% 8.6%, 73.1% 21.1%, 89.1% 18.8%, 79.7% 35.7%, 94.8% 39.8%, 87.0% 50.0%, 98.7% 61.1%, 79.7% 64.3%, 86.0% 78.7%, 73.1% 78.9%, 71.7% 95.0%, 57.3% 82.2%, 50.0% 96.0%, 41.8% 86.1%, 28.3% 95.0%, 29.4% 75.8%, 14.0% 78.7%, 16.7% 66.1%, 1.3% 61.1%, 17.0% 50.0%, 5.2% 39.8%, 16.7% 33.9%, 10.9% 18.8%, 29.4% 24.2%, 30.0% 8.6%, 41.8% 13.9%); clip-path: polygon(50.0% 0.0%, 57.3% 17.8%, 70.0% 8.6%, 73.1% 21.1%, 89.1% 18.8%, 79.7% 35.7%, 94.8% 39.8%, 87.0% 50.0%, 98.7% 61.1%, 79.7% 64.3%, 86.0% 78.7%, 73.1% 78.9%, 71.7% 95.0%, 57.3% 82.2%, 50.0% 96.0%, 41.8% 86.1%, 28.3% 95.0%, 29.4% 75.8%, 14.0% 78.7%, 16.7% 66.1%, 1.3% 61.1%, 17.0% 50.0%, 5.2% 39.8%, 16.7% 33.9%, 10.9% 18.8%, 29.4% 24.2%, 30.0% 8.6%, 41.8% 13.9%); will-change: transform, opacity;
+    animation: pow .9s cubic-bezier(.2,1.4,.4,1) forwards; }
+  .pow i { position: absolute; inset: 6px; background: linear-gradient(160deg, #FFE45C, #FFC93C); -webkit-clip-path: polygon(50.0% 0.0%, 57.3% 17.8%, 70.0% 8.6%, 73.1% 21.1%, 89.1% 18.8%, 79.7% 35.7%, 94.8% 39.8%, 87.0% 50.0%, 98.7% 61.1%, 79.7% 64.3%, 86.0% 78.7%, 73.1% 78.9%, 71.7% 95.0%, 57.3% 82.2%, 50.0% 96.0%, 41.8% 86.1%, 28.3% 95.0%, 29.4% 75.8%, 14.0% 78.7%, 16.7% 66.1%, 1.3% 61.1%, 17.0% 50.0%, 5.2% 39.8%, 16.7% 33.9%, 10.9% 18.8%, 29.4% 24.2%, 30.0% 8.6%, 41.8% 13.9%); clip-path: polygon(50.0% 0.0%, 57.3% 17.8%, 70.0% 8.6%, 73.1% 21.1%, 89.1% 18.8%, 79.7% 35.7%, 94.8% 39.8%, 87.0% 50.0%, 98.7% 61.1%, 79.7% 64.3%, 86.0% 78.7%, 73.1% 78.9%, 71.7% 95.0%, 57.3% 82.2%, 50.0% 96.0%, 41.8% 86.1%, 28.3% 95.0%, 29.4% 75.8%, 14.0% 78.7%, 16.7% 66.1%, 1.3% 61.1%, 17.0% 50.0%, 5.2% 39.8%, 16.7% 33.9%, 10.9% 18.8%, 29.4% 24.2%, 30.0% 8.6%, 41.8% 13.9%); }
+  .pow b { position: relative; font: italic 800 1.5rem/1 var(--ui); letter-spacing: .01em; color: #C7192F; white-space: nowrap;
+    text-shadow: 2px 2px 0 #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 3px 3px 0 rgba(59,21,48,.35); }
+  @keyframes pow { 0% { transform: scale(.2) rotate(var(--r)); opacity: 0; } 22% { transform: scale(1.18) rotate(var(--r)); opacity: 1; } 38% { transform: scale(1) rotate(var(--r)); }
+    78% { opacity: 1; } 100% { transform: translateY(-14px) scale(1.08) rotate(var(--r)); opacity: 0; } }
+
+  /* ===== Nube dorada voladora: pasea por la pantalla final y, al tocarla, te lleva volando hasta la primera cita ===== */
+  .nimbus { position: fixed; left: 0; top: 0; z-index: 24; width: 82px; padding: 8px; border: 0; background: none; cursor: pointer; touch-action: manipulation;
+    will-change: transform; animation: nbX 46s linear infinite, nbY 17s ease-in-out infinite alternate; }
+  @keyframes nbX { 0% { transform: translateX(-26vw); } 48%, 52% { transform: translateX(112vw); } 100% { transform: translateX(-26vw); } }
+  @keyframes nbY { from { translate: 0 26vh; } to { translate: 0 64vh; } }
+  .nb-in { display: block; animation: nbBob 3s ease-in-out infinite, nbFace 46s step-end infinite; }
+  @keyframes nbBob { 0%, 100% { translate: 0 0; rotate: -2deg; } 50% { translate: 0 -6px; rotate: 2deg; } }
+  @keyframes nbFace { 0% { scale: 1 1; } 50%, 100% { scale: -1 1; } }
+  .nb-in svg { display: block; width: 100%; overflow: visible; filter: drop-shadow(0 0 7px rgba(255,205,90,.75)); }
+  .nb-s { transform-box: fill-box; transform-origin: center; animation: nbTw 1.7s ease-in-out infinite; }
+  @keyframes nbTw { 0%, 100% { transform: scale(.2); opacity: .2; } 50% { transform: scale(1); opacity: 1; } }
+  .nb-tip { position: absolute; left: 0; right: 0; top: -14px; text-align: center; pointer-events: none; font: 700 1.25rem/1 var(--hand); color: #FFE9A8;
+    text-shadow: 0 0 8px rgba(255,190,70,.8); animation: nbTip 7s forwards; }
+  @keyframes nbTip { 0%, 80% { opacity: 1; } 100% { opacity: 0; } }
+
+  /* ===== Primera cita ===== */
+  .cita .cs { font: 500 1.35rem/1.15 var(--hand); opacity: .8; margin: 0 0 12px; }
+  .cita .q { margin-top: 6px; }
+  .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 4px 0 12px; }
+  .plan { position: relative; text-align: left; padding: 9px 10px 8px; border: 2px solid #E2C4C0; border-radius: 14px; background: #FFF8F3; color: var(--ink);
+    cursor: pointer; touch-action: manipulation; box-shadow: 0 3px 0 #D9B8B3; transition: transform .15s, background .15s; }
+  .plan .pe { display: block; font-size: 1.6rem; line-height: 1; }
+  .plan b { display: block; font: 700 1.3rem/1 var(--hand); margin-top: 3px; }
+  .plan:active, .day:active { transform: translateY(2px); box-shadow: 0 1px 0 #D9B8B3; }
+  .plan.on { background: linear-gradient(180deg, #FFD6E0, #FFB9CB); border-color: var(--wax); box-shadow: 0 3px 0 #B3203F; transform: rotate(-1deg) translateY(-1px); }
+  .plan.on::after { content: "\2665"; position: absolute; right: 8px; top: 5px; color: var(--wax); font-size: .9rem; }
+  .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; margin: 4px 0 12px; }
+  .day { padding: 6px 0 5px; border: 2px solid #E2C4C0; border-radius: 12px; background: #FFF8F3; color: var(--ink); text-align: center;
+    cursor: pointer; touch-action: manipulation; box-shadow: 0 3px 0 #D9B8B3; transition: transform .15s, background .15s; }
+  .day small { display: block; font: 700 .95rem/1 var(--hand); opacity: .65; }
+  .day b { display: block; font: 700 1.55rem/1 var(--hand); }
+  .day em { display: block; font: 500 .85rem/1 var(--hand); font-style: normal; opacity: .6; }
+  .day.we small { color: var(--wax); opacity: .9; }
+  .day.on { background: linear-gradient(180deg, #FFD6E0, #FFB9CB); border-color: var(--wax); box-shadow: 0 3px 0 #B3203F; transform: translateY(-1px); }
+  .ticket { position: relative; height: 142px; margin: 8px 0 16px; padding: 8px 16px; display: grid; grid-template-rows: 1fr 1fr; color: var(--ink); border-radius: 8px;
+    background: radial-gradient(circle at 0 50%, transparent 10px, #FFF4D6 10.5px) left / 51% 100% no-repeat, radial-gradient(circle at 100% 50%, transparent 10px, #FFF4D6 10.5px) right / 51% 100% no-repeat;
+    filter: drop-shadow(0 4px 6px rgba(70,30,40,.25)); opacity: .8; transition: opacity .4s; }
+  .ticket::before { content: ""; position: absolute; left: 14px; right: 14px; top: 50%; border-top: 2px dashed #D9B98F; }
+  .ticket.on { opacity: 1; filter: drop-shadow(0 0 10px rgba(255,200,90,.85)) drop-shadow(0 4px 6px rgba(70,30,40,.25)); }
+  .tk-a, .tk-b { display: flex; flex-direction: column; justify-content: center; gap: 3px; }
+  .tk-a { padding-bottom: 6px; } .tk-b { padding-top: 6px; }
+  .tk-h { display: flex; justify-content: space-between; font: 700 1.2rem/1 var(--hand); color: var(--wax); }
+  .tk-h span:last-child { color: var(--ink); opacity: .6; }
+  .tk-plan { font: 700 1.75rem/1.05 var(--hand); }
+  .tk-when { font: 700 1.6rem/1.05 var(--hand); }
+  .tk-foot { font: 500 1.2rem/1.1 var(--hand); opacity: .7; }
+  .cbtns { display: flex; flex-direction: column; gap: 14px; }
+  .cbtns .btn { width: 100%; }
+  .cbtns .wa { margin-top: 0; animation: none; }
+
+  /* ===== Llevamos X días ===== */
+  .since { text-align: center; padding-left: 28px; }
+  .since h2 { margin: 0; }
+  .dnum { font: 700 5.4rem/1.05 var(--hand); color: var(--wax); }
+  .dlab { font: 700 1.7rem/1.1 var(--hand); }
+  .dfrom { font: 500 1.25rem/1.2 var(--hand); opacity: .65; margin-top: 6px; }
+
+  /* ===== Logros desbloqueados ===== */
+  .achs { display: flex; flex-direction: column; gap: 10px; margin: 8px 0 6px; }
+  .ach-i { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 14px; background: #FFF8F3; border: 2px solid #E2C4C0;
+    filter: grayscale(1); opacity: .55; transition: opacity .3s, filter .3s; }
+  .ach-i .med { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-size: 1.4rem;
+    background: radial-gradient(circle at 32% 28%, #EEE, #B5B5B5); box-shadow: inset 0 2px 3px rgba(255,255,255,.6), 0 3px 0 #8D8D8D; }
+  .ach-i b { display: block; font: 700 1.5rem/1 var(--hand); }
+  .ach-i i { display: block; font: 500 1.15rem/1.1 var(--hand); font-style: normal; opacity: .7; }
+  .ach-i.on { filter: none; opacity: 1; border-color: #E8C26A; background: linear-gradient(100deg, #FFF3CF, #FFF8F3); animation: unlock .6s cubic-bezier(.2,1.6,.4,1); }
+  .ach-i.on .med { background: radial-gradient(circle at 32% 28%, #FFE9A3, #E8B93E 60%, #B98516); box-shadow: inset 0 2px 3px rgba(255,255,255,.7), 0 3px 0 #8A6210, 0 0 14px rgba(255,210,120,.7); }
+  @keyframes unlock { 0% { transform: scale(.88); } 55% { transform: scale(1.05); } 100% { transform: none; } }
+
   /* ===== Efectos de transición (sin filtros ni sombras pesadas) ===== */
   .flash { position: fixed; inset: 0; z-index: 35; pointer-events: none; animation: flashA .8s ease-out forwards;
     background: radial-gradient(circle at 50% 50%, rgba(255,225,235,.95), rgba(255,160,190,.4) 40%, transparent 70%); }
@@ -361,7 +438,7 @@
 <main class="screen" id="intro">
   <div class="hero">
     <p class="pre">Tienes una carta para</p>
-    <h1 class="name" aria-label="nombre"><span style="--i:0">A</span><span style="--i:1">r</span><span style="--i:2">i</span><span style="--i:3">a</span><span style="--i:4">n</span><span style="--i:5">n</span><span style="--i:6">a</span></h1>
+    <h1 class="name" aria-label="Arianna"><span style="--i:0">A</span><span style="--i:1">r</span><span style="--i:2">i</span><span style="--i:3">a</span><span style="--i:4">n</span><span style="--i:5">n</span><span style="--i:6">a</span></h1>
     <svg class="swoosh" viewBox="0 0 300 26"><path pathLength="1" d="M8 16C60 4 110 26 170 12S260 6 292 14"/></svg>
     <i class="sp" style="left:-4%;top:22%;--z:16px;--d:.2s"></i><i class="sp" style="left:12%;top:-6%;--z:11px;--d:1.1s"></i>
     <i class="sp" style="right:8%;top:-10%;--z:18px;--d:.7s"></i><i class="sp" style="right:-5%;top:38%;--z:12px;--d:1.6s"></i>
@@ -370,14 +447,14 @@
   <div class="env" id="env">
     <div class="e-back"></div>
     <div class="liner"></div>
-    <div class="peek"><b><span class="cz">Ari</span>,</b><i>tengo algo que decirte...</i></div>
+    <div class="peek"><b>Ari,</b><i>tengo algo que decirte...</i></div>
     <div class="pocket"><i class="pl"></i><i class="pr"></i><i class="pb"></i></div>
     <div class="flap"><i class="fs"></i><i class="ff"></i><i class="fb"></i></div>
     <div class="from">De: Alex</div>
     <div class="stamp"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><span>1 beso</span></div>
     <svg class="pm" viewBox="0 0 84 44"><circle cx="22" cy="22" r="17"/><circle cx="22" cy="22" r="13"/><text x="22" y="24.5" text-anchor="middle">con amor</text><path d="M42 12q5-4 10 0t10 0t10 0t10 0M42 20q5-4 10 0t10 0t10 0t10 0M42 28q5-4 10 0t10 0t10 0t10 0"/></svg>
-    <div class="to">Para <span class="cz">Ari</span><svg viewBox="0 0 200 12"><path d="M4 8C40 1 70 12 110 6S170 3 196 7"/></svg></div>
-    <button class="seal" id="seal" type="button" aria-label="Abrir la carta"><span class="drip d1"></span><span class="drip d2"></span><span class="cz">A</span></button>
+    <div class="to">Para Ari<svg viewBox="0 0 200 12"><path d="M4 8C40 1 70 12 110 6S170 3 196 7"/></svg></div>
+    <button class="seal" id="seal" type="button" aria-label="Abrir la carta"><span class="drip d1"></span><span class="drip d2"></span>A</button>
   </div>
   <div class="floor"></div>
   <p class="tap">toca el sello</p>
@@ -419,11 +496,28 @@
     <div class="bk-ctrl"><button class="mini ghost" id="bkPrev" type="button" disabled>Atrás</button><div class="dots" id="dots"></div><button class="mini" id="bkNext" type="button">Abrir</button></div>
   </div>
 
+  <!-- Llevamos X días -->
+  <div class="letter card since" style="transform: rotate(-1deg)">
+    <span class="tape"></span>
+    <h2>Llevamos</h2>
+    <div class="dnum" id="dnum">0</div>
+    <div class="dlab" id="dlab">días desde que nos conocimos</div>
+    <div class="dfrom">desde el domingo 11 de octubre, 9:49 pm</div>
+  </div>
+
   <div class="letter card stat">
     <span class="tape"></span>
     <div class="q">Veces que intentaste decir que no</div>
     <div class="big" id="cnt">0</div>
     <div class="hint2" id="cntTxt"></div>
+  </div>
+
+  <!-- Logros desbloqueados -->
+  <div class="letter card ach">
+    <span class="tape"></span>
+    <h2>Logros desbloqueados</h2>
+    <div class="achs" id="achs"></div>
+    <div class="rcount" id="achCount"></div>
   </div>
 
   <!-- Razones para quererla -->
@@ -436,28 +530,40 @@
   </div>
 
   <!-- Primera cita -->
-  <div class="letter card" style="transform: rotate(-1deg)">
+  <div class="letter card cita" id="cita" style="transform: rotate(-1deg)">
     <span class="tape"></span>
     <h2>Nuestra primera cita</h2>
+    <div class="cs">Tú eliges todo, cachetes. Yo solo llego a tiempo.</div>
     <div class="q">¿Qué plan quieres?</div>
-    <div class="chips">
-      <button class="chip" data-g="plan" data-v="cine y crispetas" type="button">Cine y crispetas</button>
-      <button class="chip" data-g="plan" data-v="comida rica" type="button">Comida rica</button>
-      <button class="chip" data-g="plan" data-v="helado y caminata" type="button">Helado y caminata</button>
-      <button class="chip" data-g="plan" data-v="un plan sorpresa tuyo" type="button">Sorpresa de Alex</button>
+    <div class="plans" id="plans"></div>
+    <div class="q">¿Qué día?</div>
+    <div class="days" id="days"></div>
+    <div class="q">¿A qué hora?</div>
+    <div class="chips" id="horas"></div>
+    <div class="ticket" id="ticket">
+      <div class="tk-a"><div class="tk-h"><span>Primera cita</span><span>Ari &amp; Alex</span></div><div class="tk-plan" id="tkPlan">Elige un plan</div></div>
+      <div class="tk-b"><div class="tk-when" id="tkWhen">Elige día y hora</div><div class="tk-foot" id="tkFoot">Falta: plan, día, hora</div></div>
     </div>
-    <div class="q">¿Cuándo?</div>
-    <div class="chips">
-      <button class="chip" data-g="cuando" data-v="esta semana" type="button">Esta semana</button>
-      <button class="chip" data-g="cuando" data-v="este fin de semana" type="button">Este fin de semana</button>
-      <button class="chip" data-g="cuando" data-v="cuando tú puedas" type="button">Cuando tú quieras</button>
+    <div class="cbtns">
+      <button class="btn wa" id="wa" type="button">Avisarle a Alex</button>
     </div>
-    <button class="btn wa off" id="wa" type="button" aria-disabled="true">Avisarle a Alex</button>
-    <div class="hint2" id="waHint"></div>
   </div>
 
   <button class="replay" id="replay" type="button">Ver de nuevo</button>
 </section>
+<button class="nimbus" id="nimbus" type="button" aria-label="Volar hasta la primera cita" hidden>
+  <span class="nb-tip">súbete</span>
+  <span class="nb-in"><svg viewBox="0 0 120 78" aria-hidden="true">
+    <defs><linearGradient id="nbg" gradientUnits="userSpaceOnUse" x1="0" y1="8" x2="0" y2="74"><stop offset="0" stop-color="#FFF0A6"/><stop offset=".55" stop-color="#FFD54A"/><stop offset="1" stop-color="#F2A92B"/></linearGradient></defs>
+    <g fill="url(#nbg)"><circle cx="34" cy="46" r="21"/><circle cx="58" cy="32" r="26"/><circle cx="84" cy="40" r="22"/><circle cx="102" cy="54" r="15"/><circle cx="18" cy="56" r="13"/><rect x="14" y="48" width="96" height="26" rx="13"/></g>
+    <g fill="#fff" opacity=".55"><ellipse cx="52" cy="18" rx="14" ry="6" transform="rotate(-14 52 18)"/><ellipse cx="84" cy="27" rx="8" ry="3.5" transform="rotate(-10 84 27)"/><ellipse cx="22" cy="40" rx="6" ry="3" transform="rotate(-24 22 40)"/></g>
+    <g fill="#FFF6C8">
+      <g transform="translate(-8 52)"><path class="nb-s" d="M0-6L1.8-1.8 6 0 1.8 1.8 0 6-1.8 1.8-6 0-1.8-1.8Z"/></g>
+      <g transform="translate(-16 38)"><path class="nb-s" style="animation-delay:.5s" d="M0-5L1.5-1.5 5 0 1.5 1.5 0 5-1.5 1.5-5 0-1.5-1.5Z"/></g>
+      <g transform="translate(2 72)"><path class="nb-s" style="animation-delay:1s" d="M0-4L1.2-1.2 4 0 1.2 1.2 0 4-1.2 1.2-4 0-1.2-1.2Z"/></g>
+    </g>
+  </svg></span>
+</button>
 <canvas id="confetti"></canvas>
 <canvas id="fx"></canvas>
 
@@ -490,6 +596,14 @@
       { h: 'Ari, sin salida y feliz de estarlo', a: 'Ya no quedó ni un “no” para ti, y creo que es porque tú y yo estábamos hechos para esto.', b: 'Desde hoy te voy a cuidar y a hacer reír todos los días, mi vida. Contigo hasta el plan más sencillo se vuelve el mejor del mundo.' }
     ]
   };
+  const FECHA_CONOCIDOS = '2026-10-11T21:49:00-05:00';   // domingo 11 de octubre, 9:49 pm (hora de Colombia)
+  const LOGROS = [
+    { e: '📚', t: 'Lectora oficial', d: 'Me encanta verte perdida en un libro, cachetes' },
+    { e: '🎤', t: 'Fan del rap', d: 'Contigo hasta el rap suena mejor, mi vida' },
+    { e: '🕷️', t: 'Fan de Spider-Man', d: 'Que te guste Spider-Man ya es amor del bueno' },
+    { e: '🐉', t: 'Fan de Goku', d: 'Entiendes mis frikeadas, bebé' },
+    { e: '💖', t: 'Novia oficial', d: 'Sin devolución, mi amor' }
+  ];
   const WHATSAPP = '573215425483';   // número de Alex con indicativo (sin + ni espacios)
   // Razones para quererla: cámbialas por las tuyas, entre más personales mejor
   const RAZONES = [
@@ -512,7 +626,6 @@
 
   /* ===== Utilidades y rendimiento ===== */
   const $ = id => document.getElementById(id);
-  const mark = t => t.replace(/Arianna|\bAri\b/g, m => '<span class="cz">' + m + '</span>');
   const R = (a, b) => a + Math.random() * (b - a);
   const clamp = (v, a, b) => Math.max(a, Math.min(v, b));
   // Zona de juego tipo teléfono (440x900 máx., centrada). En un iPhone es la pantalla completa.
@@ -613,7 +726,7 @@
   }, { once: true });
 
   /* ===== Textos ===== */
-  function setText(el, t) { if (el._t === t) return; el._t = t; el.innerHTML = mark(t); el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
+  function setText(el, t) { if (el.textContent === t) return; el.textContent = t; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); }
   function updateTexts() {
     writeTitle(noCount >= 4 ? TITULOS[Math.min(noCount, 8)] : TITULO0);
     setText(sub, SUBS[Math.min(noCount, 8)]);
@@ -651,11 +764,18 @@
     if (!pos) pos = { x: noX < S.l + S.w / 2 ? S.l + S.w - bw - 12 : S.l + 12, y: noY < S.t + S.h / 2 ? S.t + S.h - bh - 40 : S.t + 56 };
     setNoPos(pos.x, pos.y);
   }
+  const POWS = ['¡THWIP!', '¡ZAS!', '¡POW!', '¡THWACK!', '¡SPLAT!', '¡PUM!']; let lastPow = -1;
+  function comic() {
+    let k; do { k = (Math.random() * POWS.length) | 0; } while (k === lastPow); lastPow = k;
+    const d = document.createElement('div'); d.className = 'pow';
+    d.style.left = clamp(noX + noW / 2, 80, innerWidth - 80) + 'px'; d.style.top = clamp(noY + noH / 2, 70, innerHeight - 70) + 'px'; d.style.setProperty('--r', R(-12, 12).toFixed(1) + 'deg');
+    d.innerHTML = '<i></i><b>' + POWS[k] + '</b>'; document.body.appendChild(d); setTimeout(() => d.remove(), 950);
+  }
   function dodge() {
     if (!noReady || noGone || won) return;
     const now = performance.now(); if (now - lastDodge < 350) return; lastDodge = now;
     noCount++; updateTexts(); shakePaper();
-    burstAt(no, noCount >= NO_DESAPARECE_EN ? 18 : 7, 'heart');
+    burstAt(no, noCount >= NO_DESAPARECE_EN ? 18 : 7, 'heart'); comic();
     if (noCount >= NO_DESAPARECE_EN) { vanishNo(); return; }
     { const g = no.cloneNode(true); g.removeAttribute('id'); g.className = 'btn no ghost'; document.body.appendChild(g); setTimeout(() => g.remove(), 480); }
     moveNo();
@@ -698,7 +818,7 @@
     if (won) return; won = true;
     $('reaction').textContent = reaccion(noCount);
     const grupo = FINALES[caso(noCount)], f = grupo[(Math.random() * grupo.length) | 0];
-    $('fh').innerHTML = mark(f.h); $('fa').innerHTML = mark(f.a); $('fb').innerHTML = mark(f.b);
+    $('fh').textContent = f.h; $('fa').textContent = f.a; $('fb').textContent = f.b;
     $('sign').textContent = 'Tu novio, ' + NOMBRE_EL;
     no.hidden = true; $('ask').hidden = true; $('win').hidden = false; $('win').tabIndex = -1; $('win').focus({ preventScroll: true }); bigHeart();
     launchConfetti(); winEffects();
@@ -717,42 +837,41 @@
     $('nextReason').textContent = ri % RAZONES.length === 0 ? 'Y tengo más' : 'Otra razón';
   });
 
-  /* ===== Primera cita → mensaje de WhatsApp para Alex ===== */
-  let plan = null, cuando = null;
-  const wa = $('wa');
-  function actualizarWa() {
-    const listo = !!(plan && cuando);
-    wa.classList.toggle('off', !listo);
-    wa.setAttribute('aria-disabled', String(!listo));
-    if (listo) $('waHint').textContent = '';
+  /* ===== Primera cita: plan, día y hora → boleto y WhatsApp (sin mensaje escrito: ella escribe lo que quiera) ===== */
+  const PLANES = [
+    { e: '🍿', n: 'Cine y crispetas' },
+    { e: '🍔', n: 'Comida rica' },
+    { e: '🍦', n: 'Helado y caminata' },
+    { e: '☕', n: 'Librería y café' },
+    { e: '🌳', n: 'Parque y música' },
+    { e: '🎮', n: 'Noche de PlayStation' }
+  ];
+  const HORAS = [{ k: 'Tarde', h: 15, m: 0, t: '3:00 pm' }, { k: 'Atardecer', h: 17, m: 30, t: '5:30 pm' }, { k: 'Noche', h: 19, m: 30, t: '7:30 pm' }];
+  const DS = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'], MS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+  let plan = null, dia = null, hora = null, citaLista = false;
+  const hoy = new Date(), base = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
+  const mkBtn = (cls, html, on) => { const b = document.createElement('button'); b.type = 'button'; b.className = cls; b.innerHTML = html; b.addEventListener('click', () => on(b)); return b; };
+  const elegir = (box, b) => { box.querySelectorAll('.on').forEach(x => x.classList.remove('on')); b.classList.add('on'); burstAt(b, 8, 'spark'); };
+  PLANES.forEach(p => $('plans').appendChild(mkBtn('plan', '<span class="pe">' + p.e + '</span><b>' + p.n + '</b>', b => { plan = p; elegir($('plans'), b); paintCita(); })));
+  for (let i = 1; i <= 14; i++) {   // los próximos 14 días, desde mañana
+    const d = new Date(base.getFullYear(), base.getMonth(), base.getDate() + i);
+    $('days').appendChild(mkBtn('day' + (d.getDay() === 0 || d.getDay() === 6 ? ' we' : ''), '<small>' + DS[d.getDay()] + '</small><b>' + d.getDate() + '</b><em>' + MS[d.getMonth()] + '</em>', b => { dia = d; elegir($('days'), b); paintCita(); }));
   }
-  function urlWa() {
-    const MSGS = {
-      rapido: ['Ni lo pensé, dije que sí de una, amor. Primera cita: {plan}, {cuando}. ¿Se puede?',
-               'Dije que sí de una y no hay devolución, amor. Primera cita: {plan}, {cuando}. Yo ya elegí.'],
-      poco:   ['Ya, ya, dije que sí, amor. No te me emociones tanto jaja. Primera cita: {plan}, {cuando}.',
-               'Casi me escapo, amor, pero no. Primera cita: {plan}, {cuando}. Dime que sí 🥹'],
-      varios: ['Por fin cedí jajaja, ese botón me tuvo mal, amor. Primera cita: {plan}, {cuando}.',
-               'Qué mañoso ese botón, amor, pero igual dije que sí. Primera cita: {plan}, {cuando} 💖'],
-      sin_no: ['Me quitaste hasta el botón de no, amor, qué abusivo jaja. Bueno, ya soy tu novia. Primera cita: {plan}, {cuando}.',
-               'Pues no me dejaste opción, ¿no? Ya soy tu novia, amor. Primera cita: {plan}, {cuando}. Te lo cobro 💖']
-    };
-    const opciones = MSGS[caso(noCount)];
-    const msg = opciones[(Math.random() * opciones.length) | 0].replace('{plan}', plan).replace('{cuando}', cuando);
-    return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
+  HORAS.forEach(h => $('horas').appendChild(mkBtn('chip', h.k + ' · ' + h.t, b => { hora = h; elegir($('horas'), b); paintCita(); })));
+
+  function paintCita() {
+    const falta = [!plan && 'plan', !dia && 'día', !hora && 'hora'].filter(Boolean), listo = !falta.length;
+    $('tkPlan').textContent = plan ? plan.e + ' ' + plan.n : 'Elige un plan';
+    const cuando = [dia && DS[dia.getDay()] + ' ' + dia.getDate() + ' ' + MS[dia.getMonth()], hora && hora.t].filter(Boolean);
+    $('tkWhen').textContent = cuando.length ? cuando.join(' · ') : 'Elige día y hora';
+    let foot = 'Falta: ' + falta.join(', ');
+    if (listo) { const n = Math.round((dia - base) / 864e5); foot = n === 1 ? 'Es mañana ♥' : 'Faltan ' + n + ' días ♥'; }
+    $('tkFoot').textContent = foot;
+    const t = $('ticket'); t.classList.toggle('on', listo);
+    if (listo && !citaLista) { burstAt(t, 26, 'heart'); t.classList.remove('pop'); void t.offsetWidth; t.classList.add('pop'); }
+    citaLista = listo;
   }
-  document.querySelectorAll('.chip').forEach(ch => ch.addEventListener('click', () => {
-    const g = ch.dataset.g;
-    document.querySelectorAll('.chip[data-g="' + g + '"]').forEach(c => c.classList.remove('on'));
-    ch.classList.add('on'); burstAt(ch, 8, 'spark');
-    if (g === 'plan') plan = ch.dataset.v; else cuando = ch.dataset.v;
-    actualizarWa();
-  }));
-  wa.addEventListener('click', () => {
-    if (!plan || !cuando) { setText($('waHint'), !plan ? 'Primero elige un plan' : 'Ahora elige cuándo'); return; }
-    burstAt(wa, 14, 'heart');
-    setTimeout(() => { window.location.href = urlWa(); }, 380);
-  });
+  $('wa').addEventListener('click', () => { burstAt($('wa'), 14, 'heart'); setTimeout(() => { window.location.href = 'https://wa.me/' + WHATSAPP; }, 380); });   // chat vacío: ella escribe lo que quiera
 
   /* ===== Título que aparece palabra por palabra ===== */
   let lastTitle = '';
@@ -762,7 +881,7 @@
     t.split('\n').forEach((line, li) => {
       if (li) title.appendChild(document.createElement('br'));
       line.split(' ').forEach(w => {
-        const sp = document.createElement('span'); sp.className = /Ari/.test(w) ? 'w cz' : 'w'; sp.style.setProperty('--i', i++); sp.textContent = w;
+        const sp = document.createElement('span'); sp.className = 'w'; sp.style.setProperty('--i', i++); sp.textContent = w;
         title.appendChild(sp); title.appendChild(document.createTextNode(' '));
       });
     });
@@ -806,7 +925,67 @@
     if (!noCount) return;
     const iv = setInterval(() => { n++; el.textContent = n; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); if (n >= noCount) clearInterval(iv); }, 220);
   }
+  function countDays() {
+    const el = $('dnum'), d = Math.max(0, Math.floor((Date.now() - new Date(FECHA_CONOCIDOS).getTime()) / 864e5));
+    $('dlab').textContent = d === 1 ? 'día desde que nos conocimos' : 'días desde que nos conocimos';
+    if (!d) { el.textContent = '0'; return; }
+    let n = 0; const iv = setInterval(() => { n++; el.textContent = n; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); if (n >= d) clearInterval(iv); }, 160);
+  }
+  function buildLogros() {
+    const box = $('achs'); box.textContent = '';
+    LOGROS.forEach(() => {
+      const it = document.createElement('div'); it.className = 'ach-i';
+      it.innerHTML = '<span class="med">🔒</span><div><b>???</b><i>Logro bloqueado</i></div>';
+      box.appendChild(it);
+    });
+    $('achCount').textContent = '0 de ' + LOGROS.length + ' logros';
+  }
+  function unlockLogros() {
+    const items = [...document.querySelectorAll('.ach-i')];
+    items.forEach((it, i) => setTimeout(() => {
+      const L = LOGROS[i];
+      it.classList.add('on');
+      it.querySelector('.med').textContent = L.e; it.querySelector('b').textContent = L.t; it.querySelector('i').textContent = L.d;
+      burstAt(it.querySelector('.med'), 14, 'spark');
+      $('achCount').textContent = (i + 1) + ' de ' + items.length + ' logros';
+      if (i === items.length - 1) burstAt(it, 26, 'heart');
+    }, 500 + i * 900));
+  }
+  /* Nube dorada: pasea volando y, al tocarla, te lleva en vuelo hasta la tarjeta de la primera cita */
+  let riding = false;
+  function nimbusRide() {
+    if (riding) return; riding = true;
+    const w = $('win'), nb = $('nimbus'), inn = nb.querySelector('.nb-in'), r = nb.getBoundingClientRect(), W = nb.offsetWidth, H = nb.offsetHeight;
+    const card = $('cita').getBoundingClientRect(), wr = w.getBoundingClientRect(), s0 = w.scrollTop;
+    const s1 = clamp(s0 + card.top - wr.top - 70, 0, w.scrollHeight - w.clientHeight);
+    nb.style.animation = 'none'; inn.style.animation = 'nbBob 3s ease-in-out infinite'; nb.querySelector('.nb-tip').hidden = true;
+    const x0 = r.left, y0 = r.top, xm = innerWidth / 2 - W / 2, ym = innerHeight * .5 - H / 2, T = clamp(1100 + Math.abs(s1 - s0) * .6, 1500, 2600), tOut = 600;
+    const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2, eo = t => 1 - Math.pow(1 - t, 3), t0 = performance.now(); let lastSp = 0;
+    (function f(now) {
+      const t = now - t0; let x, y, rot, sc;
+      if (t < 500) { const k = eo(t / 500); x = x0 + (xm - x0) * k; y = y0 + (ym - y0) * k; sc = 1 + .3 * k; rot = 8 * k; }
+      else if (t < T) { x = xm; y = ym + Math.sin(t / 170) * 6; sc = 1.3; rot = 8; }
+      else { const k = Math.min((t - T) / tOut, 1); x = xm + (innerWidth + 120 - xm) * k * k; y = ym - 30 * k; sc = 1.3 - .3 * k; rot = 8 - 20 * k; }
+      w.scrollTop = s0 + (s1 - s0) * ease(Math.min(t / T, 1));
+      nb.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + rot.toFixed(1) + 'deg) scale(' + sc.toFixed(3) + ')';
+      if (now - lastSp > 55) { lastSp = now; emit(x + W * .2, y + H * .6, 2, 'spark'); }
+      if (t < T + tOut) requestAnimationFrame(f); else { nb.style.cssText = ''; inn.style.animation = ''; riding = false; }
+    })(performance.now());
+  }
+  function nimbusInit() {
+    const nb = $('nimbus'); let last = 0;
+    setTimeout(() => { nb.hidden = false; }, 4500);   // aparece cuando ya se leyó la carta
+    nb.addEventListener('click', e => { e.stopPropagation(); nimbusRide(); });
+    setInterval(() => {   // estela de brillitos mientras pasea
+      if (riding || nb.hidden || document.hidden) return;
+      const r = nb.getBoundingClientRect(), right = r.left > last; last = r.left;
+      if (r.right < 0 || r.left > innerWidth) return;
+      emit(right ? r.left + 14 : r.right - 14, r.top + r.height * .62, 1, 'spark');
+    }, 160);
+  }
   function winEffects() {
+    nimbusInit();
+    buildLogros();
     const w = $('win');
     [[.25, .22], [.75, .3], [.5, .15], [.2, .5], [.8, .55], [.5, .4]].forEach((q, i) => setTimeout(() => { const S = stage(); emit(S.l + S.w * q[0], S.t + S.h * q[1], 46, 'fire'); }, 400 + i * 650));
     for (let i = 0; i < 9; i++) {
@@ -814,7 +993,7 @@
       h.style.cssText = 'left:' + (stage().l + R(0, stage().w - 30)) + 'px;font-size:' + R(14, 34) + 'px;animation-duration:' + R(7, 13) + 's;animation-delay:' + R(0, 9) + 's;color:' + ['#FF8FA3', '#E8476A', '#FFB3C1'][i % 3];
       w.prepend(h);
     }
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.classList.contains('stat')) countUp(); } }), { root: w, threshold: .2 });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.classList.contains('stat')) countUp(); if (e.target.classList.contains('since')) countDays(); if (e.target.classList.contains('ach')) unlockLogros(); } }), { root: w, threshold: .2 });
     w.querySelectorAll('.card, .more, .bookwrap').forEach(el => { el.classList.add('reveal'); io.observe(el); });
   }
 
@@ -832,11 +1011,11 @@
   ];
   const wd = (txt, b) => txt.split(' ').map((w, i) => '<span class="wd" style="--i:' + (b + i) + '">' + w + ' </span>').join('');
   const pageHTML = (pg, n) => pg.ded
-    ? '<div class="dl wd" style="--i:0">Para <span class="cz">Ari</span>,</div><div class="dl2 wd" style="--i:4">mi lectora favorita.</div><div class="dl3 wd" style="--i:9">Esta historia es de los dos.</div>'
+    ? '<div class="dl wd" style="--i:0">Para Ari,</div><div class="dl2 wd" style="--i:4">mi lectora favorita.</div><div class="dl3 wd" style="--i:9">Esta historia es de los dos.</div>'
     : '<div class="k">' + pg.k + '</div><h4>' + pg.t + '</h4><p>' + wd(pg.p, 0) + '</p>' +
       (pg.sig ? '<div class="sig wd" style="--i:' + (pg.p.split(' ').length + 4) + '">— Alex</div>' : '') + '<div class="num">' + n + '</div>';
   const bookEl = $('book'), N = LIBRO.length + 1, leaves = [];
-  const coverHTML = '<div class="front cover"><div class="frame"></div><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><i class="rule"></i><h3 class="gold">Nuestra<br>historia</h3><i class="rule"></i><div class="who gold">Alex &amp; <span class="cz">Ari</span></div><i class="shine"></i></div><div class="back end"></div>';
+  const coverHTML = '<div class="front cover"><div class="frame"></div><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg><i class="rule"></i><h3 class="gold">Nuestra<br>historia</h3><i class="rule"></i><div class="who gold">Alex &amp; Ari</div><i class="shine"></i></div><div class="back end"></div>';
   for (let i = N - 1; i >= 0; i--) {
     const lf = document.createElement('div'); lf.className = 'leaf'; lf.style.setProperty('--z', (N - i) * 0.6);
     lf.innerHTML = i === 0 ? coverHTML : '<div class="front pg' + (LIBRO[i - 1].ded ? ' ded' : '') + '">' + pageHTML(LIBRO[i - 1], i) + '</div><div class="back"></div>';
@@ -894,7 +1073,7 @@
   }
   function cascade(el, t, st) {
     el.textContent = ''; el.style.setProperty('--st', st + 'ms');
-    t.split(' ').forEach((w, i) => { const sp = document.createElement('span'); sp.className = /Ari/.test(w) ? 'w cz' : 'w'; sp.style.setProperty('--i', i); sp.textContent = w; el.appendChild(sp); el.appendChild(document.createTextNode(' ')); });
+    t.split(' ').forEach((w, i) => { const sp = document.createElement('span'); sp.className = 'w'; sp.style.setProperty('--i', i); sp.textContent = w; el.appendChild(sp); el.appendChild(document.createTextNode(' ')); });
   }
   document.addEventListener('pointerdown', e => {
     const b = e.target.closest && e.target.closest('.btn, .mini, .chip'); if (!b) return;

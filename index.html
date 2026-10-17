@@ -392,6 +392,45 @@
   .cbtns .wa { margin-top: 0; animation: none; }
 
   /* ===== Llevamos X días ===== */
+
+  /* ===== Sombrero de Catrina ===== */
+  .hat { text-align: center; padding-left: 24px; }
+  .hat h2 { margin: 0 0 8px; }
+  .hatstage { position: relative; height: 270px; margin: 0 -8px; border-radius: 14px; overflow: hidden; cursor: pointer; touch-action: manipulation;
+    background: radial-gradient(70% 70% at 50% 62%, #7A2A5C 0%, #3A1646 60%, #1E0D2B 100%); box-shadow: inset 0 0 30px rgba(0,0,0,.45); }
+  .picado { position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: space-around; pointer-events: none; }
+  .picado i { width: 14%; height: 34px; transform-origin: top center; animation: picSway 3.2s ease-in-out infinite alternate;
+    clip-path: polygon(0 0, 100% 0, 100% 78%, 87% 100%, 75% 78%, 62% 100%, 50% 78%, 37% 100%, 25% 78%, 12% 100%, 0 78%); }
+  .picado i:nth-child(1) { background: #FF8A3D; } .picado i:nth-child(2) { background: #FF8FB1; animation-delay: -.5s; }
+  .picado i:nth-child(3) { background: #FFD54A; animation-delay: -1s; } .picado i:nth-child(4) { background: #B98CFF; animation-delay: -1.5s; }
+  .picado i:nth-child(5) { background: #FF8A3D; animation-delay: -2s; } .picado i:nth-child(6) { background: #FF8FB1; animation-delay: -2.5s; }
+  @keyframes picSway { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
+  .hatsvg { position: absolute; inset: 22px 0 0; width: 100%; height: calc(100% - 22px); overflow: visible; }
+  .hatsvg g, .hatsvg rect { transform-box: fill-box; transform-origin: center; }
+  .hat .dropg, .hat .fl, .hat .tw, .hat .leaf { opacity: 0; }
+  .hat.play .dropg { animation: hatDrop 1.1s cubic-bezier(.3,1.4,.5,1) both; transform-origin: 50% 100%; }
+  @keyframes hatDrop { 0% { opacity: 0; transform: translateY(-170px) rotate(-24deg); } 55% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+  .hat.play .sway { animation: hatSway 4.2s ease-in-out 1.2s infinite alternate; transform-origin: 50% 100%; }
+  @keyframes hatSway { from { transform: rotate(-2.2deg); } to { transform: rotate(2.2deg); } }
+  .hat.play .fl { animation: bloom .9s cubic-bezier(.3,1.6,.5,1) calc(1s + var(--d)) both; }
+  @keyframes bloom { 0% { opacity: 0; transform: scale(0) rotate(-120deg); } 100% { opacity: 1; transform: none; } }
+  .hat.play .fl .bl { animation: breathe 3s ease-in-out calc(2.2s + var(--d)) infinite alternate; }
+  @keyframes breathe { from { transform: scale(1); } to { transform: scale(1.1) rotate(8deg); } }
+  .hat.play .leaf { animation: leafIn .7s ease-out 1s both; }
+  @keyframes leafIn { from { opacity: 0; transform: scale(0); } to { opacity: 1; transform: none; } }
+  .hat.play .tw { animation: twinkle 1.9s ease-in-out calc(1.5s + var(--d)) infinite; }
+  @keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(.2) rotate(0); } 50% { opacity: 1; transform: scale(1.1) rotate(45deg); } }
+  .hat.play .shine { animation: shineRun 3.6s ease-in-out 2s infinite; }
+  @keyframes shineRun { 0% { transform: translateX(-90px) skewX(-20deg); } 45%, 100% { transform: translateX(260px) skewX(-20deg); } }
+  .hat.play .rtext { animation: ribIn 1s ease-out 1.5s both; }
+  @keyframes ribIn { from { opacity: 0; letter-spacing: 14px; } to { opacity: 1; letter-spacing: 1px; } }
+  .hatstage.tip .tipg { animation: tipHat .8s cubic-bezier(.3,1.6,.5,1); }
+  @keyframes tipHat { 0% { transform: none; } 30% { transform: translateY(-22px) rotate(-14deg); } 100% { transform: none; } }
+  .petal { position: absolute; top: -14px; width: 10px; height: 14px; border-radius: 50% 0 50% 0; pointer-events: none;
+    background: linear-gradient(135deg, #FFB347, #F26B1D); animation: petalFall linear forwards; }
+  @keyframes petalFall { 0% { transform: translateX(0) rotate(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateX(var(--dx)) translateY(300px) rotate(540deg); opacity: .9; } }
+  .hatcap { font: 500 1.35rem/1.2 var(--hand); margin: 10px 0 0; opacity: .85; }
+
   .since { text-align: center; padding-left: 28px; }
   .since h2 { margin: 0; }
   .dnum { font: 700 5.4rem/1.05 var(--hand); color: var(--wax); }
@@ -518,6 +557,60 @@
     <h2>Logros desbloqueados</h2>
     <div class="achs" id="achs"></div>
     <div class="rcount" id="achCount"></div>
+  </div>
+
+
+  <!-- Sombrero de Catrina -->
+  <div class="letter card hat" id="hatCard" style="transform: rotate(-.8deg)">
+    <span class="tape"></span>
+    <h2>Tu sombrero de Catrina</h2>
+    <div class="hatstage" id="hatStage">
+      <div class="picado"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <svg class="hatsvg" viewBox="0 0 320 250" aria-label="Sombrero de catrina con una cinta que dice Ari">
+        <defs>
+          <radialGradient id="mgo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFC857"/><stop offset="1" stop-color="#F26B1D"/></radialGradient>
+          <linearGradient id="hcr" x1="0" x2="1"><stop offset="0" stop-color="#150A1F"/><stop offset=".45" stop-color="#3A2150"/><stop offset="1" stop-color="#150A1F"/></linearGradient>
+          <linearGradient id="hbr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A2150"/><stop offset="1" stop-color="#150A1F"/></linearGradient>
+          <linearGradient id="rbg" x1="0" x2="1"><stop offset="0" stop-color="#8E1730"/><stop offset=".5" stop-color="#D42A4D"/><stop offset="1" stop-color="#8E1730"/></linearGradient>
+          <g id="mg">
+            <g fill="url(#mgo)" stroke="#C4500F" stroke-width=".6">
+              <ellipse cy="-11" rx="5.5" ry="10"/><ellipse cy="-11" rx="5.5" ry="10" transform="rotate(45)"/><ellipse cy="-11" rx="5.5" ry="10" transform="rotate(90)"/><ellipse cy="-11" rx="5.5" ry="10" transform="rotate(135)"/>
+              <ellipse cy="-11" rx="5.5" ry="10" transform="rotate(180)"/><ellipse cy="-11" rx="5.5" ry="10" transform="rotate(225)"/><ellipse cy="-11" rx="5.5" ry="10" transform="rotate(270)"/><ellipse cy="-11" rx="5.5" ry="10" transform="rotate(315)"/>
+            </g>
+            <g fill="#FFD54A"><ellipse cy="-6" rx="3.4" ry="6" transform="rotate(22)"/><ellipse cy="-6" rx="3.4" ry="6" transform="rotate(67)"/><ellipse cy="-6" rx="3.4" ry="6" transform="rotate(112)"/><ellipse cy="-6" rx="3.4" ry="6" transform="rotate(157)"/><ellipse cy="-6" rx="3.4" ry="6" transform="rotate(202)"/><ellipse cy="-6" rx="3.4" ry="6" transform="rotate(247)"/><ellipse cy="-6" rx="3.4" ry="6" transform="rotate(292)"/><ellipse cy="-6" rx="3.4" ry="6" transform="rotate(337)"/></g>
+            <circle r="3" fill="#E8590C"/>
+          </g>
+          <g id="rose"><circle r="10" fill="#D42A4D"/><path d="M0 -7C6 -7 8 0 2 3C-3 5 -6 0 -2 -3C1 -5 4 -2 1 0" fill="none" stroke="#FF8FA3" stroke-width="1.6" stroke-linecap="round"/></g>
+          <clipPath id="rbClip"><path d="M99 150Q160 170 221 150L222 126Q160 146 98 126Z"/></clipPath>
+          <path id="rbPath" d="M104 140Q160 158 216 140"/>
+          <path id="star" d="M0 -9Q1.2 -1.2 9 0Q1.2 1.2 0 9Q-1.2 1.2 -9 0Q-1.2 -1.2 0 -9Z"/>
+        </defs>
+        <ellipse cx="160" cy="226" rx="120" ry="9" fill="rgba(0,0,0,.4)"/>
+        <g class="dropg"><g class="sway"><g class="tipg">
+          <ellipse cx="160" cy="176" rx="138" ry="36" fill="url(#hbr)"/>
+          <ellipse cx="160" cy="176" rx="124" ry="30" fill="none" stroke="#FFD54A" stroke-width="1.2" stroke-dasharray="3 5" opacity=".7"/>
+          <ellipse cx="160" cy="171" rx="138" ry="34" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="1.5"/>
+          <path d="M100 172C97 122 104 78 124 66Q160 56 196 66C216 78 223 122 220 172Q160 190 100 172Z" fill="url(#hcr)"/>
+          <path d="M122 70Q160 60 198 70" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M99 150Q160 170 221 150L222 126Q160 146 98 126Z" fill="url(#rbg)"/>
+          <g clip-path="url(#rbClip)"><rect class="shine" x="60" y="110" width="26" height="70" fill="#fff" opacity=".35"/></g>
+          <path d="M99 150Q160 170 221 150M98 126Q160 146 222 126" fill="none" stroke="#FFD54A" stroke-width="1" opacity=".8"/>
+          <text class="rtext" font-family="Caveat, cursive" font-weight="700" font-size="25" fill="#FFF0F4" text-anchor="middle" dy="8"><textPath href="#rbPath" startOffset="50%">Ari</textPath></text>
+          <path d="M206 154C214 170 212 186 204 200L214 195L219 205C224 186 220 168 212 152Z" fill="url(#rbg)"/>
+          <path d="M186 158C190 174 186 190 178 202L188 197L193 207C199 188 196 170 190 156Z" fill="#8E1730"/>
+          <g fill="#2F9E6B"><ellipse class="leaf" cx="86" cy="140" rx="5" ry="13" transform="rotate(-50 86 140)"/><ellipse class="leaf" cx="116" cy="108" rx="5" ry="12" transform="rotate(-20 116 108)"/><ellipse class="leaf" cx="236" cy="132" rx="5" ry="13" transform="rotate(55 236 132)"/><ellipse class="leaf" cx="208" cy="104" rx="5" ry="11" transform="rotate(25 208 104)"/></g>
+        <g class="fl" style="--d:0s" transform="translate(104 134)"><g class="bl"><use href="#mg" transform="scale(0.8)"/></g></g>
+        <g class="fl" style="--d:0.15s" transform="translate(126 121)"><g class="bl"><use href="#mg" transform="scale(1.05)"/></g></g>
+        <g class="fl" style="--d:0.3s" transform="translate(97 152)"><g class="bl"><use href="#mg" transform="scale(0.7)"/></g></g>
+        <g class="fl" style="--d:0.45s" transform="translate(150 126)"><g class="bl"><use href="#rose" transform="scale(0.75)"/></g></g>
+        <g class="fl" style="--d:0.25s" transform="translate(214 128)"><g class="bl"><use href="#mg" transform="scale(0.85)"/></g></g>
+        <g class="fl" style="--d:0.4s" transform="translate(200 118)"><g class="bl"><use href="#rose" transform="scale(0.65)"/></g></g>
+        <g class="fl" style="--d:0.55s" transform="translate(224 146)"><g class="bl"><use href="#mg" transform="scale(0.62)"/></g></g>
+        </g></g></g>
+        <g fill="#FFE9A8"><use class="tw" href="#star" x="52" y="70" style="--d:0s"/><use class="tw" href="#star" x="272" y="88" style="--d:.7s"/><use class="tw" href="#star" x="236" y="42" style="--d:1.2s"/><use class="tw" href="#star" x="80" y="36" style="--d:.4s"/><use class="tw" href="#star" x="160" y="26" style="--d:1.5s"/></g>
+      </svg>
+    </div>
+    <p class="hatcap">Toca el sombrero, Ari. Para la Catrina más bonita.</p>
   </div>
 
   <!-- Razones para quererla -->
@@ -993,8 +1086,29 @@
       h.style.cssText = 'left:' + (stage().l + R(0, stage().w - 30)) + 'px;font-size:' + R(14, 34) + 'px;animation-duration:' + R(7, 13) + 's;animation-delay:' + R(0, 9) + 's;color:' + ['#FF8FA3', '#E8476A', '#FFB3C1'][i % 3];
       w.prepend(h);
     }
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.classList.contains('stat')) countUp(); if (e.target.classList.contains('since')) countDays(); if (e.target.classList.contains('ach')) unlockLogros(); } }), { root: w, threshold: .2 });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.classList.contains('stat')) countUp(); if (e.target.classList.contains('since')) countDays(); if (e.target.classList.contains('ach')) unlockLogros(); if (e.target.classList.contains('hat')) hatStart(); } }), { root: w, threshold: .2 });
     w.querySelectorAll('.card, .more, .bookwrap').forEach(el => { el.classList.add('reveal'); io.observe(el); });
+  }
+
+
+  /* ===== Sombrero de Catrina: animaciones ===== */
+  let hatOn = false, hatTimer = 0;
+  function petalRain(n) {
+    const st = $('hatStage'); if (!st) return;
+    for (let i = 0; i < n; i++) {
+      const pe = document.createElement('i'); pe.className = 'petal';
+      pe.style.cssText = 'left:' + R(4, 94) + '%;--dx:' + R(-60, 60) + 'px;animation-duration:' + R(3.2, 5.8) + 's;animation-delay:' + R(0, n > 3 ? 1 : 0) + 's;scale:' + R(.7, 1.3);
+      st.appendChild(pe); pe.addEventListener('animationend', () => pe.remove());
+    }
+  }
+  function hatStart() {
+    const c = $('hatCard'); if (hatOn) return; hatOn = true; c.classList.add('play');
+    setTimeout(() => { burstAt($('hatStage'), 36, 'spark'); petalRain(10); }, 1300);
+    hatTimer = setInterval(() => { if (!document.hidden) petalRain(1); }, 1100);
+    $('hatStage').addEventListener('click', () => {
+      const st = $('hatStage'); st.classList.remove('tip'); void st.offsetWidth; st.classList.add('tip');
+      burstAt(st, 30, 'fire'); petalRain(14);
+    });
   }
 
   /* ===== Libro 3D: nuestra historia ===== */

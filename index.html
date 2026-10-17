@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#26122F">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Tienes una carta esperándote 💌">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tienes una carta, Ari 💌">
+<meta property="og:description" content="Toca el sello para abrirla.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💌%3C/text%3E%3C/svg%3E">
 <title>Una carta para Arianna</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -401,6 +407,10 @@
     background: rgba(38,18,47,.88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 8px 22px rgba(0,0,0,.45); color: inherit; position: relative; }
   .mus:not(.used) .mus-pill::after { content: ""; position: absolute; inset: -4px; border-radius: 34px; border: 2px solid #FF8FB1; animation: musPing 1.8s ease-out infinite; pointer-events: none; }
   @keyframes musPing { from { opacity: .8; transform: scale(1); } to { opacity: 0; transform: scale(1.18, 1.35); } }
+  .mus-pill { transition: padding .5s ease, gap .5s ease; }
+  .mus-more { display: flex; align-items: center; gap: 9px; max-width: 280px; overflow: hidden; white-space: nowrap; transition: max-width .6s ease, opacity .4s ease; }
+  .mus.compact .mus-more { max-width: 0; opacity: 0; }
+  .mus.compact .mus-pill { padding-right: 6px; gap: 0; }
   .mus-txt { display: flex; flex-direction: column; text-align: left; line-height: 1; }
   .mus-txt b { font: 700 1.3rem/1 var(--hand); }
   .mus-txt small { font: 700 .6rem/1.2 var(--ui); opacity: .7; letter-spacing: .02em; }
@@ -443,7 +453,7 @@
   .hat { text-align: center; padding-left: 24px; }
   .hat h2 { margin: 0 0 8px; }
   .hatstage { position: relative; height: 270px; margin: 0 -8px; border-radius: 14px; overflow: hidden; cursor: pointer; touch-action: manipulation;
-    background: radial-gradient(70% 70% at 50% 62%, #7A2A5C 0%, #3A1646 60%, #1E0D2B 100%); box-shadow: inset 0 0 30px rgba(0,0,0,.45); }
+    background: radial-gradient(70% 70% at 50% 62%, #7A2A5C 0%, #3A1646 60%, #1E0D2B 100%); box-shadow: inset 0 0 30px rgba(0,0,0,.45), 0 0 calc(var(--beat, 0) * 30px) rgba(255,143,177,calc(var(--beat, 0) * .75)); }
   .picado { position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: space-around; pointer-events: none; }
   .picado i { width: 14%; height: 34px; transform-origin: top center; animation: picSway 3.2s ease-in-out infinite alternate;
     clip-path: polygon(0 0, 100% 0, 100% 78%, 87% 100%, 75% 78%, 62% 100%, 50% 78%, 37% 100%, 25% 78%, 12% 100%, 0 78%); }
@@ -451,7 +461,7 @@
   .picado i:nth-child(3) { background: #FFD54A; animation-delay: -1s; } .picado i:nth-child(4) { background: #B98CFF; animation-delay: -1.5s; }
   .picado i:nth-child(5) { background: #FF8A3D; animation-delay: -2s; } .picado i:nth-child(6) { background: #FF8FB1; animation-delay: -2.5s; }
   @keyframes picSway { from { transform: rotate(-5deg); } to { transform: rotate(5deg); } }
-  .hatsvg { position: absolute; inset: 22px 0 0; width: 100%; height: calc(100% - 22px); overflow: visible; }
+  .hatsvg { filter: brightness(calc(1 + var(--beat, 0) * .16)); position: absolute; inset: 22px 0 0; width: 100%; height: calc(100% - 22px); overflow: visible; }
   .hatsvg g, .hatsvg rect { transform-box: fill-box; transform-origin: center; }
   .hat .dropg, .hat .fl, .hat .tw, .hat .leaf { opacity: 0; }
   .hat.play .dropg { animation: hatDrop 1.1s cubic-bezier(.3,1.4,.5,1) both; transform-origin: 50% 100%; }
@@ -709,10 +719,10 @@
 <!-- Reproductor de música -->
 <audio id="musAudio" src="resto-de-mi-vida.mp3" preload="metadata" playsinline></audio>
 <div class="mus" id="mus" hidden>
-  <button class="mus-pill" id="musPill" type="button" aria-label="Abrir el reproductor">
+  <button class="mus-pill" id="musPill" type="button" aria-label="Abrir el reproductor" aria-expanded="false">
     <span class="mus-disc" id="musDiscMini"><span class="rec"><b>A</b></span></span>
-    <span class="mus-txt"><b>Por el resto de mi vida</b><small>Andrés Cepeda</small></span>
-    <span class="mus-eq" id="musEq"><i></i><i></i><i></i><i></i></span>
+    <span class="mus-more"><span class="mus-txt"><b>Por el resto de mi vida</b><small>Andrés Cepeda</small></span>
+    <span class="mus-eq" id="musEq"><i></i><i></i><i></i><i></i></span></span>
   </button>
   <div class="mus-panel" id="musPanel">
     <p class="mus-kick">Una canción para ti, Ari</p>
@@ -1337,7 +1347,7 @@
   var cx = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, 2);
   var env = ENV.b.map(function (s) { var a = new Array(s.length); for (var i = 0; i < s.length; i++) a[i] = parseInt(s.charAt(i), 36) / 35; return a; });
   var eqs = root.querySelectorAll('.mus-eq i'), recs = [root.querySelector('#musDiscMini .rec'), root.querySelector('#musDiscBig .rec')];
-  var playing = false, seeked = false, shown = false, raf = 0, last = 0, speed = 0, ang = 0, phase = 0, lvl = [0, 0, 0], fade = 0;
+  var hs = null, playing = false, seeked = false, shown = false, raf = 0, last = 0, speed = 0, ang = 0, phase = 0, lvl = [0, 0, 0], fade = 0;
 
   function sizeWave() { var w = cv.clientWidth, h = cv.clientHeight; if (!w) return; cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); drawWave(); }
   function drawWave() {
@@ -1367,6 +1377,7 @@
     phase += dt * (1.6 + (lvl[0] + lvl[1] + lvl[2]) * 4);
     var q = [lvl[0], lvl[1], lvl[2], (lvl[1] + lvl[2]) / 2];
     for (var b = 0; b < 4; b++) eqs[b].style.transform = 'scaleY(' + (.12 + q[b] * .88).toFixed(3) + ')';
+    hs = hs || $('hatStage'); if (hs) hs.style.setProperty('--beat', Math.min(1, lvl[0] * .7 + lvl[1] * .3).toFixed(2));
     if (root.classList.contains('open')) drawWave();
     if (playing || speed > 1 || lvl[0] + lvl[1] + lvl[2] > .02) raf = requestAnimationFrame(tick);
     else { raf = 0; last = 0; for (var z = 0; z < 4; z++) eqs[z].style.transform = 'scaleY(.12)'; if (root.classList.contains('open')) drawWave(); }
@@ -1395,13 +1406,21 @@
   });
   pill.addEventListener('click', function () {
     var first = !root.classList.contains('used'); root.classList.add('used');
-    if (first) { root.classList.add('open'); sizeWave(); play(); } else { root.classList.toggle('open'); if (root.classList.contains('open')) sizeWave(); }
+    if (first) { root.classList.add('open'); sizeWave(); play(); setTimeout(function () { root.classList.add('compact'); }, 600); } else { root.classList.toggle('open'); if (root.classList.contains('open')) sizeWave(); }
+    pill.setAttribute('aria-expanded', root.classList.contains('open') ? 'true' : 'false');
   });
+  document.addEventListener('pointerdown', function (e) {
+    if (root.classList.contains('open') && !root.contains(e.target)) { root.classList.remove('open'); pill.setAttribute('aria-expanded', 'false'); }
+  }, true);
+  try { if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({ title: 'Por el resto de mi vida', artist: 'Andrés Cepeda', album: 'Para Ari' });
+    navigator.mediaSession.setActionHandler('play', play); navigator.mediaSession.setActionHandler('pause', function () { A.pause(); });
+  } } catch (e) {}
   addEventListener('resize', function () { if (root.classList.contains('open')) sizeWave(); });
 
   window.musicShow = function () {
     if (shown) return; shown = true;
-    setTimeout(function () { try { A.preload = 'auto'; A.load(); } catch (e) {} root.hidden = false; requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.add('in'); }); }); }, 3500);
+    setTimeout(function () { try { A.preload = 'auto'; A.load(); } catch (e) {} root.hidden = false; requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.add('in'); }); }); setTimeout(function () { root.classList.add('compact'); }, 6500); }, 3500);
   };
 })();
 </script>

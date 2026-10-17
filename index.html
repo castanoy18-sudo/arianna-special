@@ -393,6 +393,52 @@
 
   /* ===== Llevamos X días ===== */
 
+
+  /* ===== Reproductor: badge con disco ===== */
+  .mus { position: fixed; top: calc(env(safe-area-inset-top, 0px) + 10px); right: 10px; z-index: 40; transform: translateX(130%); font-family: var(--ui); color: #FFE3EA; }
+  .mus.in { transform: none; transition: transform .9s cubic-bezier(.2,1.3,.4,1); }
+  .mus-pill { display: flex; align-items: center; gap: 9px; height: 54px; padding: 6px 14px 6px 6px; border: 1px solid rgba(255,200,212,.3); border-radius: 30px; cursor: pointer; touch-action: manipulation;
+    background: rgba(38,18,47,.88); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: 0 8px 22px rgba(0,0,0,.45); color: inherit; position: relative; }
+  .mus:not(.used) .mus-pill::after { content: ""; position: absolute; inset: -4px; border-radius: 34px; border: 2px solid #FF8FB1; animation: musPing 1.8s ease-out infinite; pointer-events: none; }
+  @keyframes musPing { from { opacity: .8; transform: scale(1); } to { opacity: 0; transform: scale(1.18, 1.35); } }
+  .mus-txt { display: flex; flex-direction: column; text-align: left; line-height: 1; }
+  .mus-txt b { font: 700 1.3rem/1 var(--hand); }
+  .mus-txt small { font: 700 .6rem/1.2 var(--ui); opacity: .7; letter-spacing: .02em; }
+  .mus-eq { display: flex; align-items: flex-end; gap: 3px; height: 20px; }
+  .mus-eq i { width: 3px; height: 20px; border-radius: 2px; background: linear-gradient(#FFE08A, #FF8FB1); transform: scaleY(.15); transform-origin: bottom; }
+  .mus-disc { --d: 40px; position: relative; flex: none; width: var(--d); height: var(--d); border-radius: 50%; box-shadow: 0 3px 8px rgba(0,0,0,.5); }
+  .mus-disc .rec { position: absolute; inset: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle, transparent 0 36%, rgba(255,255,255,.07) 36.5% 37.5%, transparent 38% 100%), repeating-radial-gradient(circle, #0E0814 0 1.5px, #231A30 1.5px 2.6px); }
+  .mus-disc .rec::before { content: ""; position: absolute; inset: 31%; border-radius: 50%; background: radial-gradient(circle at 30% 25%, #FFB347 0, #E8476A 55%, #8E1730 100%); }
+  .mus-disc .rec::after { content: ""; position: absolute; width: 7%; height: 7%; border-radius: 50%; background: #150A1F; z-index: 2; }
+  .mus-disc .rec b { position: relative; z-index: 1; font: 700 calc(var(--d) * .2)/1 var(--hand); color: #FFF3F6; transform: translateY(-34%); }
+  .mus-disc::after { content: ""; position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+    background: conic-gradient(from 20deg, transparent 0 8%, rgba(255,255,255,.2) 13%, transparent 19% 58%, rgba(255,255,255,.16) 63%, transparent 69%); }
+  .mus-panel { position: absolute; top: calc(100% + 8px); right: 0; width: min(88vw, 300px); padding: 14px 16px 12px; border-radius: 20px; border: 1px solid rgba(255,200,212,.28);
+    background: linear-gradient(170deg, rgba(90,33,71,.94), rgba(30,13,43,.96)); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 18px 40px rgba(0,0,0,.55);
+    opacity: 0; visibility: hidden; transform: translateY(-8px) scale(.94); transform-origin: top right; transition: opacity .3s, transform .35s cubic-bezier(.2,1.2,.4,1), visibility 0s .35s; }
+  .mus.open .mus-panel { opacity: 1; visibility: visible; transform: none; transition: opacity .3s, transform .35s cubic-bezier(.2,1.2,.4,1); }
+  .mus-kick { font: 700 1.15rem/1 var(--hand); opacity: .75; text-align: center; margin: 0 0 6px; }
+  .mus-deck { position: relative; height: 190px; }
+  .mus-deck .mus-disc { --d: 170px; position: absolute; left: 4px; top: 10px; box-shadow: 0 10px 24px rgba(0,0,0,.55); }
+  .mus-arm { position: absolute; right: 22px; top: 4px; width: 0; height: 0; transform-origin: 0 0; transform: rotate(3deg); transition: transform 1s cubic-bezier(.5,0,.3,1); }
+  .mus-arm::before { content: ""; position: absolute; left: -2.5px; top: 0; width: 5px; height: 128px; border-radius: 3px; background: linear-gradient(90deg, #BFB3C9, #F4EEF8, #A599B1); }
+  .mus-arm::after { content: ""; position: absolute; left: -7px; top: 122px; width: 14px; height: 18px; border-radius: 3px; background: #E8476A; box-shadow: 0 2px 5px rgba(0,0,0,.5); }
+  .mus-pivot { position: absolute; right: 12px; top: -6px; width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #F4EEF8, #8F84A0); box-shadow: 0 2px 6px rgba(0,0,0,.5); z-index: 2; }
+  .mus.playing .mus-arm { transform: rotate(37deg); }
+  .mus-wave { display: block; width: 100%; height: 62px; margin: 4px 0 6px; }
+  .mus-title { font: 700 2.1rem/1 var(--hand); text-align: center; }
+  .mus-artist { font: 700 .72rem/1.4 var(--ui); text-align: center; opacity: .7; margin: 2px 0 10px; }
+  .mus-ctl { display: flex; align-items: center; gap: 12px; }
+  .mus-play { flex: none; width: 46px; height: 46px; border: 0; border-radius: 50%; cursor: pointer; touch-action: manipulation; display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(145deg, #FF8FB1, #E8476A); box-shadow: 0 6px 14px rgba(232,71,106,.5); }
+  .mus-play svg { width: 20px; height: 20px; fill: #fff; }
+  .mus-play .ic-pause { display: none; } .mus.playing .mus-play .ic-pause { display: block; } .mus.playing .mus-play .ic-play { display: none; }
+  .mus-bar { flex: 1; height: 26px; display: flex; align-items: center; cursor: pointer; touch-action: manipulation; }
+  .mus-bar span { position: relative; display: block; width: 100%; height: 5px; border-radius: 3px; background: rgba(255,255,255,.16); overflow: hidden; }
+  .mus-bar i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 3px; background: linear-gradient(90deg, #FFE08A, #FF8FB1); }
+  .mus-msg { font: 700 .7rem/1.3 var(--ui); color: #FFD1DA; text-align: center; margin: 8px 0 0; }
+
   /* ===== Sombrero de Catrina ===== */
   .hat { text-align: center; padding-left: 24px; }
   .hat h2 { margin: 0 0 8px; }
@@ -659,6 +705,33 @@
 </button>
 <canvas id="confetti"></canvas>
 <canvas id="fx"></canvas>
+
+<!-- Reproductor de música -->
+<audio id="musAudio" src="obsesion.mp3" preload="metadata" playsinline></audio>
+<div class="mus" id="mus" hidden>
+  <button class="mus-pill" id="musPill" type="button" aria-label="Abrir el reproductor">
+    <span class="mus-disc" id="musDiscMini"><span class="rec"><b>A</b></span></span>
+    <span class="mus-txt"><b>Obsesión</b><small>Peter Manjarrés</small></span>
+    <span class="mus-eq" id="musEq"><i></i><i></i><i></i><i></i></span>
+  </button>
+  <div class="mus-panel" id="musPanel">
+    <p class="mus-kick">Una canción para ti, Ari</p>
+    <div class="mus-deck">
+      <span class="mus-disc" id="musDiscBig"><span class="rec"><b>A</b></span></span>
+      <span class="mus-pivot"></span><span class="mus-arm"></span>
+    </div>
+    <canvas class="mus-wave" id="musWave"></canvas>
+    <div class="mus-title">Obsesión</div>
+    <div class="mus-artist">Peter Manjarrés</div>
+    <div class="mus-ctl">
+      <button class="mus-play" id="musPlay" type="button" aria-label="Reproducir o pausar">
+        <svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+      </button>
+      <div class="mus-bar" id="musBar"><span><i id="musProg"></i></span></div>
+    </div>
+    <p class="mus-msg" id="musMsg" hidden></p>
+  </div>
+</div>
 
 <script>
 (() => {
@@ -1078,6 +1151,7 @@
   }
   function winEffects() {
     nimbusInit();
+    try { if (window.musicShow) musicShow(); } catch (e) {}
     buildLogros();
     const w = $('win');
     [[.25, .22], [.75, .3], [.5, .15], [.2, .5], [.8, .55], [.5, .4]].forEach((q, i) => setTimeout(() => { const S = stage(); emit(S.l + S.w * q[0], S.t + S.h * q[1], 46, 'fire'); }, 400 + i * 650));
@@ -1251,6 +1325,84 @@
       const S = stage(); setNoPos(clamp(noX, S.l + 12, S.l + S.w - noW - 12), clamp(noY, S.t + 12, S.t + S.h - noH - 12), true);
     });
   });
+})();
+</script>
+<script>
+/* ===== Reproductor: el audio es un <audio> normal (sin Web Audio), las líneas siguen una curva de energía precalculada ===== */
+(function () {
+  var ENV = {fps: 15, b: ["000000016638fdbb977667669765557546548a78977877965b75434854a75cfdba97766655656655755544aa78958bab987d76555655855deebdcbba9988jgedccba9998ca9977bdca99bba9888a8a974797875774455565868e96b9554568a8854b55432222222222fliijvxsccliaampqlqsqpgiiiiifhkiifjlmijgeecab99lljtrtqnomjgjndcb9celomg6do6ha8766aab8a78b7574fcb9844iiknolijmorqoiggg67mb3eiiib9npnronmjjhhecc98a9a99czzzztrppptrpjfecc9bj89t9ddba9878868a5inlihgszkhzxhqsroqnigfihfeccd8cmljhddcfdzha776deccdghccfebbdgkc9ziid76iia7hhg77gifhediedzkab87fihgddjjhnehgpkkppnzlfebcedbb9boi9njggb7plkzrqqolnmijgfohdngcjpduptxwsrqporlokkficfa777ckgekzjb77a95cifecbf87cifesuszmmjlhsuusqnkifd8aea9nsszmilihotwsrppkihgkkglnmmzpke98dgeccaklhgiefdc9gdsfbc75ahgg6egdcdcdeqpxzzzzstrmlkfedccibeeaa87bkmktceehfqpnhghigejiffd9cfgzmgfedhccccbca9g75bhdoqmwnmkgejtusmsuzuxnnmmmkzwtsqljhgzxqpmmlipiedkflxxvtqpplkqvtqnnligpecebbywzwxtwpglkkqvyzwvsqlllhkpusrlkkgeeidd8faa9f86a9axtolkifeccdaca989nuoeregnrsqqpmjiigefggiecedbedbmmlzvntigzwtrmnppmkikleecedzeab77876frsppmnhgfcbhqqztzzztxxopmmmppoylizuuxtszqrnkklmijdbb8cfdbecammkzlhtrvxvoozornmpkjme9rousqljkihkklkihgikkhjfefjgizledddjmkhigiegnnkjtrqoqzmllihnmltusolidedrpmorqzulmhjuyurrsxusuyxssppqlzmkjbbhfcgxyvstvrrpsmmwtsqnlpllmlfkjhgqmjegnfhqsqxroiflifgzwplopnmjhbdmnmymjtomtwttssxurlkilmhgkjwmgidelmlmmkijllgdcb9figzugkhhhkkkjjgffmlkkkjhkmqogjfaehgfolikhgddeca9bchytmrzzzrowtqlrqspkmnlosuzusqqzzyuzzzzuwzwsxunxurnmilwwvzypyzyzzwjilpsryyvxxvkigovzyprvzrqrrssllnmzkkkkgrrnomnrpkqwvuvsstpomlkjikkjhhhifftigffdjkjihhggffgegdb866ifcfc77gghcccb9bjhgkededgggfdca987878864homkjkiffgeddbabbbb99755dba9a9998ea7864a89d86b56cdbbfda99i978859b9a98b76b99ea5664ehfcbaaa7h76d844khfeecbaccaaaicaa8b56644ccaca7975da8b97bgfedbgdbbifgdcc97zzwvqqoljjieedbdmnljhigfnnlklhhgffgcegecqqnkidc8homhgecc97f77833lmkljifebwpmokhicae77cb8cigdcb7c6wstromligjdcd88fljhdhffexihdcaahbf98ae86kfgdbarjkvgfomjihdihgdecjdcfdbbgaj98c8molpzuqukhloqvtqk9eqp77tusdaumhkfhjnlhiihgdea9cnlklnrmifjpkjjg8balkuqj4eq5f9gjcac6ccacg879a6h87a84hpmlkqxg6fkkii6hvnnorrvwvpozusvwprhhhg99b9d97698uzzzzspprzqhfejhgrsnnfbaaca8a74a76bebnlmhddhg9a7uzsszqlihfhhfedcd97kkkkfcbfhqqfg87cedea9zpfzkczqqxrkoqmmb8ankbmmha5bgffbbcdaai9b976igecfgbbfhfenrpywjzsnkf9ija7diwgerhgqiglqpuvsopnqkmqwvhlioqkklienlwsjmggjlklkjmfffcdccdhkgggdecbbfa9njghehfbfktqrutzpllnknwvrqoljhc98cbabrpzlhhhgfvwtrsrommjkmjiqplznef9aaffecapwozyhtngzrkaac9b66jmmgdhffcjfeytlvzzzurnnlljgfedtncqpjediojksshijhololhkkkhnofggfigkkjhjjhfgggfehgexd7afookhiomlfghjuyohnxzyoqomkivwronjigfsunecchjgvlgjijzuvsrpqqpnutpnmmigxiffdcqzvvwyyzmrpkixxzzxuqlmthgrulihkjjjhibbbhcfbea98dautqpnnijhfgfcbce675475zzztvtpookihgfegehfdfdcafdjkjuzvsrhszqpnnmnjihjmgecigtqfc766879swvsqokkhgfcvwwzsryoszvppoqtzoomjzzzzvruxqunkknghdcvogymesfblihgliompxyuqzysorrkimfakomqpgkjjjlqtyqijkpkjihddmhrxlkddemljjhhyiluomzqturqlolkihswusxxsoniiiormkklsvmmrmousxsuwvtpywrspkpozqmha8ghcdtvtursqqmrkdtuusmkrollmhkkjzvoznjwkhnsnjopmhgmlepznilrpnlkgajlkqninkkpxtrttpnlmlkknhhnmjqifdbihhjheedegdeab9biihtjejhhpnnllnnhfqppnkkihowmfkeagfeilkigdcaccaaeeepzopvzysoovtzspzugzokwvwtzruszzzxxzzzxyzzvvqogtrrsjmwyyzzvzzzzwtukmvvwyzqzstpkipwwypwwxsstssomzzzzyxwxuussrnmlnnommkhhfffggebbbbca999876555554wvssqqptpmlihfeeebaffdddemsnozpnlkkrurolklhheeffenoozqklljkmmkjkkkghhrtxuhjzywutqspoppmkkggfecb9acacba98988779787432211113344a5221111111111110001000000000000000000000000000000000000000000000", "00000002997ab98da8667865cdba89b96aa8776bb97667b86jfca98c97dcbba9cca9876554335b87cbaa98976eda987cc9aiecbaadbaedba989887777769hedba8876986654b86776a76aca9769c9dec9755a87544333777i8hrhagd86548cfhfc9khfca9765434433eqpn8a9887pqa9dejlfjhhiopmkhbgojjghefdkgehggfecigejzfcjypd8cl77mqmjd7cf49jpxtsqj8ntegf77qppmmipkiedatsjedszqbaccglwnj35e43dkjf66ipvywxywwtpgfgeca99gefumfhvvthaksjjvro986h55gzvsrjjilrpfwe6ppxsoikoikfkzyf9bnzs7bya8jzzzwvwdbiyypcdoxvvaozkcozthaazzeotsg99gpqb65rp55ttg9cwsdhsyymcnutfb9stjkzjinhljeelohccelib776b66658xgfwkopkjyqgixrhdgkmmcbati7nb9buzxtkfqrsmihnmhhcehboa7mljwjijhekedjeagdajb8pgaeinuskfgnog99ttgowwhpopcgzzusfhxtsfbdyvezuhowknemxvpwvnkfee78jghcdbqvuzubsqiutynizzedlzwpyzhlhstkjklvmoigdddbdmjgifdzemzzkyjituuzwusplyhezuwqhjxydszztpjiuutupwqronjmkdma9ptkijdrrjnteerswvxcktvrjxocipmyslmtacedgjgfodfrfgzjnsqnjgmxutwscivlhdeseaxzlxvyjhnndatq9zwtrnjiibbhwwrqrsonlnsnpnujqomokmplllqnkpknwchvgnj78zuqvdfzftrwvkuqhcbtoentrpflwwqulglgdegof98pc9qzdgxzwcls99mppnmqrwcgihvwrkidsupjgdsqjhhijdafwfjuoiiehvaapohqrolvnomgngdqprmidywwuvroiiabbvvbtocdgcahzwqrhf8zxtnokrslusltuqqrrumqssnhiedrtwukrpkipngnruoelspoyxrslftccxe9wwuwxozuzqokhgdertucswo9uremqqmbjzgenlhhrvqg9vjelwuuojtnkkielolkjhklghtmcpplfgsmddliiorpfqqeans8ceirugnzpthfcdb9b88zxfvc9jzypwwu8dvpizwzrwxnglzuksnonooskjnkfigedlzidhxwgjpoktwsedth8oqumhcetahze9uwzrilyrpsggfecizzndmwabmzuezxqfjzyoutogstrlalogorliffojggb9jlghfdfmrlrmcdddijla9krfilhedfgcbbzgelopnkguvutuklhfvvwooekiczwoofdzvjvpjvrprsrspnqppikjpomvnoqrpxpmnomszppsnpphjglwndlvzumbacfhb7aeajhbgmbkqedgeff9bfbelo9igclmnb9hocajidp97iiaa76ccgkgfkedqihsjesfdieblk8ggdjnkifbjidsminh9debc78ch7khafjamjeepemd9hfaimaakehmhmigeigbmlikf8geaa98b9gqbmgebjgdigdxhhhdbnpgjqkiecgskvic9lioebcnhkjcijegkelkcenfhldeickg9bnhfrikleamjgnednklredghhccdeedwghnkbnfcpebkmhlf8lihjkgjh7hmhrk8ekiojacsjlgdgjceqdffjilbckejrjmcadjeexifgedumuib9plnfbcdededafb8jfcjjfpgcimlwsnhorhcakud9gig58kd67dffa7mvrtoonlgfjejhgpecfilizncfztrmgsm8hpsmbkg959wzuorqfeyrntpnrssprszzukdelyocdjnb9itogf5f77opgdggf9jnuuromqtqlgehfiofabgegrpfekzmboj788jtshkwfapqvwomstohcankmzlkhbawuzhogzzxhvyzueutkljltopzobkzzzoilwvh98qztoecrn9jm8epvxsiptke888spcgwqmwrhditvzqwsohidagkhifdgylnsxroqjgg98nzoa8pe88hrjgtuhanvvunlwzulielzmhigefgqmbitqmkhfwwxutuszwusquwxvspxvzvvszywwrsqnikgdfbijbbllzyuheyzxmjzqljwxoalyqjgzuuttpurcbazobdetnhduvuotmmggca8e66fhfda8mxeklqvvijztegvxscayrlhhnrhemwfikdmohc98e89jhfdcamb9wihuxmxwqqyzrdbzzvouypmavpiusxtjipxyxzzzzyytttrkufbbgepecczilsiewunvxejqwuklxfesousrjsibdedpickhblldtqooomifgqsputcestjgats8endlzrvhgnlbpwfmurmogoieeowtyoxtutxpuvsqmilonkmkpmmjsomqqqzhfzihqpqebpzr8zrauuwouskfbnpektspkcvwzjnlukifgomb7jm9nzsfhzzdozc8npspnmnulfijpwunlfgznofdbpkigfhkhetqetrjkjkuralfbpvwfzomkntlcjsqka7uzsrrnmifbcapzeoqddlggfxzuqpdeqzylqrkxrnxkksrrruutnrmmfighdwuurnyjbmrtivsqhjutnzxsqpeqi9smbkzrxzozpnqkgofbhtvxfizsgmzkktttcdzhfimkglxuc9ppejwwvrkpklhfffqpkihjnifsocjpmggppfdlidmomfjqgaazb7fgnvlfzornnhjgcc88lzisradzxwxyyiewnnsusuywrkhrvoorwwsqvlojhihifcjypeerzmdrompvtphrpdfrurldfpgdzkanxxvjkxwqphgiebbvzthdtg8ityjuzrkgyxruumjpusqdknovqqpjikokmfeenlmgghhljplcdjdiiliadqhhoigeifdcbqydhtokkivvvvtvtuprnmkkfhfgffedbbcccbcedfidbbbaggica98876543333eecxvutnadrrczvsg67rtjosoportqqstssttttrrqouqqrqpsxwxxxvwvywwwwtsqyrsrrtnqyzzzzzzzzzzzzzzzxyzzywvvvxwutsqpnnllonmkjigdbccdddaeba99765432232222222211111111111111100000000000000000000000000000", "00000001233343365432232166443563365342266432236548654324335433223322111110003544332322332787543665575432232232221133222122245432222112221114322216546644226636853322322211111221635a54763211467b8657643221111111119qjc8jhcpkcj54fbd97kqneaa99848h9d79587a88865776876hzg6bjilmihc4mohfh5pl47ijikkfhtid7ahd6mtsmi7jh8532gpc65fig64pkffgge34b345a9a239gdccdeeddb75876544766fea7gjja7efegolg57ihqlkgooph978zu9yg5ouyqrmltnkkxuljh8zzk6ap77zzzzvwzlkeyzp8ctzzv9kllcpzze86rs8ifeeof8dffi3hirpprgp7tkpdquvodszsrc5sverwqazrea67efa968858623933715ofdx9hqdall6rzpnp8fzqk75pf7qrritdig87cdgfccc9d968c5ga6ckbd86c86j76k94l64je5d75banzzomizzkd8zzcrzzizzzaeztjnd7vzrd7aii8nkaejdql8fheijfca7fa8c67a32iyxoh9loafzziast95qzzsimkp8hsfbcdgmoc87c658a88l7bzbbtugwbdlfhutzzvhucctzxqcozubhxxxuljstnjjmiiihceacjb4hiiha7on9zzmkzzrwwbextqjnj5fwnlmcin78ngbb9ab8bba9nbgghda6bhgeleqjvzx9ixd6zldzvxbdenj4fd3nwkgi9henjbemidhfdcedecececdeeea8a988dcizcir6gw9vq79zzzxbdvapzxthwwffayzbzzzthhhjhfbai859zwf88na9df89cof6ki69zzzzzzzv9cimqkhda5ikghb9he996dnl6rp7afaaa6as79jehzzskzzcaazf6uxzucfwppoode78646lk7hetnua97deijlr5lhfcg8uugmwaioyttrrmjifbd987pusuejtaazzozxqiqnqlfqomhaat97u85iopkphqlmic6f867yzp7ovobyp9ksqd7bpuozzlcoyr66db7nuqjhbfnrhe8if9975nzjnq99eaabbtk68gqcdfa7kkt9kprnipqmadebec77d54538ilbhkkepifdif49zmkwzssrtj7apojmvusolmfcji9d968nupo9sh6ctqaptm89i8oljth85gt57l74gkmdabmmkd67c66fnni89j56npf6ehb6atpdihcagge84a87ihga76eicb86ca87659lec99bb978ad75dgbhhjqkonp77kg5pzpuqbmspmlcg76lurg99zzdztte98uqazpdszyzvtssrttsutusussqnrrospppokqqqrwrvriefepqglntth6ad8a54ba4bk68j69g58lfbn4al97nf5me6phh84ch95jlcl84b77934974h86b96cb4io8lg5hg4hf6cj6gkgea5fi6eqolj58d6b68ei4fd68f5ad67eaih69b5fj65g8fhede97d86kehh94988657a4chagjc5g96hf8ga6643f97ac8d735bbee59cai9449af759c6fe9bg7be59e7bd66828b76c78e42aceh659bgmd4aa9954a93ld9lmefb6ee6gc8983db6bc9bd37cadd48ebgh56fdf76cc6be7ad9bc59c8cg77629c76eaad53geb865kmeca998aa66b44ea8ddbg868ccqocciud65eoc6jpk4coo48mun74gsimjecdaaa8b76d54abaeic8mxxpedlk8lgf97aafqgdtuutsaavqivpcpxvqspkldd67hqf85ei73ckk993elcce96jgg88dplledggfi8699cf847okelk97gjf6kdn85dpnff9769grtodkvidplwypzueblnuppcc9mzwaiooiewzdaqyugjul7bwzul8wwonf5hujk75vj5ehsujjif6cgggp7amgagddcxio7jxxwkrlhdd648c8995fzqfdmddcabd776feohggj8anc7js86fuuve79nndb5dl8bjjgm7fi7bhed776dggfggfghfeejijhgarqqrrmqmmikiidbg79dd6958dcolm87ajid9f98ctrficpgaenkldenumb65ha5a6b757dvlprjefba6be43975843gr697cnhajroaakjf67omob68kc6bb5hg7d96748834c86a549o7necpi7zvhmpli55musotqkf7zzrwzzsecfehjjikkknigfg7g83bb5ib5cy9pzlkzzrwtqcxtthgp79pwinkdra4gkafa8d98be7qhiife857ffgfkqqzztmazz6gz9fuuoednu7dh5blgbc7cmqcbemjgjheedfeddffddabbbcc898dbbzrbya7zjbzzzhbgzz7sibytvmtrji8kyjrzzzicehlejefb58zzo96ld8bdc98mk7hl76pzzzzzzyjahmlkjgd7bogfb75da975aorcze6ekdec8nd7dd7ipsasuj88uj5gzzq97pllfg8c95544es8cgrspgcabejjfobgkhdcfkwkfvfgqvussoojjfa8b886rgolknk6kwtfxqokpgncptngh7rk5qh5btuuqeoqjfc8g76fzzu9btufxwfcvqj79psuozuamuv86a99iwokieeptiaahfa975bzv9ze6bc978qn65hpdgfc8enpj6tpphosmfbgbedc7c45736ftdifpiikfe9a68ymleljijmjcaeqmsrvqrmomkfpmde87fynqdlrb6nwehsodafchoivn97bwe6ic3bkiha9goje87f64dlomd7i84hul7chfaaqskkiicgiib5b99fkhda7ckcgbbbb9865d8cab86nm6keaa67bcdklqnutpm5ih7dmgjjbmfenlmjjegcaab8989897653245545577544346875332221122211554jgb986czxbvztc66spjmzmjttxqutsvtwussproqrqqqppqonppoqrtusrsvstrxxvssuxttmifecaa9ba99a999989aaabbba98866656668654443322333365432221110000000000000000000000000000000000000000000000000000000"]};
+  var START = 21, $ = function (i) { return document.getElementById(i); };
+  var root = $('mus'), A = $('musAudio'), pill = $('musPill'), cv = $('musWave'), msg = $('musMsg');
+  if (!root || !A || !cv) return;
+  var cx = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var env = ENV.b.map(function (s) { var a = new Array(s.length); for (var i = 0; i < s.length; i++) a[i] = parseInt(s.charAt(i), 36) / 35; return a; });
+  var eqs = root.querySelectorAll('.mus-eq i'), recs = [root.querySelector('#musDiscMini .rec'), root.querySelector('#musDiscBig .rec')];
+  var playing = false, seeked = false, shown = false, raf = 0, last = 0, speed = 0, ang = 0, phase = 0, lvl = [0, 0, 0], fade = 0;
+
+  function sizeWave() { var w = cv.clientWidth, h = cv.clientHeight; if (!w) return; cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); drawWave(); }
+  function drawWave() {
+    var w = cv.width / dpr, h = cv.height / dpr; if (!w) return;
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0); cx.clearRect(0, 0, w, h);
+    var cols = ['#FF8FB1', '#FFB347', '#FFE08A'];
+    for (var k = 0; k < 3; k++) {
+      cx.beginPath(); cx.strokeStyle = cols[k]; cx.lineWidth = 2.4 - k * .35; cx.shadowColor = cols[k]; cx.shadowBlur = 8; cx.lineJoin = 'round';
+      var amp = (.03 + lvl[k] * .95) * h * .42;
+      for (var x = 0; x <= w; x += 3) {
+        var u = x / w, tp = Math.sin(Math.PI * u);
+        var y = h / 2 + Math.sin(u * (7 + k * 4) + phase * (1 + k * .45) + k * 1.7) * amp * tp + Math.sin(u * (15 + k * 6) - phase * 1.7) * amp * .35 * tp;
+        if (x) cx.lineTo(x, y); else cx.moveTo(x, y);
+      }
+      cx.stroke();
+    }
+    cx.shadowBlur = 0;
+  }
+  function tick(t) {
+    var dt = last ? Math.min((t - last) / 1000, .05) : 0; last = t;
+    speed += ((playing ? 220 : 0) - speed) * Math.min(1, dt * (playing ? 2.2 : 1.6));
+    ang = (ang + speed * dt) % 360;
+    recs[0].style.transform = recs[1].style.transform = 'rotate(' + ang.toFixed(1) + 'deg)';
+    var tg = [0, 0, 0];
+    if (playing) { var i = Math.floor(A.currentTime * ENV.fps); for (var k = 0; k < 3; k++) tg[k] = env[k][i] || 0; }
+    for (var k2 = 0; k2 < 3; k2++) lvl[k2] += (tg[k2] - lvl[k2]) * Math.min(1, dt * (tg[k2] > lvl[k2] ? 18 : 7));
+    phase += dt * (1.6 + (lvl[0] + lvl[1] + lvl[2]) * 4);
+    var q = [lvl[0], lvl[1], lvl[2], (lvl[1] + lvl[2]) / 2];
+    for (var b = 0; b < 4; b++) eqs[b].style.transform = 'scaleY(' + (.12 + q[b] * .88).toFixed(3) + ')';
+    if (root.classList.contains('open')) drawWave();
+    if (playing || speed > 1 || lvl[0] + lvl[1] + lvl[2] > .02) raf = requestAnimationFrame(tick);
+    else { raf = 0; last = 0; for (var z = 0; z < 4; z++) eqs[z].style.transform = 'scaleY(.12)'; if (root.classList.contains('open')) drawWave(); }
+  }
+  function kick() { if (!raf) { last = 0; raf = requestAnimationFrame(tick); } }
+  function setPlaying(v) { playing = v; root.classList.toggle('playing', v); kick(); }
+  function say(t) { msg.textContent = t; msg.hidden = !t; }
+
+  function play() {
+    say('');
+    if (!seeked) { if (A.readyState >= 1) { try { A.currentTime = START; } catch (e) {} seeked = true; } }
+    try { A.volume = 0; var v = 0; clearInterval(fade); fade = setInterval(function () { v += .08; if (v >= 1) { v = 1; clearInterval(fade); } try { A.volume = v; } catch (e) {} }, 70); } catch (e) {}
+    var p = A.play(); if (p && p.catch) p.catch(function () { setPlaying(false); say('Toca otra vez el botón para dar play'); });
+  }
+  A.addEventListener('loadedmetadata', function () { if (!seeked) { try { A.currentTime = START; seeked = true; } catch (e) {} } });
+  A.addEventListener('playing', function () { if (!seeked || A.currentTime < START - 1) { try { A.currentTime = START; } catch (e) {} seeked = true; } setPlaying(true); });
+  A.addEventListener('pause', function () { setPlaying(false); });
+  A.addEventListener('ended', function () { setPlaying(false); try { A.currentTime = START; } catch (e) {} $('musProg').style.width = '0'; });
+  A.addEventListener('error', function () { setPlaying(false); say('No encuentro la canción: obsesion.mp3 debe estar junto al index.html'); });
+  A.addEventListener('timeupdate', function () { var d = A.duration; if (d > START) $('musProg').style.width = Math.max(0, Math.min(100, (A.currentTime - START) / (d - START) * 100)) + '%'; });
+
+  $('musPlay').addEventListener('click', function () { if (A.paused) play(); else A.pause(); });
+  $('musBar').addEventListener('click', function (e) {
+    var r = this.getBoundingClientRect(), d = A.duration; if (!(d > START)) return;
+    A.currentTime = START + Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * (d - START); seeked = true;
+  });
+  pill.addEventListener('click', function () {
+    var first = !root.classList.contains('used'); root.classList.add('used');
+    if (first) { root.classList.add('open'); sizeWave(); play(); } else { root.classList.toggle('open'); if (root.classList.contains('open')) sizeWave(); }
+  });
+  addEventListener('resize', function () { if (root.classList.contains('open')) sizeWave(); });
+
+  window.musicShow = function () {
+    if (shown) return; shown = true;
+    setTimeout(function () { try { A.preload = 'auto'; A.load(); } catch (e) {} root.hidden = false; requestAnimationFrame(function () { requestAnimationFrame(function () { root.classList.add('in'); }); }); }, 3500);
+  };
 })();
 </script>
 </body>

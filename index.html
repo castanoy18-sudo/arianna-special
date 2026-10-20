@@ -1292,45 +1292,116 @@
   #apagon .ap-msg small { display: block; margin-top: 8px; font-size: .56em; color: #fff; opacity: .92; }
   .buttons { column-gap: 36px; row-gap: 16px; }
 
-  /* ===== Entrada nueva: portada de novios + candado con la fecha ===== */
-  #lock { justify-content: space-between; text-align: center; padding-top: calc(env(safe-area-inset-top, 0px) + 56px); padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 18px); transition: opacity .55s ease, transform .55s ease; }
-  #lock.leaving { opacity: 0; transform: scale(1.04); pointer-events: none; }
-  .lk-top { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; }
-  .lk-greet { margin: 0; font: 500 1.7rem/1.1 var(--hand); color: rgb(var(--c40)); animation: fadeup 1s .15s both; }
-  .lk-names { margin: 0; white-space: nowrap; font: 700 clamp(3rem, 16.5vw, 4.8rem)/1 var(--hand); color: rgb(var(--c67)); text-shadow: 2px 3px 0 rgba(0,0,0,.35); animation: fadeup 1s .3s both; }
+  /* ===== Entrada nueva: mini película + portada de novios con constelación + candado con la fecha ===== */
+  #cine { z-index: 40; background: radial-gradient(90% 65% at 50% 28%, var(--night-1) 0%, var(--night-2) 58%, var(--night-3) 100%); background-color: var(--night-3); transition: opacity .7s ease; cursor: pointer; }
+  #cine.end { opacity: 0; pointer-events: none; }
+  .cn-l { position: absolute; left: 0; right: 0; top: 40%; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; padding: 0 20px; opacity: 0; transform: translateY(14px) scale(.96); transition: opacity .8s ease, transform 1s cubic-bezier(.2,.9,.3,1); pointer-events: none; }
+  .cn-l.on { opacity: 1; transform: none; }
+  .cn-l.off { opacity: 0; transform: translateY(-14px) scale(1.03); transition-duration: .6s; }
+  .cn-l small { font: 700 1rem/1 var(--ui); letter-spacing: .26em; text-transform: uppercase; color: rgb(var(--c40)); opacity: .85; }
+  .cn-l b { white-space: nowrap; font: 700 clamp(3.2rem, 17vw, 5.4rem)/1 var(--hand); color: rgb(var(--c67)); text-shadow: 0 0 12px rgb(var(--c68) / .8), 0 0 34px rgb(var(--c69) / .5); }
+  .cn-c { position: absolute; left: 50%; top: 36%; width: min(84vw, 340px); height: auto; margin: 0 0 0 calc(min(84vw, 340px) / -2); transform: translateY(-50%); overflow: visible; }
+  #cine .cn-l.fin { top: auto; bottom: 14%; }
+  .cn-skip { position: absolute; left: 0; right: 0; bottom: calc(env(safe-area-inset-bottom, 0px) + 18px); margin: 0; text-align: center; font: 500 1.1rem var(--hand); color: rgb(var(--c11)); opacity: .45; pointer-events: none; }
+  .cn { fill: none; stroke: rgb(var(--c67)); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 3; stroke-dashoffset: 1; opacity: .85; }
+  .cn.draw, .go .cn { animation: draw 2.4s cubic-bezier(.4,.1,.3,1) forwards; }
+  .cs { fill: rgb(var(--c11)); opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .cs.draw, .go .cs { animation: cstar 2.6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+  .cs.big { fill: rgb(var(--c67)); }
+  @keyframes cstar { 0%, 100% { opacity: .15; transform: scale(.6); } 50% { opacity: 1; transform: scale(1.25); } }
+
+  #lock { justify-content: space-between; text-align: center; padding-top: calc(env(safe-area-inset-top, 0px) + 54px); padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); transition: opacity .55s ease, transform .55s ease; }
+  #lock.leaving { opacity: 0; transform: scale(1.05); pointer-events: none; }
+  .lk-top { position: relative; isolation: isolate; display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; }
+  .lk-const { position: absolute; left: 50%; top: -34px; z-index: -1; width: min(92vw, 360px); height: auto; margin-left: calc(min(92vw, 360px) / -2); opacity: .36; overflow: visible; pointer-events: none; transition: translate .25s ease-out; }
+  .lk-greet { margin: 0; font: 500 1.7rem/1.1 var(--hand); color: rgb(var(--c40)); }
+  .lk-names { display: flex; justify-content: center; align-items: baseline; gap: .16em; margin: 0; white-space: nowrap; font: 700 clamp(3rem, 16.5vw, 4.8rem)/1 var(--hand); color: rgb(var(--c67)); text-shadow: 2px 3px 0 rgba(0,0,0,.35); }
   html:not([data-theme]) .lk-names, html[data-theme="amor"] .lk-names { text-shadow: 0 0 10px rgb(var(--c68) / .9), 0 0 28px rgb(var(--c69) / .6); }
   html[data-theme="rap"] .lk-names { font-family: "Sedgwick Ave Display", "Permanent Marker", cursive; color: #FFD400; -webkit-text-stroke: 2px #1a1020; paint-order: stroke fill; text-shadow: 4px 4px 0 #7C4DFF, 8px 8px 0 rgba(0,0,0,.4); }
-  .lk-ht::before { content: attr(data-g); margin: 0 .12em; font-size: .7em; vertical-align: .08em; }
+  .lk-ht { display: inline-block; font-size: .62em; color: #FF6B8E; text-shadow: none; -webkit-text-stroke: 0; }
+  .lk-ht::before { content: attr(data-g); }
+  #lock.go .lk-ht { animation: lkBeat 1.5s ease-in-out 1.6s infinite; }
+  @keyframes lkBeat { 0%, 36%, 100% { transform: scale(1); } 12% { transform: scale(1.35); } 24% { transform: scale(1.08); } }
   #lock .swoosh { margin: 0 auto; }
-  .lk-since { margin: 6px 0 0; font: 500 1.35rem/1.15 var(--hand); color: rgb(var(--c11)); opacity: .85; animation: fadeup 1s .6s both; }
+  .lk-since { margin: 4px 0 0; font: 500 1.25rem/1.15 var(--hand); color: rgb(var(--c11)); opacity: .9; }
   .lk-since b { font-weight: 700; }
-  .lk-phrase { margin: 8px 0 0; max-width: 300px; font: 500 1.3rem/1.15 var(--hand); color: rgb(var(--c40)); opacity: .9; animation: fadeup 1s .9s both; }
-  .lk-box { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; animation: fadeup 1s 1.1s both; }
+  .lk-cnt { display: flex; gap: 8px; margin-top: 6px; }
+  .lk-cnt div { min-width: 54px; padding: 6px 4px 5px; border-radius: 12px; border: 1.5px solid rgb(var(--c11) / .28); background: rgb(var(--c11) / .08); }
+  .lk-cnt b { display: block; font: 700 1.7rem/1 var(--ui); color: rgb(var(--c67)); font-variant-numeric: tabular-nums; }
+  .lk-cnt small { display: block; margin-top: 2px; font: 700 .62rem/1 var(--ui); letter-spacing: .14em; text-transform: uppercase; color: rgb(var(--c11)); opacity: .65; }
+  .lk-phrase { margin: 8px 0 0; max-width: 300px; font: 500 1.3rem/1.15 var(--hand); color: rgb(var(--c40)); opacity: .9; }
+  #lock .lk-greet, #lock .lk-since, #lock .lk-cnt, #lock .lk-phrase, #lock .lk-box, #lock .swoosh, #lock .lk-names .ln, #lock .lk-ht { opacity: 0; }
+  #lock.go .lk-greet { animation: fadeup 1s .1s both; }
+  #lock.go .lk-names .ln.a { animation: lnIn .9s cubic-bezier(.2,1.1,.3,1) .35s both; }
+  #lock.go .lk-names .ln.b { animation: lnInR .9s cubic-bezier(.2,1.1,.3,1) .55s both; }
+  #lock.go .lk-ht { animation: lkPopH .8s cubic-bezier(.3,1.7,.5,1) .8s both, lkBeat 1.5s ease-in-out 1.8s infinite; }
+  #lock.go .swoosh { animation: draw 1.3s ease-out 1.2s forwards, fadein1 .1s 1.2s forwards; }
+  #lock.go .lk-since { animation: fadeup 1s 1.2s both; }
+  #lock.go .lk-cnt { animation: fadeup 1s 1.45s both; }
+  #lock.go .lk-phrase { animation: fadeup 1s 1.7s both; }
+  #lock.go .lk-box { animation: fadeup 1s 1.9s both; }
+  @keyframes fadein1 { to { opacity: 1; } }
+  @keyframes lnIn { from { opacity: 0; transform: translateX(-40px) rotate(-6deg); } to { opacity: 1; transform: none; } }
+  @keyframes lnInR { from { opacity: 0; transform: translateX(40px) rotate(6deg); } to { opacity: 1; transform: none; } }
+  @keyframes lkPopH { from { opacity: 0; transform: scale(0) rotate(-40deg); } to { opacity: 1; transform: none; } }
+  .lk-box { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; }
   .lk-lock { width: 46px; height: 58px; color: rgb(var(--c67)); overflow: visible; }
   .lk-lock .sh { fill: none; stroke: currentColor; stroke-width: 5.5; stroke-linecap: round; transform-box: fill-box; transform-origin: 100% 100%; transition: transform .55s cubic-bezier(.3,1.5,.5,1); }
   .lk-lock .bd { fill: currentColor; }
-  .lk-lock .kh { fill: #1a1020; opacity: .8; }
+  .lk-lock .kh { fill: #1a1020; opacity: .8; transition: fill .3s, opacity .3s; }
   #lock.open .lk-lock .sh { transform: translateY(-9px) rotate(-26deg); }
-  #lock.open .lk-lock { animation: lkPop .6s cubic-bezier(.3,1.6,.5,1); }
-  @keyframes lkPop { 40% { transform: scale(1.3) rotate(-6deg); } 100% { transform: none; } }
-  .lk-q { margin: 0; max-width: 300px; font: 500 1.3rem/1.15 var(--hand); color: rgb(var(--c11)); opacity: .85; }
-  .lk-dots { display: flex; gap: 14px; height: 18px; }
-  .lk-dots i { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgb(var(--c67)); transition: background .15s, transform .15s; }
-  .lk-dots i.on { background: rgb(var(--c67)); transform: scale(1.12); }
-  .lk-dots.bad { animation: lkShake .45s; } .lk-dots.bad i { border-color: #FF6B6B; background: #FF6B6B; }
+  #lock.open .lk-lock .kh { fill: #FFE3EA; opacity: 1; }
+  #lock.open .lk-lock { animation: lkPop .7s cubic-bezier(.3,1.6,.5,1); filter: drop-shadow(0 0 10px rgb(var(--c67))); }
+  @keyframes lkPop { 40% { transform: scale(1.35) rotate(-6deg); } 100% { transform: none; } }
+  .lk-flash { position: fixed; left: 0; top: 0; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; pointer-events: none; opacity: 0; z-index: 5;
+    background: radial-gradient(circle, rgba(255,240,244,.98) 0, rgba(255,170,200,.65) 36%, transparent 70%); }
+  .lk-flash.boom { animation: lkBoom 1s cubic-bezier(.3,.6,.4,1) forwards; }
+  @keyframes lkBoom { 0% { opacity: 1; transform: scale(.3); } 55% { opacity: .95; } 100% { opacity: 0; transform: scale(26); } }
+  .lk-dots { display: flex; gap: 12px; height: 26px; }
+  .lk-dots i { font-style: normal; font-size: 1.55rem; line-height: 26px; color: rgb(var(--c67)); transition: transform .15s; }
+  .lk-dots i::before { content: "\2661"; }
+  .lk-dots i.on::before { content: "\2665"; }
+  .lk-dots i.on { animation: dotPop .3s cubic-bezier(.3,1.8,.5,1); }
+  @keyframes dotPop { from { transform: scale(.4); } to { transform: none; } }
+  .lk-dots.bad { animation: lkShake .45s; } .lk-dots.bad i { color: #FF6B6B; }
   @keyframes lkShake { 0%, 100% { transform: none; } 20% { transform: translateX(-9px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(4px); } }
   .lk-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 14px; width: min(72vw, 250px); }
   .lk-k { height: 50px; border-radius: 16px; border: 1.5px solid rgb(var(--c11) / .3); background: rgb(var(--c11) / .08); color: rgb(var(--c11)); font: 700 1.5rem/1 var(--ui); cursor: pointer; touch-action: manipulation; transition: background .12s, transform .12s; }
-  .lk-k:active { background: rgb(var(--c11) / .24); transform: scale(.93); }
+  .lk-k:active { background: rgb(var(--c11) / .26); transform: scale(.92); }
   .lk-k.nul { visibility: hidden; }
   .lk-k.del { font-size: 1.25rem; opacity: .8; }
   .lk-hint { min-height: 3.1em; max-width: 310px; margin: 0; font: 500 1.2rem/1.1 var(--hand); color: rgb(var(--c40)); opacity: .95; }
   .lk-hint small { display: block; margin-top: 3px; font-size: 1.05rem; color: rgb(var(--c11)); opacity: .8; }
   .lk-help { background: none; border: 0; color: rgb(var(--c11)); opacity: .7; font: 600 .95rem var(--ui); text-decoration: underline; padding: 6px; cursor: pointer; }
   .lk-enter { margin-top: 4px; padding: 14px 28px; border: 0; border-radius: 16px; font: 700 1.2rem var(--ui); color: #fff; cursor: pointer; touch-action: manipulation; background: rgb(var(--c42)); box-shadow: 3px 4px 0 rgb(var(--c43)); animation: softPulse 1.6s ease-in-out infinite; }
-  #lock.known .lk-q, #lock.known .lk-dots, #lock.known .lk-pad, #lock.known .lk-hint { display: none; }
+  #lock.known .lk-dots, #lock.known .lk-pad, #lock.known .lk-hint { display: none; }
   #lock:not(.known) .lk-enter { display: none; }
-  @media (max-height: 700px) { .lk-phrase { display: none; } .lk-k { height: 40px; } .lk-pad { gap: 6px 14px; } .lk-box { gap: 6px; } .lk-lock { width: 38px; height: 48px; } .lk-hint { font-size: 1.1rem; min-height: 2.9em; } #lock { padding-top: calc(env(safe-area-inset-top, 0px) + 50px); } #lock.err .lk-q { display: none; } }
+  .env.arrive { animation: envArrive 1.15s cubic-bezier(.2,1.15,.3,1) backwards; }
+  @keyframes envArrive { 0% { translate: 0 75vh; rotate: -9deg; opacity: 0; } 45% { opacity: 1; } 100% { translate: 0 0; rotate: 0deg; opacity: 1; } }
+  @media (max-height: 700px) { .lk-phrase { display: none; } .lk-k { height: 40px; } .lk-pad { gap: 6px 14px; } .lk-box { gap: 4px; } .lk-lock { width: 38px; height: 48px; } .lk-hint { font-size: 1.1rem; min-height: 2.9em; } .lk-cnt b { font-size: 1.4rem; } .lk-cnt div { min-width: 50px; }
+    #lock { padding-top: calc(env(safe-area-inset-top, 0px) + 46px); } }
+  @media (prefers-reduced-motion: reduce) { .cn, .lk-const .cn { stroke-dashoffset: 0; } }
+
+  /* ===== Línea de tiempo ===== */
+  .timeline { padding-left: 40px; }
+  .timeline h2 { margin: 0; }
+  .tl-sub { margin: 2px 0 0; font: 500 1.3rem/1.15 var(--hand); opacity: .7; }
+  .tl { list-style: none; margin: 16px 0 0; padding: 0; }
+  .tl-i { position: relative; display: grid; grid-template-columns: 38px 1fr; column-gap: 12px; padding-bottom: 20px; opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .8s cubic-bezier(.2,.9,.3,1); }
+  .tl-i.in { opacity: 1; transform: none; }
+  .tl-i::before { content: ""; position: absolute; left: 17px; top: 40px; bottom: -2px; width: 3px; border-radius: 2px; background: var(--wax); opacity: .5; transform: scaleY(0); transform-origin: top; transition: transform .9s ease .45s; }
+  .tl-i.in::before { transform: scaleY(1); }
+  .tl-i:last-child { padding-bottom: 0; } .tl-i:last-child::before { display: none; }
+  .tl-i.fut::before { background: repeating-linear-gradient(var(--wax) 0 5px, transparent 5px 10px); }
+  .tl-d { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 1.15rem; background: var(--paper); border: 2.5px solid var(--wax); box-shadow: 0 2px 0 rgba(0,0,0,.18); transform: scale(0); transition: transform .6s cubic-bezier(.3,1.8,.5,1) .15s; }
+  .tl-i.in .tl-d { transform: scale(1); }
+  .tl-i.fut .tl-d { border-style: dashed; opacity: .85; }
+  .tl-i.big .tl-d { width: 46px; height: 46px; margin: -4px 0 0 -4px; font-size: 1.4rem; background: var(--wax); box-shadow: 0 0 0 4px rgb(var(--c7) / .25), 0 3px 0 rgba(0,0,0,.2); }
+  .tl-f { font: 700 1.05rem/1 var(--ui); letter-spacing: .06em; text-transform: uppercase; color: var(--wax); }
+  .tl-f small { font-weight: 600; letter-spacing: .02em; text-transform: none; opacity: .7; margin-left: 6px; color: var(--ink); }
+  .tl-t { margin: 3px 0 0; font: 700 1.75rem/1.05 var(--hand); }
+  .tl-p { margin: 3px 0 0; font: 500 1.25rem/1.15 var(--hand); opacity: .8; }
+  .tl-i.big .tl-t { color: var(--wax); font-size: 2rem; }
 
   /* ===== Rap: cartelito "ahora reproduciendo" (solo animación, no se puede tocar) ===== */
   #osmNow { position: fixed; z-index: 60; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); display: flex; align-items: center; gap: 11px; max-width: calc(100vw - 28px); padding: 9px 17px 9px 13px; pointer-events: none; user-select: none; -webkit-user-select: none;
@@ -1356,18 +1427,28 @@
 <button id="temaBtn" type="button" aria-label="Cambiar el tema" aria-expanded="false">💌</button>
 <div id="temaWipe" hidden aria-hidden="true"></div>
 
+<!-- 00. Mini película (solo la primera vez) -->
+<main class="screen" id="cine" hidden>
+  <div class="cn-l" id="cnL1"><small>11 de octubre · 9:49 pm</small><b>Un mensaje</b></div>
+  <div class="cn-l" id="cnL2"><small>Una semana después</small><b>Un sí</b></div>
+  <svg class="cn-c" id="cnConst" viewBox="0 0 200 190" aria-hidden="true"></svg>
+  <div class="cn-l fin" id="cnL3"><small>Desde el 18 de octubre</small><b>Nosotros</b></div>
+  <p class="cn-skip">toca para saltar</p>
+</main>
+
 <!-- 0. Portada de novios + candado -->
 <main class="screen" id="lock">
   <div class="lk-top">
+    <svg class="lk-const" id="lkConst" viewBox="0 0 200 190" aria-hidden="true"></svg>
     <p class="lk-greet" id="lkGreet"></p>
-    <h1 class="lk-names">Alex <span class="lk-ht" data-g="♥"></span> Ari</h1>
+    <h1 class="lk-names"><span class="ln a">Alex</span><span class="lk-ht" data-g="♥"></span><span class="ln b">Ari</span></h1>
     <svg class="swoosh" viewBox="0 0 300 26" aria-hidden="true"><path pathLength="1" d="M8 16C60 4 110 26 170 12S260 6 292 14"/></svg>
     <p class="lk-since" id="lkSince"></p>
+    <div class="lk-cnt" id="lkCnt" aria-label="Tiempo de novios"><div><b id="cD">0</b><small>días</small></div><div><b id="cH">00</b><small>horas</small></div><div><b id="cM">00</b><small>min</small></div><div><b id="cS">00</b><small>seg</small></div></div>
     <p class="lk-phrase" id="lkPhrase"></p>
   </div>
   <div class="lk-box" id="lkBox">
     <svg class="lk-lock" id="lkLock" viewBox="0 0 64 80" aria-hidden="true"><path class="sh" d="M18 38V26a14 14 0 0 1 28 0v12"/><rect class="bd" x="8" y="36" width="48" height="38" rx="9"/><path class="kh" d="M32 66C24 61 22 54 26 52C29 51 31 53 32 55C33 53 35 51 38 52C42 54 40 61 32 66Z"/></svg>
-    <p class="lk-q" id="lkQ">Para abrir, marca el día y el mes en que nos volvimos novios</p>
     <div class="lk-dots" id="lkDots"><i></i><i></i><i></i><i></i></div>
     <div class="lk-pad" id="lkPad">
       <button class="lk-k" type="button" data-k="1">1</button><button class="lk-k" type="button" data-k="2">2</button><button class="lk-k" type="button" data-k="3">3</button>
@@ -1379,6 +1460,7 @@
     <button class="lk-help" id="lkHelp" type="button" hidden>No me acuerdo 🙈</button>
     <button class="lk-enter" id="lkEnter" type="button">Abrir mi carta 💌</button>
   </div>
+  <div class="lk-flash" id="lkFlash"></div>
 </main>
 
 <!-- 1. Sobre cerrado -->
@@ -1445,6 +1527,14 @@
     <div class="bk-sub" id="bkSub"></div>
     <div class="stage3d" id="stage3d"><div class="tilt" id="tilt"><div class="book" id="book"><div class="block"></div><div class="ribbon"></div></div></div></div>
     <div class="bk-ctrl"><button class="mini ghost" id="bkPrev" type="button" disabled>Atrás</button><div class="dots" id="dots"></div><button class="mini" id="bkNext" type="button">Abrir</button></div>
+  </div>
+
+  <!-- Línea de tiempo -->
+  <div class="letter card timeline" id="timeline" style="transform: rotate(-.7deg)">
+    <span class="tape"></span>
+    <h2>Nuestra línea de tiempo</h2>
+    <p class="tl-sub">de un mensaje a un sí, en una semana</p>
+    <ol class="tl" id="tl"></ol>
   </div>
 
   <!-- Oficialmente novios: certificado con sello -->
@@ -2190,23 +2280,80 @@
     const h = new Date().getHours(), ap = ['mi amor', 'mi vida', 'cachetes', 'Ari', 'bebé'], a = ap[(Math.random() * ap.length) | 0];   // un apodo distinto cada vez
     return h < 5 ? '¿Despierta a esta hora, ' + a + '? 🌙' : h < 12 ? 'Buenos días, ' + a + ' ☀️' : h < 19 ? 'Buenas tardes, ' + a + ' 🌤️' : 'Buenas noches, ' + a + ' 🌙';
   }
+  /* Sonidos suaves (solo después de que ella toca algo): tecla, error y campanita al abrir el candado */
+  let AC2 = null;
+  function sonido(kind) {
+    try {
+      AC2 = AC2 || new (window.AudioContext || window.webkitAudioContext)(); if (AC2.state === 'suspended') AC2.resume();
+      const t = AC2.currentTime, nota = (f, at, dur, vol, tipo) => { const o = AC2.createOscillator(), g = AC2.createGain(); o.type = tipo || 'sine'; o.frequency.value = f; g.gain.setValueAtTime(.0001, t + at); g.gain.exponentialRampToValueAtTime(vol, t + at + .01); g.gain.exponentialRampToValueAtTime(.0001, t + at + dur); o.connect(g); g.connect(AC2.destination); o.start(t + at); o.stop(t + at + dur + .02); };
+      if (kind === 'tick') nota(900 + Math.random() * 120, 0, .06, .05);
+      else if (kind === 'bad') { nota(247, 0, .16, .07, 'triangle'); nota(196, .13, .26, .07, 'triangle'); }
+      else if (kind === 'ok') { [523.25, 659.25, 783.99, 1046.5, 1318.5].forEach((f, i) => nota(f, i * .09, .7, .05)); nota(2093, .38, .5, .02); }
+    } catch (e) {}
+  }
+  /* Constelación en forma de corazón: las estrellas aparecen y las líneas se dibujan solas */
+  function constelacion(svg, n) {
+    const NS = 'http://www.w3.org/2000/svg', P = []; n = n || 18;
+    for (let i = 0; i < n; i++) { const t = i / n * 6.2832; P.push([100 + 16 * Math.pow(Math.sin(t), 3) * 5.6 + R(-3, 3), 85 - (13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)) * 5.6 + R(-3, 3)]); }
+    const ln = document.createElementNS(NS, 'path'); ln.setAttribute('class', 'cn'); ln.setAttribute('pathLength', 1);
+    ln.setAttribute('d', 'M' + P.map(p => p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' L') + ' Z'); svg.appendChild(ln);
+    P.concat([[28, 20], [176, 14], [14, 150], [186, 160], [100, 8]]).forEach((p, i) => {
+      const c = document.createElementNS(NS, 'circle'); c.setAttribute('class', 'cs' + (i < n && i % 4 === 0 ? ' big' : '')); c.setAttribute('cx', p[0].toFixed(1)); c.setAttribute('cy', p[1].toFixed(1)); c.setAttribute('r', (i < n ? R(1.6, 3.2) : R(1, 1.8)).toFixed(1));
+      c.style.setProperty('--d', R(0, 2.4).toFixed(2) + 's'); svg.appendChild(c);
+    });
+    return svg;
+  }
+  function cine(alTerminar) {   // mini película de la primera vez: un mensaje, un sí, nosotros
+    const c = $('cine'), L = [$('cnL1'), $('cnL2'), $('cnL3')], cs = $('cnConst'), tm = []; let fin = false;
+    c.hidden = false; constelacion(cs, 20);
+    const at = (ms, f) => tm.push(setTimeout(f, ms));
+    const salir = () => { if (fin) return; fin = true; tm.forEach(clearTimeout); c.classList.add('end'); setTimeout(() => { c.hidden = true; }, 750); alTerminar(); };
+    at(500, () => L[0].classList.add('on')); at(2500, () => { L[0].classList.remove('on'); L[0].classList.add('off'); });
+    at(3000, () => L[1].classList.add('on')); at(4900, () => { L[1].classList.remove('on'); L[1].classList.add('off'); });
+    at(5400, () => cs.querySelectorAll('.cn, .cs').forEach(e => e.classList.add('draw'))); at(6600, () => L[2].classList.add('on'));
+    at(9400, salir); c.addEventListener('click', salir);
+  }
   (function lockInit() {
     const lock = $('lock'), dots = [].slice.call($('lkDots').children), hint = $('lkHint'), help = $('lkHelp'), dn = diasNovios();
-    let buf = '', tries = 0, done = false, conocido = false;
-    try { conocido = localStorage.getItem('ari_abierto') === '1'; } catch (e) {}   // si ya abrió el candado una vez, las próximas veces solo toca "Abrir"
+    let buf = '', tries = 0, done = false, conocido = false, tick = 0;
+    /* Modo Alex: abre la página una vez con ?alex al final del link (ej. index.html?alex) y ese navegador SIEMPRE pedirá la clave.
+       Con ?ella se quita ese modo. Ari, en cambio, la pone una sola vez y después solo toca "Abrir mi carta". */
+    let modoAlex = false;
+    try {
+      const q = location.search + location.hash;
+      if (/[?&#]alex\b/i.test(q)) localStorage.setItem('ari_modo_alex', '1'); else if (/[?&#]ella\b/i.test(q)) localStorage.removeItem('ari_modo_alex');
+      modoAlex = localStorage.getItem('ari_modo_alex') === '1';
+      conocido = !modoAlex && localStorage.getItem('ari_abierto') === '1';   // si ya abrió el candado una vez, las próximas veces solo toca "Abrir" (y se salta la mini película)
+    } catch (e) {}
     lock.classList.toggle('known', conocido);
     $('lkGreet').textContent = saludo();
-    $('lkSince').innerHTML = 'novios desde el <b>18 de octubre de 2026</b> · ' + (dn === 0 ? '¡hoy!' : dn === 1 ? 'hace 1 día' : 'hace ' + dn + ' días');
+    $('lkSince').innerHTML = 'novios desde el <b>18 de octubre de 2026</b>';
     $('lkPhrase').textContent = FRASES_DIA[dn % FRASES_DIA.length];
+    hint.textContent = 'Para abrir, marca el día y el mes en que nos volvimos novios';
+    constelacion($('lkConst'), 18);
+    const cnt = { D: $('cD'), H: $('cH'), M: $('cM'), S: $('cS') }, p2 = n => (n < 10 ? '0' : '') + n;
+    const reloj = () => {   // el contador de novios corre en vivo
+      let d = Math.max(0, Date.now() - new Date(FECHA_NOVIOS).getTime()) / 1000; const D = Math.floor(d / 86400), H = Math.floor(d % 86400 / 3600), M = Math.floor(d % 3600 / 60), S = Math.floor(d % 60);
+      cnt.D.textContent = D; cnt.H.textContent = p2(H); cnt.M.textContent = p2(M); cnt.S.textContent = p2(S);
+    };
+    reloj(); tick = setInterval(() => { if (!document.hidden) reloj(); }, 1000);
+    const arranca = () => lock.classList.add('go');
+    if (conocido || modoAlex && !/[?&#]cine\b/i.test(location.search + location.hash)) arranca(); else cine(arranca);   // Alex no ve la película cada vez (con ?alex&cine sí)
+    let px = 0, py = 0, pq = false;   // la constelación se mueve un poquito con el dedo / mouse
+    lock.addEventListener('pointermove', e => { px = (e.clientX / innerWidth - .5) * 16; py = (e.clientY / innerHeight - .5) * 12; if (!pq) { pq = true; requestAnimationFrame(() => { pq = false; $('lkConst').style.translate = px.toFixed(1) + 'px ' + py.toFixed(1) + 'px'; }); } }, { passive: true });
     const pintar = () => dots.forEach((x, i) => x.classList.toggle('on', i < buf.length));
     function abrir() {
-      if (done) return; done = true;
-      try { localStorage.setItem('ari_abierto', '1'); } catch (e) {}
-      lock.classList.add('open'); hint.textContent = '¡Esa es! 💛';
-      const r = $('lkLock').getBoundingClientRect(); emit(r.left + r.width / 2, r.top + r.height / 2, 46, 'heart'); emit(r.left + r.width / 2, r.top + r.height / 2, 26, 'spark');
+      if (done) return; done = true; clearInterval(tick);
+      try { if (!modoAlex) localStorage.setItem('ari_abierto', '1'); } catch (e) {}   // en modo Alex no se guarda: siempre pide la clave
+      lock.classList.add('open'); hint.textContent = '¡Esa es! 💛'; sonido('ok');
+      const r = $('lkLock').getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2; emit(cx, cy, 46, 'heart'); emit(cx, cy, 26, 'spark');
       if (window.vibrar) window.vibrar([30, 40, 60]);
-      setTimeout(() => lock.classList.add('leaving'), 900);
-      setTimeout(() => { lock.hidden = true; const i = $('intro'); i.hidden = false; i.style.animation = 'fade .7s'; }, 1450);
+      setTimeout(() => { const f = $('lkFlash'); f.style.left = cx + 'px'; f.style.top = cy + 'px'; f.classList.add('boom'); }, 450);
+      setTimeout(() => lock.classList.add('leaving'), 1050);
+      setTimeout(() => {
+        lock.hidden = true; const i = $('intro'); i.hidden = false; i.style.animation = 'fade .5s'; $('env').classList.add('arrive');
+        setTimeout(() => { const e = $('env').getBoundingClientRect(); emit(e.left + e.width / 2, e.top + e.height / 2, 30, 'spark'); }, 700);
+      }, 1600);
     }
     const REGANOS = ['Ay, Ari, ¿en serio? Esa no es 😒', '¿Ya se te olvidó, cachetes? Qué falta de respeto 😤', 'Uy no, eso sí no me lo esperaba de ti 🙄', 'Piensa, mi vida, que sí te la sabes',
       'Me vas a hacer sentir que no te importa la fecha 🥺', 'Mmm, esa no es. Y yo que te creía más atenta 😏', 'Jajaja, no, bebé. Intenta otra vez', 'Ay no, Ari, ¿tan rápido se te olvidó? 😭'];
@@ -2214,10 +2361,10 @@
     let ultimo = -1;
     function tecla(k) {
       if (done || buf.length >= 4 && k !== 'del') return;
-      buf = k === 'del' ? buf.slice(0, -1) : buf + k; pintar();
+      buf = k === 'del' ? buf.slice(0, -1) : buf + k; pintar(); sonido('tick'); if (window.vibrar) window.vibrar([8]);
       if (buf.length < 4) return;
       if (buf === CODIGO) { setTimeout(abrir, 220); return; }
-      tries++; lock.classList.add('err'); const dd = $('lkDots'); dd.classList.remove('bad'); void dd.offsetWidth; dd.classList.add('bad');
+      tries++; const dd = $('lkDots'); dd.classList.remove('bad'); void dd.offsetWidth; dd.classList.add('bad'); sonido('bad');
       if (window.vibrar) window.vibrar([70]);
       let r; do { r = (Math.random() * REGANOS.length) | 0; } while (r === ultimo); ultimo = r;   // el regaño cambia cada vez, y desde el segundo error viene con pista
       hint.textContent = REGANOS[r];
@@ -2229,10 +2376,35 @@
     document.addEventListener('keydown', e => { if (lock.hidden || done || conocido) return; if (/^\d$/.test(e.key)) tecla(e.key); else if (e.key === 'Backspace') tecla('del'); });
     help.addEventListener('click', () => {   // si no se acuerda, el candado le "dicta" la fecha
       help.hidden = true; hint.textContent = 'Jajaja, esta vez te ayudo 🙈'; buf = '';
-      CODIGO.split('').forEach((c, i) => setTimeout(() => { buf += c; pintar(); if (i === 3) setTimeout(abrir, 300); }, 350 + i * 320));
+      CODIGO.split('').forEach((c, i) => setTimeout(() => { buf += c; pintar(); sonido('tick'); if (i === 3) setTimeout(abrir, 300); }, 350 + i * 320));
     });
     $('lkEnter').addEventListener('click', abrir);
   })();
+
+  /* ===== Línea de tiempo: agrega aquí las fechas nuevas (f = fecha corta, d = detalle, e = emoji, big = fecha grande, fut = todavía no pasa) ===== */
+  const LINEA = [
+    { f: '11 oct', d: 'domingo · 9:49 pm', e: '💬', t: 'Un mensaje', p: 'Todo empezó por TikTok. Hablamos, nos reímos y me sentí muy especial.' },
+    { f: '12 oct', d: 'lunes', e: '🌳', t: 'Te vi por primera vez', p: 'Un parquecito, el suelo mojado y todo lo que nos queríamos contar.' },
+    { f: '13 oct', d: 'martes', e: '🏠', t: 'Tu casa', p: 'Hablamos de todo y de nada. Contigo cualquier plan tranquilo es el mejor.' },
+    { f: '14 oct', d: 'miércoles', e: '🌙', t: 'La noche en el parque', p: 'Vimos llegar la noche y me contaste de tu música.' },
+    { f: '15 oct', d: 'jueves', e: '🎬', t: 'Película y play', p: 'Acobijados, un montón de risas y no faltaron los besitos.' },
+    { f: '18 oct', d: 'domingo', e: '💛', t: 'La decisión final', p: 'Salchipapa, Mulán y un sí. Nos volvimos novios.', big: true }
+  ];
+  function timelineInit() {
+    const ol = $('tl'); if (!ol || ol.children.length) return;
+    const hoy = new Date(); hoy.setHours(0, 0, 0, 0); let k = 1, t; for (;; k++) { t = new Date(NOVIOS_DIA[0], NOVIOS_DIA[1] + k, NOVIOS_DIA[2]); if (t >= hoy) break; }
+    const dias = Math.round((t - hoy) / 864e5), MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+    const todo = LINEA.concat([
+      { f: t.getDate() + ' ' + MES[t.getMonth()], d: dias === 0 ? '¡hoy!' : dias === 1 ? 'mañana' : 'faltan ' + dias + ' días', e: '🎉', t: k === 1 ? 'Primer mesiversario' : 'Mesiversario ' + k, p: 'Todavía no pasa, pero ya lo estoy esperando.', fut: true },
+      { f: '...', d: '', e: '✨', t: 'Lo que sigue', p: 'Lo vamos escribiendo juntos, día a día.', fut: true }]);
+    todo.forEach(x => {
+      const li = document.createElement('li'); li.className = 'tl-i' + (x.big ? ' big' : '') + (x.fut ? ' fut' : '');
+      li.innerHTML = '<div class="tl-d">' + x.e + '</div><div><div class="tl-f">' + x.f + (x.d ? '<small>' + x.d + '</small>' : '') + '</div><h3 class="tl-t">' + x.t + '</h3><p class="tl-p">' + x.p + '</p></div>';
+      ol.appendChild(li);
+    });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; e.target.classList.add('in'); io.unobserve(e.target); if (e.target.classList.contains('big')) setTimeout(() => { burstAt(e.target.querySelector('.tl-d'), 34, 'heart'); burstAt(e.target.querySelector('.tl-d'), 20, 'fire'); if (window.vibrar) window.vibrar([30, 40, 30]); }, 450); }), { root: $('win'), threshold: .5 });
+    [].forEach.call(ol.children, li => io.observe(li));
+  }
 
   /* ===== Abrir el sobre ===== */
   $('seal').addEventListener('click', () => {
@@ -2556,7 +2728,7 @@
     }, 200);
   }
   function winEffects() {
-    nimbusInit();
+    nimbusInit(); timelineInit();
     try { if (window.musicShow) musicShow(); } catch (e) {}
     try { if (window.buzonInit) buzonInit(); } catch (e) {}
     buildLogros();

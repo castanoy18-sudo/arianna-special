@@ -685,6 +685,36 @@
   .dlab { font: 700 1.7rem/1.1 var(--hand); }
   .dfrom { font: 500 1.25rem/1.2 var(--hand); opacity: .65; margin-top: 6px; }
 
+  /* ===== Oficialmente novios: certificado con sello ===== */
+  .novios { text-align: center; padding-left: 36px; padding-bottom: 58px; }
+  .nv-kick { font: 700 1rem/1 var(--ui); letter-spacing: .3em; text-transform: uppercase; color: var(--wax); opacity: .85; margin-top: 4px; }
+  .nv-h { margin: 8px 0 0; font: 700 3rem/1 var(--hand); }
+  .nv-names { margin: 2px 0 10px; font: 700 2.1rem/1.1 var(--hand); color: var(--wax); }
+  .nv-ht::before { content: attr(data-g); margin: 0 .2em; }
+  .nv-txt { margin: 0 0 6px; font: 500 1.5rem/1.2 var(--hand); }
+  .nv-fun { margin: 0 0 10px; font: 500 1.2rem/1.2 var(--hand); opacity: .7; }
+  .nv-n { font: 700 5.2rem/1.05 var(--hand); color: var(--wax); }
+  .nv-l { font: 700 1.7rem/1.1 var(--hand); }
+  .nv-next { margin-top: 12px; font: 700 1.4rem/1.15 var(--hand); }
+  .nv-next small { display: block; font: 500 1.2rem/1.2 var(--hand); opacity: .7; }
+  .nv-sig { display: flex; justify-content: space-around; gap: 18px; margin: 20px 4px 0; }
+  .nv-sig div { flex: 1; }
+  .nv-sig span { display: block; font: 700 2rem/1 var(--hand); color: var(--wax); transform: rotate(-3deg); clip-path: inset(-6px 100% -6px 0); }
+  .nv-sig div:nth-child(2) span { transform: rotate(2deg); }
+  .nv-sig i { display: block; height: 0; margin-top: 2px; border-top: 1.5px solid currentColor; opacity: .45; }
+  .novios.in .nv-sig span { animation: sigIn 1.1s cubic-bezier(.4,0,.2,1) 1.4s forwards; }
+  .novios.in .nv-sig div:nth-child(2) span { animation-delay: 2.3s; }
+  .nv-note { margin: 14px 0 0; font: 500 1.2rem/1.2 var(--hand); opacity: .65; }
+  .nv-seal { position: absolute; right: 8px; bottom: -28px; z-index: 3; width: 84px; height: 84px; display: grid; place-items: center; transform: rotate(-12deg); opacity: 0; pointer-events: none; }
+  .nv-seal i { position: absolute; inset: 0; border-radius: 50% 46% 52% 48% / 48% 52% 46% 50%; background: radial-gradient(circle at 32% 28%, rgba(255,255,255,.28), transparent 38%), radial-gradient(circle at 40% 35%, var(--wax), var(--wax-d) 80%);
+    box-shadow: 0 6px 12px rgba(0,0,0,.35), inset 0 0 0 5px rgba(255,255,255,.1), inset 0 0 0 7px rgba(0,0,0,.14); }
+  .nv-seal b { position: relative; font: 700 2.1rem/1 var(--hand); color: rgba(255,255,255,.92); text-shadow: 0 -1px 0 rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.2); }
+  .nv-seal b::before { content: attr(data-g); }
+  .nv-seal::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 3px solid var(--wax); opacity: 0; }
+  .novios.in .nv-seal { animation: flStamp .6s cubic-bezier(.3,1.5,.5,1) .7s both; }
+  .novios.in .nv-seal::after { animation: flRing .7s ease-out 1s both; }
+  @media (prefers-reduced-motion: reduce) { .nv-sig span { clip-path: none !important; animation: none !important; } .nv-seal { opacity: 1 !important; animation: none !important; } }
+
   /* ===== Logros desbloqueados ===== */
   .achs { display: flex; flex-direction: column; gap: 10px; margin: 8px 0 6px; }
   .ach-i { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 14px; background: rgb(var(--c56)); border: 2px solid rgb(var(--c55));
@@ -1262,6 +1292,46 @@
   #apagon .ap-msg small { display: block; margin-top: 8px; font-size: .56em; color: #fff; opacity: .92; }
   .buttons { column-gap: 36px; row-gap: 16px; }
 
+  /* ===== Entrada nueva: portada de novios + candado con la fecha ===== */
+  #lock { justify-content: space-between; text-align: center; padding-top: calc(env(safe-area-inset-top, 0px) + 56px); padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 18px); transition: opacity .55s ease, transform .55s ease; }
+  #lock.leaving { opacity: 0; transform: scale(1.04); pointer-events: none; }
+  .lk-top { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; }
+  .lk-greet { margin: 0; font: 500 1.7rem/1.1 var(--hand); color: rgb(var(--c40)); animation: fadeup 1s .15s both; }
+  .lk-names { margin: 0; white-space: nowrap; font: 700 clamp(3rem, 16.5vw, 4.8rem)/1 var(--hand); color: rgb(var(--c67)); text-shadow: 2px 3px 0 rgba(0,0,0,.35); animation: fadeup 1s .3s both; }
+  html:not([data-theme]) .lk-names, html[data-theme="amor"] .lk-names { text-shadow: 0 0 10px rgb(var(--c68) / .9), 0 0 28px rgb(var(--c69) / .6); }
+  html[data-theme="rap"] .lk-names { font-family: "Sedgwick Ave Display", "Permanent Marker", cursive; color: #FFD400; -webkit-text-stroke: 2px #1a1020; paint-order: stroke fill; text-shadow: 4px 4px 0 #7C4DFF, 8px 8px 0 rgba(0,0,0,.4); }
+  .lk-ht::before { content: attr(data-g); margin: 0 .12em; font-size: .7em; vertical-align: .08em; }
+  #lock .swoosh { margin: 0 auto; }
+  .lk-since { margin: 6px 0 0; font: 500 1.35rem/1.15 var(--hand); color: rgb(var(--c11)); opacity: .85; animation: fadeup 1s .6s both; }
+  .lk-since b { font-weight: 700; }
+  .lk-phrase { margin: 8px 0 0; max-width: 300px; font: 500 1.3rem/1.15 var(--hand); color: rgb(var(--c40)); opacity: .9; animation: fadeup 1s .9s both; }
+  .lk-box { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; animation: fadeup 1s 1.1s both; }
+  .lk-lock { width: 46px; height: 58px; color: rgb(var(--c67)); overflow: visible; }
+  .lk-lock .sh { fill: none; stroke: currentColor; stroke-width: 5.5; stroke-linecap: round; transform-box: fill-box; transform-origin: 100% 100%; transition: transform .55s cubic-bezier(.3,1.5,.5,1); }
+  .lk-lock .bd { fill: currentColor; }
+  .lk-lock .kh { fill: #1a1020; opacity: .8; }
+  #lock.open .lk-lock .sh { transform: translateY(-9px) rotate(-26deg); }
+  #lock.open .lk-lock { animation: lkPop .6s cubic-bezier(.3,1.6,.5,1); }
+  @keyframes lkPop { 40% { transform: scale(1.3) rotate(-6deg); } 100% { transform: none; } }
+  .lk-q { margin: 0; max-width: 300px; font: 500 1.3rem/1.15 var(--hand); color: rgb(var(--c11)); opacity: .85; }
+  .lk-dots { display: flex; gap: 14px; height: 18px; }
+  .lk-dots i { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgb(var(--c67)); transition: background .15s, transform .15s; }
+  .lk-dots i.on { background: rgb(var(--c67)); transform: scale(1.12); }
+  .lk-dots.bad { animation: lkShake .45s; } .lk-dots.bad i { border-color: #FF6B6B; background: #FF6B6B; }
+  @keyframes lkShake { 0%, 100% { transform: none; } 20% { transform: translateX(-9px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(4px); } }
+  .lk-pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px 14px; width: min(72vw, 250px); }
+  .lk-k { height: 50px; border-radius: 16px; border: 1.5px solid rgb(var(--c11) / .3); background: rgb(var(--c11) / .08); color: rgb(var(--c11)); font: 700 1.5rem/1 var(--ui); cursor: pointer; touch-action: manipulation; transition: background .12s, transform .12s; }
+  .lk-k:active { background: rgb(var(--c11) / .24); transform: scale(.93); }
+  .lk-k.nul { visibility: hidden; }
+  .lk-k.del { font-size: 1.25rem; opacity: .8; }
+  .lk-hint { min-height: 3.1em; max-width: 310px; margin: 0; font: 500 1.2rem/1.1 var(--hand); color: rgb(var(--c40)); opacity: .95; }
+  .lk-hint small { display: block; margin-top: 3px; font-size: 1.05rem; color: rgb(var(--c11)); opacity: .8; }
+  .lk-help { background: none; border: 0; color: rgb(var(--c11)); opacity: .7; font: 600 .95rem var(--ui); text-decoration: underline; padding: 6px; cursor: pointer; }
+  .lk-enter { margin-top: 4px; padding: 14px 28px; border: 0; border-radius: 16px; font: 700 1.2rem var(--ui); color: #fff; cursor: pointer; touch-action: manipulation; background: rgb(var(--c42)); box-shadow: 3px 4px 0 rgb(var(--c43)); animation: softPulse 1.6s ease-in-out infinite; }
+  #lock.known .lk-q, #lock.known .lk-dots, #lock.known .lk-pad, #lock.known .lk-hint { display: none; }
+  #lock:not(.known) .lk-enter { display: none; }
+  @media (max-height: 700px) { .lk-phrase { display: none; } .lk-k { height: 40px; } .lk-pad { gap: 6px 14px; } .lk-box { gap: 6px; } .lk-lock { width: 38px; height: 48px; } .lk-hint { font-size: 1.1rem; min-height: 2.9em; } #lock { padding-top: calc(env(safe-area-inset-top, 0px) + 50px); } #lock.err .lk-q { display: none; } }
+
   /* ===== Rap: cartelito "ahora reproduciendo" (solo animación, no se puede tocar) ===== */
   #osmNow { position: fixed; z-index: 60; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); display: flex; align-items: center; gap: 11px; max-width: calc(100vw - 28px); padding: 9px 17px 9px 13px; pointer-events: none; user-select: none; -webkit-user-select: none;
     background: #FFE14D; color: #1a1020; border: 3px solid #1a1020; border-radius: 9px 13px 10px 14px; box-shadow: 4px 5px 0 #1a1020, 6px 9px 16px rgba(0,0,0,.35);
@@ -1286,8 +1356,33 @@
 <button id="temaBtn" type="button" aria-label="Cambiar el tema" aria-expanded="false">💌</button>
 <div id="temaWipe" hidden aria-hidden="true"></div>
 
+<!-- 0. Portada de novios + candado -->
+<main class="screen" id="lock">
+  <div class="lk-top">
+    <p class="lk-greet" id="lkGreet"></p>
+    <h1 class="lk-names">Alex <span class="lk-ht" data-g="♥"></span> Ari</h1>
+    <svg class="swoosh" viewBox="0 0 300 26" aria-hidden="true"><path pathLength="1" d="M8 16C60 4 110 26 170 12S260 6 292 14"/></svg>
+    <p class="lk-since" id="lkSince"></p>
+    <p class="lk-phrase" id="lkPhrase"></p>
+  </div>
+  <div class="lk-box" id="lkBox">
+    <svg class="lk-lock" id="lkLock" viewBox="0 0 64 80" aria-hidden="true"><path class="sh" d="M18 38V26a14 14 0 0 1 28 0v12"/><rect class="bd" x="8" y="36" width="48" height="38" rx="9"/><path class="kh" d="M32 66C24 61 22 54 26 52C29 51 31 53 32 55C33 53 35 51 38 52C42 54 40 61 32 66Z"/></svg>
+    <p class="lk-q" id="lkQ">Para abrir, marca el día y el mes en que nos volvimos novios</p>
+    <div class="lk-dots" id="lkDots"><i></i><i></i><i></i><i></i></div>
+    <div class="lk-pad" id="lkPad">
+      <button class="lk-k" type="button" data-k="1">1</button><button class="lk-k" type="button" data-k="2">2</button><button class="lk-k" type="button" data-k="3">3</button>
+      <button class="lk-k" type="button" data-k="4">4</button><button class="lk-k" type="button" data-k="5">5</button><button class="lk-k" type="button" data-k="6">6</button>
+      <button class="lk-k" type="button" data-k="7">7</button><button class="lk-k" type="button" data-k="8">8</button><button class="lk-k" type="button" data-k="9">9</button>
+      <button class="lk-k nul" type="button" tabindex="-1" aria-hidden="true"></button><button class="lk-k" type="button" data-k="0">0</button><button class="lk-k del" type="button" data-k="del" aria-label="Borrar">⌫</button>
+    </div>
+    <p class="lk-hint" id="lkHint"></p>
+    <button class="lk-help" id="lkHelp" type="button" hidden>No me acuerdo 🙈</button>
+    <button class="lk-enter" id="lkEnter" type="button">Abrir mi carta 💌</button>
+  </div>
+</main>
+
 <!-- 1. Sobre cerrado -->
-<main class="screen" id="intro">
+<main class="screen" id="intro" hidden>
   <div class="hero">
     <p class="pre">Tienes una carta para</p>
     <h1 class="name" aria-label="Arianna"><span style="--i:0">A</span><span style="--i:1">r</span><span style="--i:2">i</span><span style="--i:3">a</span><span style="--i:4">n</span><span style="--i:5">n</span><span style="--i:6">a</span></h1>
@@ -1299,7 +1394,7 @@
   <div class="env" id="env">
     <div class="e-back"></div>
     <div class="liner"></div>
-    <div class="peek"><b>Ari,</b><i>tengo algo que decirte...</i></div>
+    <div class="peek"></div>
     <div class="pocket"><i class="pl"></i><i class="pr"></i><i class="pb"></i></div>
     <div class="flap"><i class="fs"></i><i class="ff"></i><i class="fb"></i></div>
     <div class="from">De: Alex</div>
@@ -1352,6 +1447,22 @@
     <div class="bk-ctrl"><button class="mini ghost" id="bkPrev" type="button" disabled>Atrás</button><div class="dots" id="dots"></div><button class="mini" id="bkNext" type="button">Abrir</button></div>
   </div>
 
+  <!-- Oficialmente novios: certificado con sello -->
+  <div class="letter card novios" id="novios" style="transform: rotate(.8deg)">
+    <span class="tape"></span>
+    <div class="nv-kick">Certificado oficial</div>
+    <h2 class="nv-h">¡Somos novios!</h2>
+    <p class="nv-names">Alex <span class="nv-ht" data-g="♥"></span> Ari</p>
+    <p class="nv-txt">Se certifica que el <b>domingo 18 de octubre de 2026</b>, Ari dijo que <b>sí</b>. Desde ese día somos oficialmente novios.</p>
+    <p class="nv-fun">Del primer mensaje al sí pasó una semana exacta, de domingo a domingo.</p>
+    <div class="nv-n" id="nvDias">0</div>
+    <div class="nv-l" id="nvLab">días siendo novios</div>
+    <div class="nv-next"><span id="nvMes"></span><small id="nvFalta"></small></div>
+    <div class="nv-sig"><div><span>Alex</span><i></i></div><div><span>Ari</span><i></i></div></div>
+    <p class="nv-note">Válido por toda la vida. Se renueva con abrazos largos.</p>
+    <div class="nv-seal" aria-hidden="true"><i></i><b data-g="♥"></b></div>
+  </div>
+
   <!-- Llevamos X días -->
   <div class="letter card since" style="transform: rotate(-1deg)">
     <span class="tape"></span>
@@ -1359,13 +1470,6 @@
     <div class="dnum" id="dnum">0</div>
     <div class="dlab" id="dlab">días desde que nos conocimos</div>
     <div class="dfrom">desde el domingo 11 de octubre, 9:49 pm</div>
-  </div>
-
-  <div class="letter card stat">
-    <span class="tape"></span>
-    <div class="q">Veces que intentaste decir que no</div>
-    <div class="big" id="cnt">0</div>
-    <div class="hint2" id="cntTxt"></div>
   </div>
 
   <!-- Logros desbloqueados -->
@@ -1953,44 +2057,8 @@
     6: 'Te prometo que vale la pena, amor', 7: 'Ya casi, ya casi...', 8: 'Ya solo queda una respuesta posible' };
   // Cartas finales: según cómo llegó ella al "Sí" (se elige una al azar de cada grupo)
   const RAPON = () => document.documentElement.getAttribute('data-theme') === 'rap';
-  const RAP_FINALES = {
-    rapido: [
-      { h: 'Ni lo pensaste, jajaja', a: 'Le diste al sí de una, sin dudar ni un segundo. Y yo aquí con una sonrisa que no me cabe en la cara.', b: 'Gracias por ser mi novia, Ari. Esto sonó mejor que cualquier canción del Penya. Te quiero un montón.' },
-      { h: 'Esa era la respuesta, bebé', a: 'Sin rodeos ni nada. Así de claro lo tienes tú, y así de feliz me dejaste a mí.', b: 'Ahora sí, oficialmente: eres mi novia. Te quiero muchísimo, cachetes.' }
-    ],
-    poco: [
-      { h: 'Casi no llegas, Ari', a: 'Ese botón te hizo el quite un par de veces, pero al final caíste donde era. Me hiciste sudar, jajaja.', b: 'Desde hoy eres mi novia. Y mira que apenas estamos empezando.' },
-      { h: 'Te demoraste un poquito', a: 'Pero valió la pena, no me quejo. Es el mejor sí que me han dado en la vida.', b: 'Te quiero mucho, mi vida. Prepárate, que te voy a consentir.' }
-    ],
-    varios: [
-      { h: 'Por fin, mi amor', a: 'Tanto “no” y mira, ganó el amor. Yo viendo ese botón correr de un lado a otro como loco, jajaja.', b: 'Ya eres oficialmente mi novia, bebé. Te voy a consentir el doble por hacerme esperar.' },
-      { h: 'Qué terca eres, cachetes', a: 'Me tuviste con el corazón en la mano un buen rato. Pero llegaste, y eso es lo que importa.', b: 'Eres mi persona favorita, ¿lo sabías? Te quiero muchísimo.' }
-    ],
-    sin_no: [
-      { h: 'Sabía que ibas a caer', a: 'Se me acabaron los botones de “no”, pero ni falta hacían. Tú ya sabías la respuesta desde el principio.', b: 'Eres mi novia, mi persona favorita y la mejor decisión que he tomado. Te quiero muchísimo.' },
-      { h: 'Ya no hay vuelta atrás', a: 'Ni botón de no ni excusas. Llegaste al sí por el camino largo, pero llegaste.', b: 'Bienvenida, mi amor. Aquí se te quiere con todo.' }
-    ]
-  };
-  const rapReaccion = n => n === 0 ? 'Uy, de una y sin pensarlo. Así me gusta, mi amor 😎' : n <= 2 ? 'Jajaja, casi se te escapa. Pero llegaste, bebé 😏' : n < NO_DESAPARECE_EN ? 'Por fin, mi amor. Ya me tenías sudando 😮‍💨' : 'Tanto que te hiciste la dura y mira, igual caíste 😏';
-  const rapPs = n => n === 0 ? 'P.D. Ni lo pensaste. Eso me encanta de ti.' : n <= 2 ? 'P.D. Dudaste un segundito, pero volviste, bebé.' : n < NO_DESAPARECE_EN ? 'P.D. Intentaste decir que no ' + n + ' veces. Las conté todas, jajaja.' : 'P.D. Ya no te dejé botón de no, mi amor. Hice trampa, lo sé.';
-  const FINALES = {
-    rapido: [
-      { h: 'Ari, ¡ni lo pensaste!', a: 'Dijiste que sí de una y me derretí, mi vida. Prometo cuidarte, hacerte reír y estar contigo en las buenas y en las malas, como tú ya estás para mí.', b: 'Eres mi persona favorita y mi mejor casualidad. Te quiero muchísimo, cachetes.' },
-      { h: 'Arianna, así sí me gusta', a: 'Sin rodeos y sin botones escapándose: tú sí sabes lo que quieres. Y yo, desde hoy, soy el hombre más feliz del mundo.', b: 'Gracias por ser mi novia. Te quiero muchísimo, bebé.' }
-    ],
-    poco: [
-      { h: 'Ari, casi me da algo', a: 'Jajaja casi me da algo viendo cómo ese botón se te escapaba... pero llegaste al lado correcto, que es el que cuenta.', b: 'Desde hoy eres mi novia y te voy a querer con todo, amor. Contigo hasta el plan más sencillo se vuelve el mejor del mundo.' },
-      { h: 'Cachetes, me hiciste sudar', a: 'Un ratico de duda y listo, así me gusta: con emoción. Gracias por darme el sí más bonito de mi vida.', b: 'Te quiero muchísimo, mi vida, y esto apenas empieza.' }
-    ],
-    varios: [
-      { h: 'Arianna, ¡por fin!', a: 'Tanto “no” y al final ganó el amor. Gracias por darme ese sí, de verdad me hiciste el día (¡y más!).', b: 'Desde hoy eres oficialmente mi novia, bebé. Prepárate, que te voy a consentir el doble por la espera.' },
-      { h: 'Ari, valió la pena la espera', a: 'Me tuviste viendo ese botón correr de un lado a otro y valió cada segundo. Gracias por darme el sí al final.', b: 'Eres mi persona favorita, mi calma y mi mejor casualidad. Te quiero muchísimo, mi amor.' }
-    ],
-    sin_no: [
-      { h: 'Arianna, sabía que ibas a caer', a: 'Se me acabaron los botones de “no”, pero ni falta que hicieron: tu corazón ya sabía la respuesta desde el principio.', b: 'Eres mi novia, mi persona favorita y mi mejor decisión. Te quiero muchísimo, cachetes.' },
-      { h: 'Ari, sin salida y feliz de estarlo', a: 'Ya no quedó ni un “no” para ti, y creo que es porque tú y yo estábamos hechos para esto.', b: 'Desde hoy te voy a cuidar y a hacer reír todos los días, mi vida. Contigo hasta el plan más sencillo se vuelve el mejor del mundo.' }
-    ]
-  };
+  const FECHA_NOVIOS = '2026-10-18T00:00:00-05:00';   // domingo 18 de octubre de 2026: Ari dijo que sí
+  const NOVIOS_DIA = [2026, 9, 18];   // año, mes (0 = enero), día: de aquí salen los mesiversarios
   const FECHA_CONOCIDOS = '2026-10-11T21:49:00-05:00';   // domingo 11 de octubre, 9:49 pm (hora de Colombia)
   const LOGROS = [
     { e: '📚', t: 'Lectora oficial', d: 'Me encanta verte perdida en un libro, cachetes' },
@@ -2107,6 +2175,65 @@
   }
   function burstAt(el, n, kind) { const r = el.getBoundingClientRect(); emit(r.left + r.width / 2, r.top + r.height / 2, n, kind); }
 
+  /* ===== Entrada: portada de novios + candado con la fecha ===== */
+  const CODIGO = '1810';   // día y mes en que se hicieron novios (18/10): es la clave del candado
+  const FRASES_DIA = ['Hoy me acordé de ti como veinte veces, cachetes.', 'Ya quiero verte, mi vida.', 'Qué suerte la mía, Ari.', 'Pienso en tu risa y se me pasa el día volando.',
+    'Acuérdate: me debes un abrazo largo.', 'Hoy toca salchipapa, ¿o qué?', 'Spider-Man, Goku y tú. Mi top de siempre.', 'No me canso de ti, mi vida.',
+    'Dime que hoy también estás feliz.', 'Tengo ganas de verte y de ver Mulán otra vez.', 'Contigo todo se calma, bebé.', 'Te quiero un montón, Ari.', 'A ti te toca elegir el plan de hoy.', 'Gracias por escogerme, mi amor.'];
+  const CARTAS_NOVIOS = [
+    { h: 'Hola, mi amor', a: 'Todavía me da risa escribirlo. Antes esta página tenía un botón de “no” que se escapaba, y ahora tú eres mi novia de verdad.', b: 'Aquí está todo lo nuestro, para que lo leas cuando quieras. Gracias por decirme que sí, Ari. Te quiero un montón.', ps: 'P.D. Ya le quité el botón de “no”. No lo vamos a necesitar.' },
+    { h: 'Ya estás en casa, Ari', a: 'Esta página es de los dos. Aquí van las cartas, el libro, las razones y todo lo que vayamos viviendo, que ojalá sea muchísimo.', b: 'Gracias por escogerme. Hoy, mañana y todos los días que vengan. Te quiero muchísimo, cachetes.', ps: 'P.D. Me debes un abrazo largo, de esos que dejan sin aire.' },
+    { h: 'Mi persona favorita', a: 'Y ahora, además, mi novia. Todavía me da una emoción rara decirlo, jajaja.', b: 'Gracias por cada risa y por contarme lo que te gusta con esa emoción. Contigo descubrí que mi lugar favorito es donde estés tú.', ps: 'P.D. Salchipapa cuando quieras. Yo invito.' }
+  ];
+  const diasNovios = () => Math.max(0, Math.floor((Date.now() - new Date(FECHA_NOVIOS).getTime()) / 864e5));
+  function saludo() {
+    const h = new Date().getHours(), ap = ['mi amor', 'mi vida', 'cachetes', 'Ari', 'bebé'], a = ap[(Math.random() * ap.length) | 0];   // un apodo distinto cada vez
+    return h < 5 ? '¿Despierta a esta hora, ' + a + '? 🌙' : h < 12 ? 'Buenos días, ' + a + ' ☀️' : h < 19 ? 'Buenas tardes, ' + a + ' 🌤️' : 'Buenas noches, ' + a + ' 🌙';
+  }
+  (function lockInit() {
+    const lock = $('lock'), dots = [].slice.call($('lkDots').children), hint = $('lkHint'), help = $('lkHelp'), dn = diasNovios();
+    let buf = '', tries = 0, done = false, conocido = false;
+    try { conocido = localStorage.getItem('ari_abierto') === '1'; } catch (e) {}   // si ya abrió el candado una vez, las próximas veces solo toca "Abrir"
+    lock.classList.toggle('known', conocido);
+    $('lkGreet').textContent = saludo();
+    $('lkSince').innerHTML = 'novios desde el <b>18 de octubre de 2026</b> · ' + (dn === 0 ? '¡hoy!' : dn === 1 ? 'hace 1 día' : 'hace ' + dn + ' días');
+    $('lkPhrase').textContent = FRASES_DIA[dn % FRASES_DIA.length];
+    const pintar = () => dots.forEach((x, i) => x.classList.toggle('on', i < buf.length));
+    function abrir() {
+      if (done) return; done = true;
+      try { localStorage.setItem('ari_abierto', '1'); } catch (e) {}
+      lock.classList.add('open'); hint.textContent = '¡Esa es! 💛';
+      const r = $('lkLock').getBoundingClientRect(); emit(r.left + r.width / 2, r.top + r.height / 2, 46, 'heart'); emit(r.left + r.width / 2, r.top + r.height / 2, 26, 'spark');
+      if (window.vibrar) window.vibrar([30, 40, 60]);
+      setTimeout(() => lock.classList.add('leaving'), 900);
+      setTimeout(() => { lock.hidden = true; const i = $('intro'); i.hidden = false; i.style.animation = 'fade .7s'; }, 1450);
+    }
+    const REGANOS = ['Ay, Ari, ¿en serio? Esa no es 😒', '¿Ya se te olvidó, cachetes? Qué falta de respeto 😤', 'Uy no, eso sí no me lo esperaba de ti 🙄', 'Piensa, mi vida, que sí te la sabes',
+      'Me vas a hacer sentir que no te importa la fecha 🥺', 'Mmm, esa no es. Y yo que te creía más atenta 😏', 'Jajaja, no, bebé. Intenta otra vez', 'Ay no, Ari, ¿tan rápido se te olvidó? 😭'];
+    const PISTAS = ['Pista: fue un domingo', 'Pista: justo una semana después de conocernos', 'Pista: ese día comimos salchipapa 🍟', 'Pista: son 4 números, primero el día y luego el mes', 'Pista: ese día vimos Mulán 🎬', 'Última pista: octubre es el mes 10, mi vida'];
+    let ultimo = -1;
+    function tecla(k) {
+      if (done || buf.length >= 4 && k !== 'del') return;
+      buf = k === 'del' ? buf.slice(0, -1) : buf + k; pintar();
+      if (buf.length < 4) return;
+      if (buf === CODIGO) { setTimeout(abrir, 220); return; }
+      tries++; lock.classList.add('err'); const dd = $('lkDots'); dd.classList.remove('bad'); void dd.offsetWidth; dd.classList.add('bad');
+      if (window.vibrar) window.vibrar([70]);
+      let r; do { r = (Math.random() * REGANOS.length) | 0; } while (r === ultimo); ultimo = r;   // el regaño cambia cada vez, y desde el segundo error viene con pista
+      hint.textContent = REGANOS[r];
+      if (tries >= 2) { const sm = document.createElement('small'); sm.textContent = PISTAS[Math.min(tries - 2, PISTAS.length - 1)]; hint.appendChild(sm); }
+      if (tries >= 5) help.hidden = false;
+      setTimeout(() => { dd.classList.remove('bad'); buf = ''; pintar(); }, 480);
+    }
+    $('lkPad').addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (b) tecla(b.getAttribute('data-k')); });
+    document.addEventListener('keydown', e => { if (lock.hidden || done || conocido) return; if (/^\d$/.test(e.key)) tecla(e.key); else if (e.key === 'Backspace') tecla('del'); });
+    help.addEventListener('click', () => {   // si no se acuerda, el candado le "dicta" la fecha
+      help.hidden = true; hint.textContent = 'Jajaja, esta vez te ayudo 🙈'; buf = '';
+      CODIGO.split('').forEach((c, i) => setTimeout(() => { buf += c; pintar(); if (i === 3) setTimeout(abrir, 300); }, 350 + i * 320));
+    });
+    $('lkEnter').addEventListener('click', abrir);
+  })();
+
   /* ===== Abrir el sobre ===== */
   $('seal').addEventListener('click', () => {
     { const r = $('seal').getBoundingClientRect(); emit(r.left + r.width / 2, r.top + r.height / 2, 40, 'spark'); }
@@ -2115,8 +2242,7 @@
     setTimeout(() => $('env').classList.add('lift'), 500);
     setTimeout(() => $('env').classList.add('away', 'out'), 1350);
     setTimeout(() => {
-      $('intro').hidden = true; $('ask').hidden = false; flash();
-      setTimeout(placeNoAtSlot, 800); setTimeout(() => $('paper').classList.add('settled'), 900);
+      $('intro').hidden = true; flash(); celebrar();   // ya no hay pregunta: el sobre abre directo a la carta
     }, 1900);
   }, { once: true });
 
@@ -2202,23 +2328,16 @@
   no.addEventListener('click', e => { e.preventDefault(); dodge(); });
 
   /* ===== Botón "Sí" ===== */
-  function reaccion(n) {
-    if (RAPON()) return rapReaccion(n);
-    if (n === 0) return 'Uy no pensé que le fueras a dar sí de una 😳😍';
-    if (n <= 2) return 'Jajaja ya te estaba costando, ¿cierto?';
-    if (n < NO_DESAPARECE_EN) return '¡Al fin! Ya te estaba agotando la paciencia';
-    return 'Sabía que ibas a caer 😏❤️';
-  }
-  function caso(n) { return n === 0 ? 'rapido' : n <= 2 ? 'poco' : n < NO_DESAPARECE_EN ? 'varios' : 'sin_no'; }
   /* Primera carta: sello que se estampa, fecha de cuándo dijo que sí, palabras que se "escriben" con tinta fresca, P.D. y firma que se dibuja */
   function escribirCarta(f) {
     const L = $('firstLetter'), seal = $('flSeal'), g = (window.TH && TH.glyph) || '♥', d = new Date(), n = noCount;
     const DS = ['dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb'], MS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-    $('flMeta').textContent = (RAPON() ? 'Me dijiste que sí · ' : 'Dijiste que sí · ') + DS[d.getDay()] + ' ' + d.getDate() + ' ' + MS[d.getMonth()] + ' · ' + (d.getHours() % 12 || 12) + ':' + String(d.getMinutes()).padStart(2, '0') + ' ' + (d.getHours() < 12 ? 'am' : 'pm');
+    const dn = diasNovios();
+    $('flMeta').textContent = 'Novios desde el 18 de octubre · ' + (dn === 0 ? '¡hoy!' : dn === 1 ? 'hace 1 día' : 'hace ' + dn + ' días');
     const ps = n === 0 ? 'P.D. Ni lo pensaste. Eso me encantó.' : n <= 2 ? 'P.D. Te vi dudar un segundito y aun así me elegiste.'
       : n < NO_DESAPARECE_EN ? 'P.D. Intentaste decir que no ' + n + ' veces. Las conté todas.' : 'P.D. Ya no hay devolución, ni botones de no.';
     let i = 0; const put = (el, txt, gap) => { i += gap || 0; el.innerHTML = txt.split(' ').map(w => '<span class="wd" style="--i:' + (i++) + '">' + w + '</span>').join(' '); };
-    put($('fh'), f.h); put($('fa'), f.a, 2); put($('fb'), f.b, 3); put($('flPs'), RAPON() ? rapPs(n) : ps, 5);
+    put($('fh'), f.h); put($('fa'), f.a, 2); put($('fb'), f.b, 3); put($('flPs'), f.ps, 5);
     $('sign').textContent = 'Tu novio, ' + NOMBRE_EL; L.dataset.g = g; $('sign').dataset.g = g;
     L.style.setProperty('--sd', (2.1 + i * .06 + .5).toFixed(2) + 's'); window.letterEnd = performance.now() + ((2.1 + i * .06 + .5) + 2) * 1000;
     setTimeout(() => {   // el sello cae: golpecito, chispas y vibración
@@ -2232,9 +2351,8 @@
   }
   function celebrar() {
     if (won) return; won = true;
-    $('reaction').textContent = reaccion(noCount);
-    const grupo = (RAPON() ? RAP_FINALES : FINALES)[caso(noCount)], f = grupo[(Math.random() * grupo.length) | 0];
-    escribirCarta(f);
+    $('reaction').textContent = saludo();
+    escribirCarta(CARTAS_NOVIOS[(Math.random() * CARTAS_NOVIOS.length) | 0]);
     no.hidden = true; $('ask').hidden = true; $('win').hidden = false; $('win').tabIndex = -1; $('win').focus({ preventScroll: true }); bigHeart();
     launchConfetti(); winEffects();
   }
@@ -2346,6 +2464,26 @@
     if (!d) { el.textContent = '0'; return; }
     let n = 0; const iv = setInterval(() => { n++; el.textContent = n; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); if (n >= d) clearInterval(iv); }, 160);
   }
+  function countNovios() {
+    const el = $('nvDias'), d = Math.max(0, Math.floor((Date.now() - new Date(FECHA_NOVIOS).getTime()) / 864e5));
+    $('nvLab').textContent = d === 0 ? 'hoy empezamos' : d === 1 ? 'día siendo novios' : 'días siendo novios';
+    if (!d) { el.textContent = '0'; return; }
+    let n = 0; const iv = setInterval(() => { n++; el.textContent = n; el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); if (n >= d) clearInterval(iv); }, 160);
+  }
+  function mesiversario() {   // el próximo día 18: cuántos faltan
+    const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
+    let k = 1, t; for (;; k++) { t = new Date(NOVIOS_DIA[0], NOVIOS_DIA[1] + k, NOVIOS_DIA[2]); if (t >= hoy) break; }
+    const dias = Math.round((t - hoy) / 864e5), MES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    const nom = k === 1 ? 'Primer mesiversario' : k % 12 === 0 ? (k === 12 ? 'Nuestro primer aniversario' : 'Aniversario ' + k / 12) : 'Mesiversario ' + k;
+    $('nvMes').textContent = nom + ': ' + t.getDate() + ' de ' + MES[t.getMonth()] + (k % 12 === 0 || t.getFullYear() !== hoy.getFullYear() ? ' de ' + t.getFullYear() : '');
+    $('nvFalta').textContent = dias === 0 ? '¡es hoy! 🎉' : dias === 1 ? 'falta 1 día' : 'faltan ' + dias + ' días';
+  }
+  function noviosIn() {   // al llegar a la tarjeta: se estampa el sello y estalla la celebración
+    countNovios(); mesiversario();
+    const el = $('novios'), seal = el.querySelector('.nv-seal');
+    setTimeout(() => { if (window.vibrar) window.vibrar([40, 50, 40]); burstAt(seal, 38, 'heart'); burstAt(seal, 28, 'fire'); }, 1100);
+    [[.18, .3], [.82, .42], [.5, .16], [.3, .8], [.72, .75]].forEach((q, i) => setTimeout(() => { const r = el.getBoundingClientRect(); emit(r.left + r.width * q[0], r.top + r.height * q[1], 34, i % 2 ? 'heart' : 'fire'); }, 1500 + i * 420));
+  }
   function buildLogros() {
     const box = $('achs'); box.textContent = '';
     LOGROS.forEach(() => {
@@ -2429,7 +2567,7 @@
       h.style.cssText = 'left:' + (stage().l + R(0, stage().w - 30)) + 'px;font-size:' + R(14, 34) + 'px;animation-duration:' + R(7, 13) + 's;animation-delay:' + R(0, 9) + 's;color:' + TH.fh[i % 3];
       w.prepend(h);
     }
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.classList.contains('stat')) countUp(); if (e.target.classList.contains('since')) countDays(); if (e.target.classList.contains('ach')) unlockLogros(); if (e.target.classList.contains('hat')) hatStart(); } }), { root: w, threshold: .2 });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.classList.contains('stat')) countUp(); if (e.target.classList.contains('since')) countDays(); if (e.target.classList.contains('ach')) unlockLogros(); if (e.target.classList.contains('hat')) hatStart(); if (e.target.classList.contains('novios')) noviosIn(); } }), { root: w, threshold: .2 });
     w.querySelectorAll('.card, .more, .bookwrap').forEach(el => { el.classList.add('reveal'); io.observe(el); });
   }
 
@@ -2463,7 +2601,8 @@
     { k: 'Capítulo cuatro', t: 'Tu casa', p: 'Al tercer día nos vimos en tu casa. Nos quedamos compartiendo, hablando de todo y de nada. Contigo cualquier plan tranquilo se siente como el mejor del mundo.' },
     { k: 'Capítulo cinco', t: 'La noche en el parque', p: 'Al cuarto día volvimos al parquecito. Vimos cómo la noche iba llegando y, mientras tanto, conocí tus gustos por la música mucho más a fondo. Escucharte hablar de lo que te apasiona me enamoró un poquito más.' },
     { k: 'Capítulo seis', t: 'Película y play', p: 'El quinto día estuvimos en tu casa viendo una película juntos. Me encantó estar acobijado junto a ti. Te enseñé a jugar un poco de PlayStation, nos reímos un montón y no faltaron los besitos. Fue un día de esos que uno quiere repetir.' },
-    { k: 'Capítulo siete', t: 'Hoy', p: 'Y mira dónde estamos. Entre libros, Spider-Man, buen rap y charlas largas, descubrí que mi lugar favorito es donde estés tú.' },
+    { k: 'Capítulo siete', t: 'Mi lugar favorito', p: 'Y mira dónde estamos. Entre libros, Spider-Man, buen rap y charlas largas, descubrí que mi lugar favorito es donde estés tú.' },
+    { k: 'Capítulo ocho', t: 'La decisión final', p: 'El 18 de octubre comimos salchipapa, nos reímos y vimos Mulán, mientras me contabas con muchísima emoción todo lo que te gusta. Me encantó tanto estar contigo. Ese mismo día me dijiste que sí y nos volvimos novios.' },
     { k: 'Fin del capítulo', t: 'Continuará...', p: 'Lo mejor de esta historia es que apenas estamos empezando. Escríbela conmigo, página a página.', sig: true }
   ];
   const wd = (txt, b) => txt.split(' ').map((w, i) => '<span class="wd" style="--i:' + (b + i) + '">' + w + ' </span>').join('');

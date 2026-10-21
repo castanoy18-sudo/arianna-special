@@ -1223,7 +1223,8 @@
 
   /* ===== Lámpara mejorada: foco real, bloom, haz suave, polvo en la luz y se puede arrastrar ===== */
   @property --fl { syntax: '<number>'; inherits: false; initial-value: 1; }
-  #apagon .ap-dark { background: linear-gradient(rgba(0,0,0,var(--blk,0)), rgba(0,0,0,var(--blk,0))),
+  #apagon .ap-blk { position: absolute; left: -150vw; top: -100vh; width: 300vw; height: 300vh; background: #000; opacity: 0; will-change: opacity; }
+  #apagon .ap-dark { background:
     radial-gradient(circle at 150vw calc(100vh + 34vh), rgba(255,206,110,.17) 0, rgba(255,200,100,.08) calc(var(--lr,0px) * .5), rgba(255,190,90,.02) calc(var(--lr,0px) * .82), transparent calc(var(--lr,0px) * .9), rgba(0,0,0,.4) calc(var(--lr,0px) * 1.08), rgba(0,0,0,.82) calc(var(--lr,0px) * 1.3), rgba(0,0,0,.95) calc(var(--lr,0px) * 1.6)); }
   #apagon .ap-swing.drag { animation-play-state: paused; }
   #apagon .ap-lamp { left: -60px; width: 120px; touch-action: none; cursor: grab; -webkit-tap-highlight-color: transparent; }
@@ -1487,7 +1488,7 @@
 
   /* ===== Reproductor (tema Rap): sticker amarillo, vinilo con estrella, anillos y chispas que saltan con el bajo ===== */
   html:not([data-theme="rap"]) #rmus { display: none !important; }
-  .rmus { position: fixed; top: calc(env(safe-area-inset-top, 0px) + 10px); right: 10px; z-index: 40; transform: translateX(135%); transition: transform .5s cubic-bezier(.5,0,.8,.4);
+  .rmus { position: fixed; top: calc(env(safe-area-inset-top, 0px) + 10px); right: 10px; z-index: 46; transform: translateX(135%); transition: transform .5s cubic-bezier(.5,0,.8,.4);
     font-family: "Permanent Marker", "Caveat Brush", cursive; color: #1a1020; --beat: 0; --hit: 0; }
   .rmus.in { transform: none; transition: transform .95s cubic-bezier(.2,1.35,.4,1); }
   .rmus-pill { position: relative; display: flex; align-items: center; gap: 9px; height: 54px; padding: 4px 16px 4px 4px; border: 3px solid #1a1020; border-radius: 16px 24px 15px 26px; cursor: pointer; touch-action: manipulation; color: inherit; font: inherit;
@@ -1495,6 +1496,13 @@
   .rmus-pill::before { content: ""; position: absolute; inset: -9px; z-index: -1; border-radius: 30px; background: radial-gradient(closest-side, rgba(255,64,129,.75), transparent); opacity: calc(var(--beat) * .95); pointer-events: none; }
   .rmus:not(.used) .rmus-pill::after { content: ""; position: absolute; inset: -7px; border-radius: 28px; border: 3px dashed #FF4081; animation: rmPing 1.5s ease-out infinite; pointer-events: none; }
   @keyframes rmPing { from { opacity: .95; transform: scale(1); } to { opacity: 0; transform: scale(1.2, 1.4); } }
+  /* Apagón: el reproductor queda a media luz, titila al irse la corriente y enciende de golpe al volver */
+  .rmus.off .rmus-pill { opacity: .55; }
+  .rmus.off.open .rmus-panel { opacity: .6; }
+  .rmus.cut .rmus-pill { animation: rmCut .9s linear both; }
+  @keyframes rmCut { 0% { opacity: 1; } 7% { opacity: .1; } 15% { opacity: 1; } 24% { opacity: .05; } 38% { opacity: .85; } 50% { opacity: .15; } 100% { opacity: .55; } }
+  .rmus.back .rmus-pill { animation: rmBack .85s linear; }
+  @keyframes rmBack { 0% { opacity: .55; } 10% { opacity: 1; } 20% { opacity: .2; } 32% { opacity: 1; } 42% { opacity: .4; } 56%, 100% { opacity: 1; } }
   .rmus-more { display: flex; align-items: center; gap: 9px; max-width: 290px; overflow: hidden; white-space: nowrap; transition: max-width .6s ease, opacity .4s ease; }
   .rmus.compact .rmus-more { max-width: 0; opacity: 0; }
   .rmus.compact .rmus-pill { padding-right: 4px; gap: 0; }
@@ -2142,17 +2150,22 @@
   /* ===== Modo rap: en cualquier momento se va la luz, aparece "Tranquila, Ari, tengo lámpara" y baja una lámpara que alumbra lo que ella va deslizando ===== */
   var ap = null, apArmed = false, apThr = 0, apOn = false;
   var LAMP = '<svg viewBox="0 0 120 190" aria-hidden="true"><defs>'
-    + '<linearGradient id="lmS" x1="0" x2="1"><stop offset="0" stop-color="#14141a"/><stop offset=".28" stop-color="#4b4e60"/><stop offset=".48" stop-color="#7a7e94"/><stop offset=".74" stop-color="#2b2c38"/><stop offset="1" stop-color="#0f0f14"/></linearGradient>'
-    + '<linearGradient id="lmC" x1="0" x2="1"><stop offset="0" stop-color="#0c0c10"/><stop offset=".5" stop-color="#3a3b48"/><stop offset="1" stop-color="#0c0c10"/></linearGradient>'
-    + '<radialGradient id="lmB"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#FFF3C4"/><stop offset=".8" stop-color="#FFC857"/><stop offset="1" stop-color="#FF9F1C"/></radialGradient></defs>'
-    + '<path d="M60 -2600V30" stroke="#0e0e12" stroke-width="4"/><path d="M59 -2600V30" stroke="#3d3e4c" stroke-width="1"/>'
-    + '<g class="ap-chain"><path d="M68 44Q78 58 73 76" stroke="#b9b49a" stroke-width="2" stroke-dasharray="2 2.4" fill="none"/><circle cx="73" cy="80" r="3.6" fill="#d9c27a" stroke="#6b5a1f"/></g>'
-    + '<g class="ap-bulb"><circle cx="60" cy="122" r="15" fill="#7b7a72" opacity=".75"/><circle class="ap-hot" cx="60" cy="122" r="15" fill="url(#lmB)"/><path d="M53 118q3.5-7 7 0t7 0" stroke="#FF8A1F" stroke-width="1.6" fill="none"/></g>'
-    + '<rect x="51" y="24" width="18" height="22" rx="3" fill="url(#lmC)" stroke="#07070a" stroke-width="1.5"/><path d="M51 30h18M51 35h18M51 40h18" stroke="#000" opacity=".5"/>'
-    + '<path d="M13 113C11 74 34 46 60 44C86 46 109 74 107 113Z" fill="url(#lmS)" stroke="#0b0b10" stroke-width="3" stroke-linejoin="round"/>'
-    + '<path d="M26 102C27 80 38 62 52 54" stroke="#d4d8ea" stroke-opacity=".6" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M20 96C42 90 78 90 100 96" stroke="#0b0b10" stroke-opacity=".45" fill="none"/>'
-    + '<circle cx="34" cy="92" r="2" fill="#9094a8"/><circle cx="86" cy="92" r="2" fill="#2a2b36"/>'
-    + '<ellipse cx="60" cy="113" rx="49" ry="6.5" fill="#0d0d12" stroke="#5b5e72" stroke-width="2"/><ellipse class="ap-in" cx="60" cy="113.5" rx="41" ry="4" fill="#FFE9A8"/></svg>';
+    + '<linearGradient id="lmS" x1="0" x2="1"><stop offset="0" stop-color="#0b0b10"/><stop offset=".2" stop-color="#2a2c3a"/><stop offset=".38" stop-color="#6f7490"/><stop offset=".48" stop-color="#383a4c"/><stop offset=".72" stop-color="#17181f"/><stop offset="1" stop-color="#08080b"/></linearGradient>'
+    + '<linearGradient id="lmBr" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#FBE59A"/><stop offset=".45" stop-color="#C99B3C"/><stop offset=".75" stop-color="#7C5617"/><stop offset="1" stop-color="#E2BC63"/></linearGradient>'
+    + '<linearGradient id="lmBh" x1="0" x2="1"><stop offset="0" stop-color="#6b4a12"/><stop offset=".4" stop-color="#F6DE8E"/><stop offset=".7" stop-color="#B98A2E"/><stop offset="1" stop-color="#5a3d0d"/></linearGradient>'
+    + '<radialGradient id="lmB"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#FFF3C4"/><stop offset=".8" stop-color="#FFC857"/><stop offset="1" stop-color="#FF9F1C"/></radialGradient>'
+    + '<radialGradient id="lmH"><stop offset="0" stop-color="#FFE9A8" stop-opacity=".9"/><stop offset=".45" stop-color="#FFC857" stop-opacity=".35"/><stop offset="1" stop-color="#FF9F1C" stop-opacity="0"/></radialGradient>'
+    + '<radialGradient id="lmIn"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#FFE9A8"/><stop offset="1" stop-color="#FFB347"/></radialGradient>'
+    + '<radialGradient id="lmHt" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FF8FA3"/><stop offset=".5" stop-color="#E0202F"/><stop offset="1" stop-color="#7a0f22"/></radialGradient></defs>'
+    + '<path d="M60 -2600V22" stroke="#101015" stroke-width="4.6"/><path d="M60 -2600V22" stroke="#7a2638" stroke-width="4.6" stroke-dasharray="1.4 2.6" opacity=".85"/><path d="M58.6 -2600V22" stroke="#3d3e4c" stroke-width="1"/>'
+    + '<rect x="53.5" y="16" width="13" height="18" rx="3" fill="url(#lmBh)" stroke="#4a330c"/><path d="M54 22h12M54 27h12" stroke="#4a330c" stroke-width=".8"/>'
+    + '<path d="M50 34h20l2 12H48z" fill="url(#lmBh)" stroke="#4a330c" stroke-width="1"/><path d="M49 40h22" stroke="#4a330c" stroke-width=".8"/>'
+    + '<path d="M49 46H71C80 50 88 62 92 74C98 90 104 102 109 113H11C16 102 22 90 28 74C32 62 40 50 49 46Z" fill="url(#lmS)" stroke="#06060a" stroke-width="1.5" stroke-linejoin="round"/>'
+    + '<path d="M22.6 87Q60 99 97.4 87" stroke="url(#lmBr)" stroke-width="3.2" fill="none"/><path d="M35 62C31 74 27 88 24 101" stroke="#fff" stroke-opacity=".4" stroke-width="3" stroke-linecap="round" fill="none"/><path d="M86 66C92 80 98 94 103 106" stroke="#9db4ff" stroke-opacity=".3" stroke-width="2" stroke-linecap="round" fill="none"/>'
+    + '<circle cx="40" cy="72" r="1.5" fill="#C99B3C"/><circle cx="80" cy="72" r="1.5" fill="#C99B3C"/><circle cx="60" cy="58" r="1.5" fill="#C99B3C"/>'
+    + '<g class="ap-chain"><circle cx="83" cy="116" r="1.8" fill="#C99B3C"/><path d="M83 117Q88 128 85 140" stroke="#d8c288" stroke-width="2.4" stroke-dasharray="0.1 3.6" stroke-linecap="round" fill="none"/><g transform="translate(76.6 136.9) scale(.28)"><path d="M30 50C8 34 6 14 20 12C26 11 30 16 30 20C30 16 34 11 40 12C54 14 52 34 30 50Z" fill="url(#lmHt)" stroke="#3a0711" stroke-width="4"/></g></g>'
+    + '<g class="ap-bulb"><circle class="ap-hot" cx="60" cy="124" r="30" fill="url(#lmH)"/><circle cx="60" cy="124" r="14" fill="#9aa3b8" opacity=".38" stroke="#aeb6c8" stroke-opacity=".6" stroke-width=".8"/><circle class="ap-hot" cx="60" cy="124" r="14" fill="url(#lmB)"/><path d="M53 125q3.5-8 7 0t7 0" stroke="#7b6a52" stroke-width="1.2" fill="none"/><path class="ap-hot" d="M53 125q3.5-9 7 0t7 0" stroke="#FFF7DC" stroke-width="1.8" fill="none"/><path d="M52.5 119a9 9 0 0 1 6-5" stroke="#fff" stroke-opacity=".55" stroke-width="1.6" stroke-linecap="round" fill="none"/></g>'
+    + '<ellipse cx="60" cy="113" rx="49" ry="6.5" fill="#0b0b10" stroke="url(#lmBr)" stroke-width="2.2"/><ellipse class="ap-in" cx="60" cy="113.6" rx="42" ry="4.2" fill="url(#lmIn)"/></svg>';
   var AC = null;
   function sfx(kind) {
     try {
@@ -2163,6 +2176,15 @@
         g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.1, t + .03); g.gain.exponentialRampToValueAtTime(.0001, t + .7); o.connect(g); o.start(t); o.stop(t + .75);
         var n = AC.createBuffer(1, Math.floor(AC.sampleRate * .3), AC.sampleRate), d = n.getChannelData(0); for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
         var s2 = AC.createBufferSource(), g2 = AC.createGain(); s2.buffer = n; g2.gain.value = .22; s2.connect(g2); g2.connect(AC.destination); s2.start(t + .38);
+      } else if (kind === 'zap') {   // rayo: chasquido eléctrico, zumbido que cae y trueno grave
+        var nb = AC.createBuffer(1, Math.floor(AC.sampleRate * 1.5), AC.sampleRate), nd = nb.getChannelData(0);
+        for (var j = 0; j < nd.length; j++) { var e2 = j / nd.length; nd[j] = (Math.random() * 2 - 1) * (e2 < .02 ? 1 : Math.pow(1 - e2, 2.2)) * (Math.random() < .3 ? 1 : .3); }
+        var sa = AC.createBufferSource(), hp = AC.createBiquadFilter(), ga = AC.createGain(); sa.buffer = nb; hp.type = 'highpass'; hp.frequency.value = 1600;
+        ga.gain.setValueAtTime(.55, t); ga.gain.exponentialRampToValueAtTime(.0001, t + .4); sa.connect(hp); hp.connect(ga); ga.connect(AC.destination); sa.start(t);
+        var sb = AC.createBufferSource(), lp = AC.createBiquadFilter(), gb = AC.createGain(); sb.buffer = nb; lp.type = 'lowpass'; lp.frequency.setValueAtTime(480, t + .04); lp.frequency.exponentialRampToValueAtTime(60, t + 1.4);
+        gb.gain.setValueAtTime(.0001, t); gb.gain.exponentialRampToValueAtTime(.9, t + .09); gb.gain.exponentialRampToValueAtTime(.0001, t + 1.45); sb.connect(lp); lp.connect(gb); gb.connect(AC.destination); sb.start(t);
+        var oz = AC.createOscillator(), gz = AC.createGain(); oz.type = 'sawtooth'; oz.frequency.setValueAtTime(2600, t); oz.frequency.exponentialRampToValueAtTime(80, t + .24);
+        gz.gain.setValueAtTime(.12, t); gz.gain.exponentialRampToValueAtTime(.0001, t + .26); oz.connect(gz); gz.connect(AC.destination); oz.start(t); oz.stop(t + .3);
       } else {   // clic de interruptor
         var c = AC.createOscillator(); c.type = 'square'; c.frequency.setValueAtTime(900, t); c.frequency.exponentialRampToValueAtTime(220, t + .05);
         g.gain.setValueAtTime(.08, t); g.gain.exponentialRampToValueAtTime(.0001, t + .07); c.connect(g); c.start(t); c.stop(t + .08);
@@ -2171,21 +2193,22 @@
   }
   function armarLampara() { apArmed = true; apThr = $('win').scrollTop + rnd(150, 700); }   // se irá la luz cuando haya bajado un poquito, en un punto al azar
   function quitarLampara() {
-    apArmed = false; apOn = false; root.classList.remove('ap-dark');
+    apArmed = false; apOn = false; root.classList.remove('ap-dark'); try { if (window.rapPower) rapPower(true); } catch (e) {}
     if (ap) { var a = ap; ap = null; if (a.animate) a.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 250 }).onfinish = function () { a.remove(); }; else a.remove(); }
   }
   function apagon() {
     apOn = true; root.classList.add('ap-dark'); ap = document.createElement('div'); ap.id = 'apagon';
-    ap.innerHTML = '<div class="ap-swing"><div class="ap-dark"></div><div class="ap-cono"></div><div class="ap-dust"></div><div class="ap-bloom"></div><button class="ap-lamp" type="button" aria-label="Lámpara: tócala para prender la luz, arrástrala para alumbrar">' + LAMP + '</button><div class="ap-hint">arrástrame pa’ alumbrar<br>tócame pa’ prender la luz</div></div><div class="ap-flash"></div><div class="ap-sparks"></div><div class="ap-msg"><span class="am1"></span><small class="am2"></small></div>';
+    ap.innerHTML = '<div class="ap-swing"><div class="ap-dark"></div><div class="ap-blk"></div><div class="ap-cono"></div><div class="ap-dust"></div><div class="ap-bloom"></div><button class="ap-lamp" type="button" aria-label="Lámpara: tócala para prender la luz, arrástrala para alumbrar">' + LAMP + '</button><div class="ap-hint">arrástrame pa’ alumbrar<br>tócame pa’ prender la luz</div></div><div class="ap-flash"></div><div class="ap-sparks"></div><div class="ap-msg"><span class="am1"></span><small class="am2"></small></div>';
     document.body.appendChild(ap);
-    var q = function (c) { return ap.querySelector(c); }, sw = q('.ap-swing'), dark = q('.ap-dark'), lamp = q('.ap-lamp'), cono = q('.ap-cono'), msg = q('.ap-msg'), hint = q('.ap-hint'), dust = q('.ap-dust'), R = Math.min(320, innerWidth * .8) + 'px';
+    var q = function (c) { return ap.querySelector(c); }, sw = q('.ap-swing'), dark = q('.ap-dark'), blk = q('.ap-blk'), lamp = q('.ap-lamp'), cono = q('.ap-cono'), msg = q('.ap-msg'), hint = q('.ap-hint'), dust = q('.ap-dust'), R = Math.min(320, innerWidth * .8) + 'px';
     var an = function (el, fr, o) { o.fill = 'forwards'; return el.animate(fr, o); }, T = [];
     var later = function (f, ms) { T.push(setTimeout(function () { if (ap) f(); }, ms)); };
     for (var m = 0; m < 18; m++) { var d = document.createElement('i'), z = 1.5 + Math.random() * 2; d.className = 'ap-mote'; d.style.cssText = 'left:' + (8 + Math.random() * 84) + '%;top:' + (10 + Math.random() * 85) + '%;width:' + z + 'px;height:' + z + 'px;--t:' + (6 + Math.random() * 7) + 's;--d:-' + (Math.random() * 10) + 's'; dust.appendChild(d); }
     var m1 = q('.am1'), m2 = q('.am2'), sp = q('.ap-sparks');
     var typ = function (el, txt, ms, done) { var ch = Array.from(txt), k = 0; (function step() { if (!ap) return; el.textContent = ch.slice(0, ++k).join(''); if (k < ch.length) T.push(setTimeout(step, ms)); else if (done) T.push(setTimeout(done, 380)); })(); };
+    sfx('zap'); try { if (window.rapPower) rapPower(false); } catch (e) {}   // rayo: la canción se frena como sin corriente y se pausa
     if (window.vibrar) window.vibrar([40, 40, 30, 70, 20, 90, 220]);
-    an(dark, [{ '--blk': 0 }, { '--blk': .55 }, { '--blk': .1 }, { '--blk': .9 }, { '--blk': .25 }, { '--blk': .7 }, { '--blk': 1 }], { duration: 760 });   // bajón, parpadeo y todo negro
+    an(blk, [{ opacity: 0 }, { opacity: .55 }, { opacity: .1 }, { opacity: .9 }, { opacity: .25 }, { opacity: .7 }, { opacity: 1 }], { duration: 760 });   // bajón, parpadeo y todo negro
     later(function () {   // chispazo
       sfx('down'); an(q('.ap-flash'), [{ opacity: 0 }, { opacity: .95, offset: .15 }, { opacity: 0 }], { duration: 340 });
       for (var k = 0; k < 16; k++) { var e = document.createElement('i'), ang = Math.random() * Math.PI * .9 + Math.PI * .05, r = 50 + Math.random() * 130; e.className = 'ap-sp'; e.style.setProperty('--dx', (-Math.cos(ang) * r) + 'px'); e.style.setProperty('--dy', (Math.sin(ang) * r + 40) + 'px'); sp.appendChild(e); }
@@ -2201,7 +2224,8 @@
         sfx('click'); var seq = [[1, 0], [0, 70], [1, 130], [0, 190], [1, 230], [0, 270], [1, 330]];
         seq.forEach(function (st) { later(function () { ap.classList.toggle('lit', !!st[0]); if (st[0] && window.vibrar) window.vibrar([18]); }, st[1]); });
         later(function () {
-          an(dark, [{ '--lr': '0px' }, { '--lr': R }], { duration: 900, easing: 'ease-out' }); an(dark, [{ '--blk': 1 }, { '--blk': 0 }], { duration: 450 });
+          try { if (window.rapPower) rapPower(true); } catch (e) {}   // vuelve la luz: el disco arranca otra vez
+          an(dark, [{ '--lr': '0px' }, { '--lr': R }], { duration: 900, easing: 'ease-out' }); an(blk, [{ opacity: 1 }, { opacity: 0 }], { duration: 450 });
           an(cono, [{ opacity: 0 }, { opacity: 1 }], { duration: 700 });
           later(function () { an(hint, [{ opacity: 0 }, { opacity: .9, offset: .15 }, { opacity: .9, offset: .8 }, { opacity: 0 }], { duration: 7000 }); }, 1000);
         }, 340);
@@ -3571,6 +3595,7 @@
 
   function play() {
     say(''); if (!load()) return;
+    if (!spinFlag) { clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} }
     try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}   // en iPhone suena aunque el celular esté en silencio
     meta();
     try { A.volume = 0; var v = 0; clearInterval(fade); fade = setInterval(function () { v += .1; if (v >= 1) { v = 1; clearInterval(fade); } try { A.volume = v; } catch (e) {} }, 55); } catch (e) {}
@@ -3578,9 +3603,37 @@
     if (!A.paused) setPlaying(true);
   }
   function pauseSoft() {
-    clearInterval(fade); setPlaying(false); var v = 1;
+    clearInterval(fade); clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} setPlaying(false); var v = 1;
     fade = setInterval(function () { v -= .14; if (v <= 0) { clearInterval(fade); try { A.pause(); A.volume = 1; } catch (e) {} } else { try { A.volume = v; } catch (e) {} } }, 35);
   }
+  /* Apagón (lo dispara la lámpara del tema Rap): el disco se frena como sin corriente (el tono baja) y se pausa; al volver la luz arranca solo, subiendo de tono */
+  var pwrOff = false, resumeAfter = false, rateT = 0, spinFlag = false;
+  function noPitch() { try { A.preservesPitch = false; A.mozPreservesPitch = false; A.webkitPreservesPitch = false; } catch (e) {} }
+  function spinDown() {
+    clearInterval(fade); clearInterval(rateT); noPitch(); setPlaying(false); var t0 = performance.now();
+    rateT = setInterval(function () {
+      var k = Math.min(1, (performance.now() - t0) / 950);
+      try { A.playbackRate = Math.max(.2, 1 - k * .8); A.volume = Math.max(0, 1 - k * k * .9); } catch (e) {}
+      if (k >= 1) { clearInterval(rateT); try { A.pause(); A.playbackRate = 1; A.volume = 1; } catch (e) {} }
+    }, 30);
+  }
+  function spinUp() {
+    clearInterval(rateT); noPitch(); try { A.playbackRate = .3; } catch (e) {}
+    spinFlag = true; play(); spinFlag = false; var t0 = performance.now();
+    rateT = setInterval(function () { var k = Math.min(1, (performance.now() - t0) / 800); try { A.playbackRate = .3 + .7 * k * k; } catch (e) {} if (k >= 1) { clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} } }, 30);
+  }
+  window.rapPower = function (on) {
+    if (theme() !== 'rap') return;
+    if (!on) {
+      if (pwrOff) return; pwrOff = true; resumeAfter = !A.paused;
+      root.classList.remove('back', 'cut'); root.classList.add('off'); void root.offsetWidth; root.classList.add('cut');
+      if (resumeAfter) spinDown(); kick();
+    } else {
+      if (!pwrOff) return; pwrOff = false; var go = resumeAfter && A.paused; resumeAfter = false;
+      root.classList.remove('off', 'cut'); void root.offsetWidth; root.classList.add('back'); setTimeout(function () { root.classList.remove('back'); }, 900);
+      if (go) spinUp(); kick();
+    }
+  };
   function seekBy(s) { if (!load()) return; var nt = Math.max(0, Math.min(D() - .3, A.currentTime + s)); scratch(s); try { A.currentTime = nt; } catch (e) {} times(); kick(); }
   function scratch(ds) { ang = (ang + ds * 26) % 360; }
 
@@ -3660,7 +3713,7 @@
     setTimeout(function () { if (theme() === 'rap') { showPill(0); setTimeout(function () { root.classList.add('compact'); }, 6500); } }, 3500);
   };
   window.rapStop = function () {
-    primed = false; want = false; shown = false; clearInterval(fade);
+    primed = false; want = false; shown = false; clearInterval(fade); pwrOff = false; resumeAfter = false; clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} root.classList.remove('off', 'cut', 'back');
     root.classList.remove('in', 'open', 'compact'); pill.setAttribute('aria-expanded', 'false'); giveBack();
     if (A.paused) { A.muted = false; A.volume = 1; setPlaying(false); }
     else { var v = A.volume; fade = setInterval(function () { v -= .1; if (v <= 0) { clearInterval(fade); try { A.pause(); A.muted = false; A.volume = 1; } catch (e) {} setPlaying(false); } else { try { A.volume = v; } catch (e) {} } }, 40); }

@@ -1453,7 +1453,7 @@
   .jd.grow .new .bl { animation: jdBloom 1.6s cubic-bezier(.2,1.25,.4,1) calc(var(--d) + 1.35s) forwards; }
   @keyframes jdPop { from { scale: 0; } to { scale: 1; } }
   @keyframes jdBloom { 0% { scale: 0; rotate: -80deg; } 100% { scale: 1; rotate: 0deg; } }
-  .jd .fl.tap .tp { animation: jdTap .6s cubic-bezier(.3,1.6,.5,1); }
+  .jd .fl.jtap .tp { animation: jdTap .6s cubic-bezier(.3,1.6,.5,1); }
   @keyframes jdTap { 0% { scale: 1; rotate: 0deg; } 35% { scale: 1.28; rotate: -9deg; } 70% { scale: .95; rotate: 5deg; } 100% { scale: 1; rotate: 0deg; } }
   .jd .halo { transform-box: fill-box; transform-origin: 50% 50%; animation: jdHalo 3.4s ease-in-out infinite alternate; }
   @keyframes jdHalo { from { opacity: .35; scale: .9; } to { opacity: .95; scale: 1.15; } }
@@ -3000,7 +3000,7 @@
       cap.textContent = i === 0 ? 'Día 1 · ' + fecha(0) + ' · la del sí' : i === n - 1 ? 'Hoy · día ' + (i + 1) + ' · la más nueva' : 'Día ' + (i + 1) + ' · ' + fecha(i);
       cap.style.left = Math.min(Math.max(r.left + r.width / 2 - w.left, 70), w.width - 70) + 'px'; cap.style.top = Math.max(r.top - w.top - 2, 30) + 'px';
       cap.classList.add('on'); clearTimeout(capT); capT = setTimeout(() => cap.classList.remove('on'), 2400);
-      fl.classList.remove('tap'); void fl.getBoundingClientRect(); fl.classList.add('tap'); burstAt(hit, 10, 'heart'); if (window.vibrar) window.vibrar([12]);
+      fl.classList.remove('jtap'); void fl.getBoundingClientRect(); fl.classList.add('jtap'); clearTimeout(fl._jt); fl._jt = setTimeout(() => fl.classList.remove('jtap'), 700); burstAt(hit, 10, 'heart'); if (window.vibrar) window.vibrar([12]);
     });
     /* ---- crecer ---- */
     let limpiar = 0;

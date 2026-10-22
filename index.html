@@ -3609,6 +3609,7 @@
 
   function play() {
     say(''); if (!load()) return; wantPlay = true; retries = 0;
+    if (holdMode) { holdMode = false; try { A.currentTime = holdT; A.muted = false; A.playbackRate = 1; } catch (e) {} }
     if (!spinFlag) { clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} }
     try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}   // en iPhone suena aunque el celular esté en silencio
     meta();
@@ -3617,11 +3618,11 @@
     if (!A.paused) setPlaying(true);
   }
   function pauseSoft() {
-    wantPlay = false; clearInterval(fade); clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} setPlaying(false); var v = 1;
+    wantPlay = false; holdMode = false; try { A.muted = false; } catch (e) {} clearInterval(fade); clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} setPlaying(false); var v = 1;
     fade = setInterval(function () { v -= .14; if (v <= 0) { clearInterval(fade); ourPause(); try { A.volume = 1; } catch (e) {} } else { try { A.volume = v; } catch (e) {} } }, 35);
   }
   /* Apagón (lo dispara la lámpara del tema Rap): el disco se frena como sin corriente (el tono baja) y se pausa; al volver la luz arranca solo, subiendo de tono */
-  var pwrT = 0, wantPlay = false, ours = false, retries = 0, pwrOff = false, resumeAfter = false, rateT = 0, spinFlag = false, IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1), RMIN = IOS ? .5 : .2;
+  var holdMode = false, holdT = 0, pwrT = 0, wantPlay = false, ours = false, retries = 0, pwrOff = false, resumeAfter = false, rateT = 0, spinFlag = false, IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1), RMIN = IOS ? .5 : .2;
   function ourPause() { ours = true; try { A.pause(); } catch (e) {} }   // pausa hecha por nosotros (la distingue de una pausa que el navegador/iPhone hace solo)
   function noPitch() { try { A.preservesPitch = false; A.mozPreservesPitch = false; A.webkitPreservesPitch = false; } catch (e) {} }
   function spinDown() {
@@ -3629,12 +3630,14 @@
     rateT = setInterval(function () {
       var k = Math.min(1, (performance.now() - t0) / 950);
       try { A.playbackRate = Math.max(RMIN, 1 - k * (1 - RMIN)); A.volume = Math.max(0, 1 - k * k * .9); } catch (e) {}
-      if (k >= 1) { clearInterval(rateT); if (pwrOff) ourPause(); try { A.playbackRate = 1; A.volume = 1; } catch (e) {} }
+      if (k >= 1) { clearInterval(rateT); if (pwrOff) { if (IOS && !A.paused) { holdMode = true; holdT = A.currentTime; try { A.muted = true; } catch (e) {} } else { ourPause(); try { A.playbackRate = 1; A.volume = 1; } catch (e) {} } } else { try { A.playbackRate = 1; A.volume = 1; } catch (e) {} } }
     }, 30);
   }
   function spinUp() {
     var r0 = IOS ? .5 : .3; clearInterval(rateT); noPitch(); try { A.playbackRate = r0; } catch (e) {}
-    spinFlag = true; play(); spinFlag = false; var t0 = performance.now();
+    if (holdMode) { holdMode = false; wantPlay = true; try { A.currentTime = holdT; A.muted = false; A.volume = 1; } catch (e) {} meta(); setPlaying(true); }   // iPhone: la canción nunca se pausó, solo estaba muda; vuelve desde donde se cortó
+    else { spinFlag = true; play(); spinFlag = false; }
+    var t0 = performance.now();
     rateT = setInterval(function () { var k = Math.min(1, (performance.now() - t0) / 800); try { A.playbackRate = r0 + (1 - r0) * k * k; } catch (e) {} if (k >= 1) { clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} } }, 30);
   }
   window.rapPower = function (on) {
@@ -3644,7 +3647,7 @@
       root.classList.remove('back', 'cut'); root.classList.add('off'); void root.offsetWidth; root.classList.add('cut');
       if (resumeAfter) spinDown(); kick();
     } else {
-      if (!pwrOff) return; pwrOff = false; var go = resumeAfter && A.paused; resumeAfter = false;
+      if (!pwrOff) return; pwrOff = false; var go = resumeAfter && (A.paused || holdMode); resumeAfter = false;
       root.classList.remove('off', 'cut'); void root.offsetWidth; root.classList.add('back'); setTimeout(function () { root.classList.remove('back'); }, 900);
       if (go) spinUp(); kick();
     }
@@ -3713,7 +3716,7 @@
   /* Al cambiar al tema Rap: el toque en el menú "desbloquea" el audio (mudo) y, cuando ya cambió el tema, la canción arranca desde el principio con fade in */
   window.rapLoad = function () { load(); };
   window.rapPrime = function () {
-    want = true; pwrOff = false; resumeAfter = false; clearInterval(rateT); clearInterval(fade); try { A.playbackRate = 1; } catch (e) {}
+    want = true; pwrOff = false; holdMode = false; resumeAfter = false; clearInterval(rateT); clearInterval(fade); try { A.playbackRate = 1; } catch (e) {}
     try { if (!load()) return; A.muted = true; var p = A.play(); if (p && p.catch) p.catch(function () { primed = false; }); primed = true; } catch (e) {}
   };
   function showPill(ms) {
@@ -3731,7 +3734,7 @@
     setTimeout(function () { if (theme() === 'rap') { showPill(0); setTimeout(function () { root.classList.add('compact'); }, 6500); } }, 3500);
   };
   window.rapStop = function () {
-    primed = false; want = false; wantPlay = false; shown = false; clearInterval(fade); pwrOff = false; resumeAfter = false; clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} root.classList.remove('off', 'cut', 'back');
+    primed = false; want = false; wantPlay = false; holdMode = false; shown = false; clearInterval(fade); pwrOff = false; resumeAfter = false; clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} root.classList.remove('off', 'cut', 'back');
     root.classList.remove('in', 'open', 'compact'); pill.setAttribute('aria-expanded', 'false'); giveBack();
     if (A.paused) { A.muted = false; A.volume = 1; setPlaying(false); }
     else { var v = A.volume; fade = setInterval(function () { v -= .1; if (v <= 0) { clearInterval(fade); ourPause(); try { A.muted = false; A.volume = 1; } catch (e) {} setPlaying(false); } else { try { A.volume = v; } catch (e) {} } }, 40); }

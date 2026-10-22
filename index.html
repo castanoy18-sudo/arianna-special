@@ -3608,7 +3608,7 @@
   function times() { t0.textContent = mmss(A.currentTime); t1.textContent = mmss(D()); setProg(A.currentTime / D() * 100); }
 
   function play() {
-    say(''); if (!load()) return;
+    say(''); if (!load()) return; wantPlay = true; retries = 0;
     if (!spinFlag) { clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} }
     try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}   // en iPhone suena aunque el celular esté en silencio
     meta();
@@ -3617,18 +3617,19 @@
     if (!A.paused) setPlaying(true);
   }
   function pauseSoft() {
-    clearInterval(fade); clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} setPlaying(false); var v = 1;
-    fade = setInterval(function () { v -= .14; if (v <= 0) { clearInterval(fade); try { A.pause(); A.volume = 1; } catch (e) {} } else { try { A.volume = v; } catch (e) {} } }, 35);
+    wantPlay = false; clearInterval(fade); clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} setPlaying(false); var v = 1;
+    fade = setInterval(function () { v -= .14; if (v <= 0) { clearInterval(fade); ourPause(); try { A.volume = 1; } catch (e) {} } else { try { A.volume = v; } catch (e) {} } }, 35);
   }
   /* Apagón (lo dispara la lámpara del tema Rap): el disco se frena como sin corriente (el tono baja) y se pausa; al volver la luz arranca solo, subiendo de tono */
-  var pwrOff = false, resumeAfter = false, rateT = 0, spinFlag = false, IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1), RMIN = IOS ? .5 : .2;
+  var wantPlay = false, ours = false, retries = 0, pwrOff = false, resumeAfter = false, rateT = 0, spinFlag = false, IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1), RMIN = IOS ? .5 : .2;
+  function ourPause() { ours = true; try { A.pause(); } catch (e) {} }   // pausa hecha por nosotros (la distingue de una pausa que el navegador/iPhone hace solo)
   function noPitch() { try { A.preservesPitch = false; A.mozPreservesPitch = false; A.webkitPreservesPitch = false; } catch (e) {} }
   function spinDown() {
     clearInterval(fade); clearInterval(rateT); noPitch(); setPlaying(false); var t0 = performance.now();
     rateT = setInterval(function () {
       var k = Math.min(1, (performance.now() - t0) / 950);
       try { A.playbackRate = Math.max(RMIN, 1 - k * (1 - RMIN)); A.volume = Math.max(0, 1 - k * k * .9); } catch (e) {}
-      if (k >= 1) { clearInterval(rateT); try { A.pause(); A.playbackRate = 1; A.volume = 1; } catch (e) {} }
+      if (k >= 1) { clearInterval(rateT); if (pwrOff) ourPause(); try { A.playbackRate = 1; A.volume = 1; } catch (e) {} }
     }, 30);
   }
   function spinUp() {
@@ -3652,12 +3653,15 @@
   function scratch(ds) { ang = (ang + ds * 26) % 360; }
 
   A.addEventListener('playing', function () { setPlaying(true); });
-  A.addEventListener('pause', function () { setPlaying(false); });
-  A.addEventListener('ended', function () { setPlaying(false); try { A.currentTime = 0; } catch (e) {} setProg(0); t0.textContent = '0:00'; });
+  A.addEventListener('pause', function () {
+    var mine = ours; ours = false; setPlaying(false);
+    if (!mine && wantPlay && theme() === 'rap' && !pwrOff && !A.ended && retries++ < 3) setTimeout(function () { if (wantPlay && theme() === 'rap' && !pwrOff && A.paused) { try { A.muted = false; A.volume = 1; var q = A.play(); if (q && q.catch) q.catch(function () { setPlaying(false); say('Toca otra vez el botón para dar play'); }); } catch (e) {} } }, 160);   // si algo la frenó sin que ella lo pidiera, vuelve a sonar
+  });
+  A.addEventListener('ended', function () { wantPlay = false; setPlaying(false); try { A.currentTime = 0; } catch (e) {} setProg(0); t0.textContent = '0:00'; });
   A.addEventListener('error', function () { setPlaying(false); say('No pude reproducir la canción'); });
   A.addEventListener('durationchange', function () { t1.textContent = mmss(D()); });
   A.addEventListener('timeupdate', function () { if (!drag && !playing) times(); });
-  A.addEventListener('play', function () { if (theme() !== 'rap' && !want) A.pause(); });   // por si la intentan prender desde otro lado (pantalla de bloqueo, etc.)
+  A.addEventListener('play', function () { if (theme() !== 'rap' && !want) { wantPlay = false; ourPause(); } });   // por si la intentan prender desde otro lado (pantalla de bloqueo, etc.)
 
   $('rmPlay').addEventListener('click', function () { if (A.paused || !playing) play(); else pauseSoft(); });
   $('rmBack').addEventListener('click', function () { seekBy(-10); });
@@ -3709,7 +3713,7 @@
   /* Al cambiar al tema Rap: el toque en el menú "desbloquea" el audio (mudo) y, cuando ya cambió el tema, la canción arranca desde el principio con fade in */
   window.rapLoad = function () { load(); };
   window.rapPrime = function () {
-    want = true;
+    want = true; pwrOff = false; resumeAfter = false; clearInterval(rateT); clearInterval(fade); try { A.playbackRate = 1; } catch (e) {}
     try { if (!load()) return; A.muted = true; var p = A.play(); if (p && p.catch) p.catch(function () { primed = false; }); primed = true; } catch (e) {}
   };
   function showPill(ms) {
@@ -3718,7 +3722,7 @@
     if (ms) setTimeout(function () { root.classList.add('compact'); }, ms);
   }
   window.rapGo = function () {
-    var ok = primed; primed = false; want = false; shown = true; showPill(ok ? 2600 : 0);
+    var ok = primed; primed = false; want = false; shown = true; pwrOff = false; resumeAfter = false; clearInterval(rateT); root.classList.remove('off', 'cut', 'back'); try { A.playbackRate = 1; A.muted = false; } catch (e) {} showPill(ok ? 2600 : 0);
     if (!ok) return;   // el navegador no dejó sonar solo: la pastilla late y con un toque arranca
     root.classList.add('used'); try { A.currentTime = 0; } catch (e) {} A.muted = false; play();
   };
@@ -3727,10 +3731,10 @@
     setTimeout(function () { if (theme() === 'rap') { showPill(0); setTimeout(function () { root.classList.add('compact'); }, 6500); } }, 3500);
   };
   window.rapStop = function () {
-    primed = false; want = false; shown = false; clearInterval(fade); pwrOff = false; resumeAfter = false; clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} root.classList.remove('off', 'cut', 'back');
+    primed = false; want = false; wantPlay = false; shown = false; clearInterval(fade); pwrOff = false; resumeAfter = false; clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} root.classList.remove('off', 'cut', 'back');
     root.classList.remove('in', 'open', 'compact'); pill.setAttribute('aria-expanded', 'false'); giveBack();
     if (A.paused) { A.muted = false; A.volume = 1; setPlaying(false); }
-    else { var v = A.volume; fade = setInterval(function () { v -= .1; if (v <= 0) { clearInterval(fade); try { A.pause(); A.muted = false; A.volume = 1; } catch (e) {} setPlaying(false); } else { try { A.volume = v; } catch (e) {} } }, 40); }
+    else { var v = A.volume; fade = setInterval(function () { v -= .1; if (v <= 0) { clearInterval(fade); ourPause(); try { A.muted = false; A.volume = 1; } catch (e) {} setPlaying(false); } else { try { A.volume = v; } catch (e) {} } }, 40); }
     setTimeout(function () { if (theme() !== 'rap') root.hidden = true; }, 700);
   };
   times();

@@ -2167,6 +2167,24 @@
     + '<g class="ap-bulb"><circle class="ap-hot" cx="60" cy="124" r="30" fill="url(#lmH)"/><circle cx="60" cy="124" r="14" fill="#9aa3b8" opacity=".38" stroke="#aeb6c8" stroke-opacity=".6" stroke-width=".8"/><circle class="ap-hot" cx="60" cy="124" r="14" fill="url(#lmB)"/><path d="M53 125q3.5-8 7 0t7 0" stroke="#7b6a52" stroke-width="1.2" fill="none"/><path class="ap-hot" d="M53 125q3.5-9 7 0t7 0" stroke="#FFF7DC" stroke-width="1.8" fill="none"/><path d="M52.5 119a9 9 0 0 1 6-5" stroke="#fff" stroke-opacity=".55" stroke-width="1.6" stroke-linecap="round" fill="none"/></g>'
     + '<ellipse cx="60" cy="113" rx="49" ry="6.5" fill="#0b0b10" stroke="url(#lmBr)" stroke-width="2.2"/><ellipse class="ap-in" cx="60" cy="113.6" rx="42" ry="4.2" fill="url(#lmIn)"/></svg>';
   var AC = null;
+  function unlockAC() {   // iPhone/Android: el audio de efectos solo suena si se "desbloquea" con un toque; se repite hasta que quede en marcha
+    try {
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+      AC = AC || new (window.AudioContext || window.webkitAudioContext)();
+      if (AC.state !== 'running') { var r = AC.resume(); if (r && r.catch) r.catch(function () {}); }
+      var b = AC.createBuffer(1, 1, 22050), s0 = AC.createBufferSource(); s0.buffer = b; s0.connect(AC.destination); s0.start(0);
+    } catch (e) {}
+  }
+  ['pointerdown', 'touchend', 'click', 'keydown'].forEach(function (n) { document.addEventListener(n, function h() { unlockAC(); if (AC && AC.state === 'running') document.removeEventListener(n, h, true); }, true); });
+  var NB_ = null;
+  function fxKit(t) {   // sonidos de rayo con mucho medio y agudo: así se oyen en el parlante del celular, no solo en la PC
+    var cm = AC.createDynamicsCompressor(); cm.connect(AC.destination);
+    if (!NB_ || NB_.sampleRate !== AC.sampleRate) { NB_ = AC.createBuffer(1, Math.floor(AC.sampleRate * 1.6), AC.sampleRate); var nd = NB_.getChannelData(0); for (var j = 0; j < nd.length; j++) { var e2 = j / nd.length; nd[j] = (Math.random() * 2 - 1) * (e2 < .02 ? 1 : Math.pow(1 - e2, 2)) * (Math.random() < .35 ? 1 : .35); } }
+    return {
+      nz: function (type, f0, f1, dur, g0, st) { var s1 = AC.createBufferSource(), fl = AC.createBiquadFilter(), gg = AC.createGain(); s1.buffer = NB_; fl.type = type; fl.frequency.setValueAtTime(f0, t + st); fl.frequency.exponentialRampToValueAtTime(f1, t + st + dur); gg.gain.setValueAtTime(g0, t + st); gg.gain.exponentialRampToValueAtTime(.0001, t + st + dur); s1.connect(fl); fl.connect(gg); gg.connect(cm); s1.start(t + st); s1.stop(t + st + dur + .05); },
+      sw: function (type, f0, f1, dur, g0, st) { var o = AC.createOscillator(), fl = AC.createBiquadFilter(), gg = AC.createGain(); o.type = type; o.frequency.setValueAtTime(f0, t + st); o.frequency.exponentialRampToValueAtTime(f1, t + st + dur); fl.type = 'lowpass'; fl.frequency.value = 3800; gg.gain.setValueAtTime(g0, t + st); gg.gain.exponentialRampToValueAtTime(.0001, t + st + dur); o.connect(fl); fl.connect(gg); gg.connect(cm); o.start(t + st); o.stop(t + st + dur + .05); }
+    };
+  }
   function sfx(kind) {
     try {
       AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === 'suspended') AC.resume();
@@ -2176,15 +2194,10 @@
         g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.1, t + .03); g.gain.exponentialRampToValueAtTime(.0001, t + .7); o.connect(g); o.start(t); o.stop(t + .75);
         var n = AC.createBuffer(1, Math.floor(AC.sampleRate * .3), AC.sampleRate), d = n.getChannelData(0); for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3);
         var s2 = AC.createBufferSource(), g2 = AC.createGain(); s2.buffer = n; g2.gain.value = .22; s2.connect(g2); g2.connect(AC.destination); s2.start(t + .38);
-      } else if (kind === 'zap') {   // rayo: chasquido eléctrico, zumbido que cae y trueno grave
-        var nb = AC.createBuffer(1, Math.floor(AC.sampleRate * 1.5), AC.sampleRate), nd = nb.getChannelData(0);
-        for (var j = 0; j < nd.length; j++) { var e2 = j / nd.length; nd[j] = (Math.random() * 2 - 1) * (e2 < .02 ? 1 : Math.pow(1 - e2, 2.2)) * (Math.random() < .3 ? 1 : .3); }
-        var sa = AC.createBufferSource(), hp = AC.createBiquadFilter(), ga = AC.createGain(); sa.buffer = nb; hp.type = 'highpass'; hp.frequency.value = 1600;
-        ga.gain.setValueAtTime(.55, t); ga.gain.exponentialRampToValueAtTime(.0001, t + .4); sa.connect(hp); hp.connect(ga); ga.connect(AC.destination); sa.start(t);
-        var sb = AC.createBufferSource(), lp = AC.createBiquadFilter(), gb = AC.createGain(); sb.buffer = nb; lp.type = 'lowpass'; lp.frequency.setValueAtTime(480, t + .04); lp.frequency.exponentialRampToValueAtTime(60, t + 1.4);
-        gb.gain.setValueAtTime(.0001, t); gb.gain.exponentialRampToValueAtTime(.9, t + .09); gb.gain.exponentialRampToValueAtTime(.0001, t + 1.45); sb.connect(lp); lp.connect(gb); gb.connect(AC.destination); sb.start(t);
-        var oz = AC.createOscillator(), gz = AC.createGain(); oz.type = 'sawtooth'; oz.frequency.setValueAtTime(2600, t); oz.frequency.exponentialRampToValueAtTime(80, t + .24);
-        gz.gain.setValueAtTime(.12, t); gz.gain.exponentialRampToValueAtTime(.0001, t + .26); oz.connect(gz); gz.connect(AC.destination); oz.start(t); oz.stop(t + .3);
+      } else if (kind === 'zap') {   // se va la luz: chasquido, zumbido que cae, trueno y el disco que se queda sin corriente
+        var K = fxKit(t); K.nz('bandpass', 3200, 1400, .45, 1, 0); K.nz('lowpass', 1800, 140, 1.4, .9, .04); K.sw('sawtooth', 3000, 120, .3, .35, 0); K.sw('sawtooth', 780, 70, 1.0, .22, .12);
+      } else if (kind === 'powerup') {   // vuelve la luz: chispazo corto y zumbido que sube
+        var K2 = fxKit(t); K2.nz('bandpass', 2600, 900, .2, .8, 0); K2.sw('square', 1800, 260, .07, .25, 0); K2.sw('sawtooth', 90, 1100, .55, .22, .05);
       } else {   // clic de interruptor
         var c = AC.createOscillator(); c.type = 'square'; c.frequency.setValueAtTime(900, t); c.frequency.exponentialRampToValueAtTime(220, t + .05);
         g.gain.setValueAtTime(.08, t); g.gain.exponentialRampToValueAtTime(.0001, t + .07); c.connect(g); c.start(t); c.stop(t + .08);
@@ -2224,7 +2237,7 @@
         sfx('click'); var seq = [[1, 0], [0, 70], [1, 130], [0, 190], [1, 230], [0, 270], [1, 330]];
         seq.forEach(function (st) { later(function () { ap.classList.toggle('lit', !!st[0]); if (st[0] && window.vibrar) window.vibrar([18]); }, st[1]); });
         later(function () {
-          try { if (window.rapPower) rapPower(true); } catch (e) {}   // vuelve la luz: el disco arranca otra vez
+          sfx('powerup'); try { if (window.rapPower) rapPower(true); } catch (e) {}   // vuelve la luz: el disco arranca otra vez
           an(dark, [{ '--lr': '0px' }, { '--lr': R }], { duration: 900, easing: 'ease-out' }); an(blk, [{ opacity: 1 }, { opacity: 0 }], { duration: 450 });
           an(cono, [{ opacity: 0 }, { opacity: 1 }], { duration: 700 });
           later(function () { an(hint, [{ opacity: 0 }, { opacity: .9, offset: .15 }, { opacity: .9, offset: .8 }, { opacity: 0 }], { duration: 7000 }); }, 1000);
@@ -2553,10 +2566,11 @@
   /* ===== Línea de tiempo: agrega aquí las fechas nuevas (f = fecha corta, d = detalle, e = emoji, big = fecha grande, fut = todavía no pasa) ===== */
   const LINEA = [
     { f: '11 oct', d: 'domingo · 9:49 pm', e: '💬', t: 'Un mensaje', p: 'Todo empezó por TikTok. Hablamos, nos reímos y me sentí muy especial.' },
-    { f: '12 oct', d: 'lunes', e: '🌳', t: 'Te vi por primera vez', p: 'Un parquecito, el suelo mojado y todo lo que nos queríamos contar.' },
-    { f: '13 oct', d: 'martes', e: '🏠', t: 'Tu casa', p: 'Hablamos de todo y de nada. Contigo cualquier plan tranquilo es el mejor.' },
-    { f: '14 oct', d: 'miércoles', e: '🌙', t: 'La noche en el parque', p: 'Vimos llegar la noche y me contaste de tu música.' },
-    { f: '15 oct', d: 'jueves', e: '🎬', t: 'Película y play', p: 'Acobijados, un montón de risas y no faltaron los besitos.' },
+    { f: '12 oct', d: 'lunes', e: '📱', t: 'Seguimos hablando', p: 'Hablamos normal y nos fuimos conociendo más. Ese día quedamos en vernos al siguiente.' },
+    { f: '13 oct', d: 'martes', e: '👀', t: 'Te vi por primera vez', p: 'Por fin nos vimos y salimos. Llegaste a mi lado y todo se calmó un poquito.' },
+    { f: '14 oct', d: 'miércoles', e: '🏠', t: 'Tu casa', p: 'Hablamos de todo y de nada. Contigo cualquier plan tranquilo es el mejor.' },
+    { f: '15 oct', d: 'jueves', e: '🌅', t: 'El atardecer', p: 'Fuimos al parquecito y vimos el atardecer. Me contaste de tu música.' },
+    { f: '16 oct', d: 'viernes', e: '🎬', t: 'Película y play', p: 'Acobijados, un montón de risas y no faltaron los besitos.' },
     { f: '18 oct', d: 'domingo', e: '💛', t: 'La decisión final', p: 'Salchipapa, Mulán y un sí. Nos volvimos novios.', big: true }
   ];
   function timelineInit() {
@@ -3067,11 +3081,11 @@
   const LIBRO = [
     { ded: true },
     { k: 'Capítulo uno', t: 'Un mensaje', p: 'Todo empezó con un mensaje por TikTok. Hablamos, nos reímos y, sin darme cuenta, me sentí muy especial. Nos contamos nuestros problemas como si nos conociéramos de toda la vida.' },
-    { k: 'Capítulo dos', t: 'Al otro día', p: 'Al día siguiente nos vimos en persona. Cuando te vi por primera vez, llegaste a mi lado y todo se calmó un poquito. Eras tan hermosa. Tu olor, tu sonrisa, todo de ti me encantó desde ese momento.' },
-    { k: 'Capítulo tres', t: 'Sentados en el suelo', p: 'Nos sentamos en el suelo de un parquecito y hablamos de las cosas que nos gustan. Nos quedó el trasero empapado y la ropa también algo mojada, y nunca me importó, porque estabas tú. Tenerte a mi lado fue un momento demasiado especial para mí.' },
-    { k: 'Capítulo cuatro', t: 'Tu casa', p: 'Al tercer día nos vimos en tu casa. Nos quedamos compartiendo, hablando de todo y de nada. Contigo cualquier plan tranquilo se siente como el mejor del mundo.' },
-    { k: 'Capítulo cinco', t: 'La noche en el parque', p: 'Al cuarto día volvimos al parquecito. Vimos cómo la noche iba llegando y, mientras tanto, conocí tus gustos por la música mucho más a fondo. Escucharte hablar de lo que te apasiona me enamoró un poquito más.' },
-    { k: 'Capítulo seis', t: 'Película y play', p: 'El quinto día estuvimos en tu casa viendo una película juntos. Me encantó estar acobijado junto a ti. Te enseñé a jugar un poco de PlayStation, nos reímos un montón y no faltaron los besitos. Fue un día de esos que uno quiere repetir.' },
+    { k: 'Capítulo dos', t: 'Seguimos hablando', p: 'El lunes seguimos hablando normal y conociéndonos cada vez más. Ese día quedamos en vernos el martes, y yo ya tenía muchas ganas de que llegara.' },
+    { k: 'Capítulo tres', t: 'Te vi por primera vez', p: 'El martes por fin nos vimos y salimos. Cuando te vi por primera vez, llegaste a mi lado y todo se calmó un poquito. Eras tan hermosa. Tu olor, tu sonrisa, todo de ti me encantó desde ese momento.' },
+    { k: 'Capítulo cuatro', t: 'Tu casa', p: 'El miércoles estuvimos en tu casa. Nos quedamos compartiendo, hablando de todo y de nada. Contigo cualquier plan tranquilo se siente como el mejor del mundo.' },
+    { k: 'Capítulo cinco', t: 'El atardecer', p: 'El jueves fuimos al parquecito y vimos el atardecer. Nos sentamos en el suelo, nos quedó la ropa mojada y nunca me importó, porque estabas tú. Escucharte hablar de tu música y de lo que te apasiona me enamoró un poquito más.' },
+    { k: 'Capítulo seis', t: 'Película y play', p: 'El viernes estuvimos en tu casa viendo una película juntos. Me encantó estar acobijado junto a ti. Te enseñé a jugar un poco de PlayStation, nos reímos un montón y no faltaron los besitos. Fue un día de esos que uno quiere repetir.' },
     { k: 'Capítulo siete', t: 'Mi lugar favorito', p: 'Y mira dónde estamos. Entre libros, Spider-Man, buen rap y charlas largas, descubrí que mi lugar favorito es donde estés tú.' },
     { k: 'Capítulo ocho', t: 'La decisión final', p: 'El 18 de octubre comimos salchipapa, nos reímos y vimos Mulán, mientras me contabas con muchísima emoción todo lo que te gusta. Me encantó tanto estar contigo. Ese mismo día me dijiste que sí y nos volvimos novios.' },
     { k: 'Fin del capítulo', t: 'Continuará...', p: 'Lo mejor de esta historia es que apenas estamos empezando. Escríbela conmigo, página a página.', sig: true }
@@ -3607,20 +3621,20 @@
     fade = setInterval(function () { v -= .14; if (v <= 0) { clearInterval(fade); try { A.pause(); A.volume = 1; } catch (e) {} } else { try { A.volume = v; } catch (e) {} } }, 35);
   }
   /* Apagón (lo dispara la lámpara del tema Rap): el disco se frena como sin corriente (el tono baja) y se pausa; al volver la luz arranca solo, subiendo de tono */
-  var pwrOff = false, resumeAfter = false, rateT = 0, spinFlag = false;
+  var pwrOff = false, resumeAfter = false, rateT = 0, spinFlag = false, IOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1), RMIN = IOS ? .5 : .2;
   function noPitch() { try { A.preservesPitch = false; A.mozPreservesPitch = false; A.webkitPreservesPitch = false; } catch (e) {} }
   function spinDown() {
     clearInterval(fade); clearInterval(rateT); noPitch(); setPlaying(false); var t0 = performance.now();
     rateT = setInterval(function () {
       var k = Math.min(1, (performance.now() - t0) / 950);
-      try { A.playbackRate = Math.max(.2, 1 - k * .8); A.volume = Math.max(0, 1 - k * k * .9); } catch (e) {}
+      try { A.playbackRate = Math.max(RMIN, 1 - k * (1 - RMIN)); A.volume = Math.max(0, 1 - k * k * .9); } catch (e) {}
       if (k >= 1) { clearInterval(rateT); try { A.pause(); A.playbackRate = 1; A.volume = 1; } catch (e) {} }
     }, 30);
   }
   function spinUp() {
-    clearInterval(rateT); noPitch(); try { A.playbackRate = .3; } catch (e) {}
+    var r0 = IOS ? .5 : .3; clearInterval(rateT); noPitch(); try { A.playbackRate = r0; } catch (e) {}
     spinFlag = true; play(); spinFlag = false; var t0 = performance.now();
-    rateT = setInterval(function () { var k = Math.min(1, (performance.now() - t0) / 800); try { A.playbackRate = .3 + .7 * k * k; } catch (e) {} if (k >= 1) { clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} } }, 30);
+    rateT = setInterval(function () { var k = Math.min(1, (performance.now() - t0) / 800); try { A.playbackRate = r0 + (1 - r0) * k * k; } catch (e) {} if (k >= 1) { clearInterval(rateT); try { A.playbackRate = 1; } catch (e) {} } }, 30);
   }
   window.rapPower = function (on) {
     if (theme() !== 'rap') return;

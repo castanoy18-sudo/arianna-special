@@ -1338,6 +1338,67 @@
   .lk-names { display: flex; justify-content: center; align-items: baseline; gap: .16em; margin: 0; white-space: nowrap; font: 700 clamp(3rem, 16.5vw, 4.8rem)/1 var(--hand); color: rgb(var(--c67)); text-shadow: 2px 3px 0 rgba(0,0,0,.35); }
   html:not([data-theme]) .lk-names, html[data-theme="amor"] .lk-names { text-shadow: 0 0 10px rgb(var(--c68) / .9), 0 0 28px rgb(var(--c69) / .6); }
   html[data-theme="rap"] .lk-names { font-family: "Sedgwick Ave Display", "Permanent Marker", cursive; color: #FFD400; -webkit-text-stroke: 2px #1a1020; paint-order: stroke fill; text-shadow: 4px 4px 0 #7C4DFF, 8px 8px 0 rgba(0,0,0,.4); }
+
+  /* ===== VALLENATO (remake): atardecer en el Caribe, papel de iraca con banda de sombrero vueltiao, mochila arhuaca, mariposas amarillas y acordeón ===== */
+  html[data-theme="vallenato"]::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(circle at 27% 6%, #FFF3C4 0 11px, rgba(255,243,196,.34) 12px 26px, rgba(255,243,196,.1) 27px 58px, transparent 66px),
+      radial-gradient(75% 36% at 50% 104%, rgba(255,150,50,.42), rgba(226,70,90,.2) 48%, transparent 76%),
+      radial-gradient(circle, rgba(255,244,200,.5) 0 .9px, transparent 1.3px) 0 0 / 89px 71px, radial-gradient(circle, rgba(255,244,200,.3) 0 .9px, transparent 1.3px) 33px 41px / 57px 67px,
+      linear-gradient(180deg, #091229 0%, #182650 36%, #35305f 64%, #6c385a 86%, #a8483f 100%); }
+  html[data-theme="vallenato"]::after { content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: min(28vh, 250px); z-index: -1; pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='220'%20viewBox='0%200%20800%20220'%3E%3Cpath%20d='M0%20150L90%2092%20130%20112%20210%2062%20300%20125%20380%20100%20470%20140%20560%2082%20650%20130%20740%20102%20800%20150V220H0Z'%20fill='%2318264b'/%3E%3Cpath%20d='M0%20150C100%20122%20200%20136%20300%20120S500%2098%20600%20122%20740%20140%20800%20150V220H0Z'%20fill='%23101c36'/%3E%3Cpath%20d='M0%20188C120%20166%20260%20180%20400%20170S660%20162%20800%20188V220H0Z'%20fill='%23070e1c'/%3E%3Cg%20transform='translate(120%20182)%20scale(1)'%20stroke='%23060b16'%20fill='none'%20stroke-linecap='round'%3E%3Cpath%20d='M0%200C3%20-30%202%20-60%2010%20-90'%20stroke-width='5'/%3E%3Cg%20stroke-width='3.6'%3E%3Cpath%20d='M10%20-90C-10%20-105%20-30%20-95%20-40%20-75'/%3E%3Cpath%20d='M10%20-90C-5%20-112%20-25%20-115%20-45%20-105'/%3E%3Cpath%20d='M10%20-90C10%20-115%2025%20-125%2045%20-118'/%3E%3Cpath%20d='M10%20-90C28%20-108%2050%20-105%2062%20-88'/%3E%3Cpath%20d='M10%20-90C30%20-95%2045%20-80%2050%20-62'/%3E%3Cpath%20d='M10%20-90C-15%20-80%20-25%20-62%20-28%20-45'/%3E%3C/g%3E%3C/g%3E%3Cg%20transform='translate(152%20185)%20scale(0.72)'%20stroke='%23060b16'%20fill='none'%20stroke-linecap='round'%3E%3Cpath%20d='M0%200C3%20-30%202%20-60%2010%20-90'%20stroke-width='5'/%3E%3Cg%20stroke-width='3.6'%3E%3Cpath%20d='M10%20-90C-10%20-105%20-30%20-95%20-40%20-75'/%3E%3Cpath%20d='M10%20-90C-5%20-112%20-25%20-115%20-45%20-105'/%3E%3Cpath%20d='M10%20-90C10%20-115%2025%20-125%2045%20-118'/%3E%3Cpath%20d='M10%20-90C28%20-108%2050%20-105%2062%20-88'/%3E%3Cpath%20d='M10%20-90C30%20-95%2045%20-80%2050%20-62'/%3E%3Cpath%20d='M10%20-90C-15%20-80%20-25%20-62%20-28%20-45'/%3E%3C/g%3E%3C/g%3E%3Cg%20transform='translate(520%20172)%20scale(1.1)'%20stroke='%23060b16'%20fill='none'%20stroke-linecap='round'%3E%3Cpath%20d='M0%200C3%20-30%202%20-60%2010%20-90'%20stroke-width='5'/%3E%3Cg%20stroke-width='3.6'%3E%3Cpath%20d='M10%20-90C-10%20-105%20-30%20-95%20-40%20-75'/%3E%3Cpath%20d='M10%20-90C-5%20-112%20-25%20-115%20-45%20-105'/%3E%3Cpath%20d='M10%20-90C10%20-115%2025%20-125%2045%20-118'/%3E%3Cpath%20d='M10%20-90C28%20-108%2050%20-105%2062%20-88'/%3E%3Cpath%20d='M10%20-90C30%20-95%2045%20-80%2050%20-62'/%3E%3Cpath%20d='M10%20-90C-15%20-80%20-25%20-62%20-28%20-45'/%3E%3C/g%3E%3C/g%3E%3Cg%20transform='translate(700%20184)%20scale(0.8)'%20stroke='%23060b16'%20fill='none'%20stroke-linecap='round'%3E%3Cpath%20d='M0%200C3%20-30%202%20-60%2010%20-90'%20stroke-width='5'/%3E%3Cg%20stroke-width='3.6'%3E%3Cpath%20d='M10%20-90C-10%20-105%20-30%20-95%20-40%20-75'/%3E%3Cpath%20d='M10%20-90C-5%20-112%20-25%20-115%20-45%20-105'/%3E%3Cpath%20d='M10%20-90C10%20-115%2025%20-125%2045%20-118'/%3E%3Cpath%20d='M10%20-90C28%20-108%2050%20-105%2062%20-88'/%3E%3Cpath%20d='M10%20-90C30%20-95%2045%20-80%2050%20-62'/%3E%3Cpath%20d='M10%20-90C-15%20-80%20-25%20-62%20-28%20-45'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") bottom center / auto 100% repeat-x; }
+  html[data-theme="vallenato"] ::selection { background: #FCD116; color: #16233d; }
+  html[data-theme="vallenato"] .paper, html[data-theme="vallenato"] .letter { background:
+      linear-gradient(90deg, transparent 31px, rgba(206,17,38,.5) 31px 32px, transparent 32px),
+      repeating-linear-gradient(45deg, rgba(122,84,24,.085) 0 2px, transparent 2px 7px), repeating-linear-gradient(-45deg, rgba(122,84,24,.085) 0 2px, transparent 2px 7px),
+      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='260'%20height='260'%3E%3Cfilter%20id='c'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.02%20.035'%20numOctaves='4'%20seed='7'/%3E%3CfeColorMatrix%20values='0%200%200%200%20.45%20%200%200%200%200%20.3%20%200%200%200%200%20.08%20%200%200%200%20.55%20-.12'/%3E%3C/filter%3E%3Crect%20width='260'%20height='260'%20filter='url(%23c)'/%3E%3C/svg%3E"), linear-gradient(180deg, #F8EDC8, #EAD7A0);
+    border-radius: 4px 7px 4px 8px; box-shadow: inset 0 0 0 2px rgba(120,80,20,.2), inset 0 -16px 24px rgba(120,80,20,.16), 0 3px 0 #8b6a2c, 0 22px 38px rgba(2,6,20,.62); }
+  html[data-theme="vallenato"] .paper::before, html[data-theme="vallenato"] .letter::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 16px; pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='36'%20height='20'%3E%3Crect%20width='36'%20height='20'%20fill='%2316110d'/%3E%3Cpath%20d='M18%202L31%2010%2018%2018%205%2010Z'%20fill='%23F4E9C9'/%3E%3Cpath%20d='M18%206L25%2010%2018%2014%2011%2010Z'%20fill='%2316110d'/%3E%3Cpath%20d='M18%208.5L21%2010%2018%2011.5%2015%2010Z'%20fill='%23F4E9C9'/%3E%3Cpath%20d='M0%200L5%2010%200%2020M36%200L31%2010%2036%2020'%20fill='none'%20stroke='%23F4E9C9'%20stroke-width='2'/%3E%3Cpath%20d='M0%201H36M0%2019H36'%20stroke='%23C9A24A'%20stroke-width='1.2'/%3E%3C/svg%3E") 0 0 / auto 16px repeat-x; border-radius: 4px 7px 0 0; box-shadow: 0 2px 0 rgba(0,0,0,.28); }
+  html[data-theme="vallenato"] .tape { display: block; width: 100px; height: 24px; margin-left: -50px; top: -13px; opacity: .96; box-shadow: none;
+    clip-path: polygon(0 0, 100% 0, 96% 25%, 100% 50%, 96% 75%, 100% 100%, 0 100%, 4% 75%, 0 50%, 4% 25%);
+    background: linear-gradient(180deg, rgba(255,255,255,.35), transparent 50%, rgba(0,0,0,.2)), repeating-linear-gradient(90deg, #FCD116 0 16px, #2F6FD6 16px 32px, #CE1126 32px 48px); }
+  html[data-theme="vallenato"] .letter h2 { display: inline-block; padding-bottom: 7px; color: #16233d; text-shadow: 2px 2px 0 rgba(252,209,22,.6);
+    background: linear-gradient(90deg, #FCD116 0 33.3%, #2F6FD6 33.3% 66.6%, #CE1126 66.6%) 0 100% / 100% 5px no-repeat; }
+  html[data-theme="vallenato"] .name { color: #FCD116; -webkit-text-stroke: 2px #16233d; paint-order: stroke fill; text-shadow: 3px 3px 0 #CE1126, 6px 6px 0 #2F6FD6, 9px 9px 0 rgba(0,0,0,.4); }
+  html[data-theme="vallenato"] .lk-names { color: #FCD116; -webkit-text-stroke: 2px #16233d; paint-order: stroke fill; text-shadow: 3px 3px 0 #CE1126, 6px 6px 0 #2F6FD6, 9px 9px 0 rgba(0,0,0,.4); }
+  html[data-theme="vallenato"] .btn { font-family: var(--hand); letter-spacing: .02em; }
+  html[data-theme="vallenato"] .yes, html[data-theme="vallenato"] .yes.hot, html[data-theme="vallenato"] .yes.big { color: #16233d; text-shadow: none; border: 3px solid #16233d; border-radius: 16px 22px 16px 22px;
+    background: linear-gradient(180deg, #FFE55F, #FCD116 58%, #E4B400); box-shadow: 0 6px 0 #CE1126, 0 6px 0 3px #16233d, 0 16px 24px rgba(0,0,0,.45), inset 0 2px 0 rgba(255,255,255,.75); }
+  html[data-theme="vallenato"] .yes:active { box-shadow: 0 2px 0 #CE1126, 0 2px 0 3px #16233d; }
+  html[data-theme="vallenato"] .no { color: #fff; text-shadow: 2px 2px 0 #16233d; border: 3px solid #16233d; border-radius: 22px 16px 22px 16px; background: linear-gradient(180deg, #5C93F0, #2F6FD6); box-shadow: 0 5px 0 #16233d, 0 12px 20px rgba(0,0,0,.4); }
+  html[data-theme="vallenato"] .mini { color: #fff; text-shadow: 2px 2px 0 #16233d; border: 3px solid #16233d; border-radius: 13px 17px 12px 16px; background: linear-gradient(180deg, #E53A4E, #CE1126); box-shadow: 0 4px 0 #16233d, 0 10px 16px rgba(0,0,0,.4); }
+  html[data-theme="vallenato"] .mini:active { box-shadow: 0 1px 0 #16233d; }
+  html[data-theme="vallenato"] .mini.ghost { background: rgba(255,255,255,.05); border: 3px dashed rgba(252,209,22,.8); box-shadow: none; color: #FCD116; text-shadow: none; }
+  html[data-theme="vallenato"] .chip { background: #F8EDC8; color: #16233d; border: 2.5px solid #16233d; border-radius: 9px 14px 10px 15px; box-shadow: 3px 4px 0 #16233d; }
+  html[data-theme="vallenato"] .chip.on { background: #FCD116; box-shadow: 3px 4px 0 #CE1126; }
+  html[data-theme="vallenato"] .note { background: #FCD116; color: #16233d; border: 3px solid #16233d; border-radius: 4px; box-shadow: 5px 6px 0 #CE1126; }
+  html[data-theme="vallenato"] .seal { border-radius: 50%; color: #FFF3C4; text-shadow: 0 2px 0 rgba(0,0,0,.4);
+    background: radial-gradient(circle at 34% 28%, rgba(255,255,255,.4), transparent 34%), radial-gradient(circle, #E53A4E 0 52%, #CE1126 53% 70%, #8f0b1c 100%);
+    box-shadow: 0 8px 16px rgba(0,0,0,.55), 0 0 0 3px #FCD116, 0 0 0 5px #16233d, 0 0 26px rgba(252,209,22,.45); }
+  html[data-theme="vallenato"] .seal::after { border-color: rgba(255,243,196,.35); }
+  /* decorado (lo arma vallDecor en JS) */
+  #vaFx { position: fixed; inset: 0; z-index: 20; pointer-events: none; overflow: hidden; }
+  .va-bf { position: absolute; left: 0; top: 0; width: 34px; opacity: 0; will-change: transform; filter: drop-shadow(0 3px 3px rgba(0,0,0,.4)); }
+  .va-bf svg { display: block; width: 100%; overflow: visible; }
+  .va-wl, .va-wr { transform-box: view-box; transform-origin: 30px 30px; animation: vaFlap .22s ease-in-out infinite alternate; }
+  .va-wr { animation-delay: -.02s; }
+  @keyframes vaFlap { to { transform: scaleX(.22); } }
+  .va-ff { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: #FFF3A0; box-shadow: 0 0 6px 2px rgba(255,230,90,.8), 0 0 14px 5px rgba(255,190,40,.35); opacity: 0; animation: vaFire var(--t) ease-in-out var(--dl) infinite; }
+  @keyframes vaFire { 0% { opacity: 0; transform: translate(0,0); } 20% { opacity: .95; } 50% { opacity: .35; transform: translate(var(--dx), calc(var(--dy) * .5)); } 75% { opacity: .95; } 100% { opacity: 0; transform: translate(calc(var(--dx) * 1.6), var(--dy)); } }
+  .va-star { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #FFF6CF; opacity: .2; animation: vaTw var(--t) ease-in-out var(--dl) infinite alternate; }
+  @keyframes vaTw { to { opacity: .95; transform: scale(1.7); } }
+  .va-note { position: fixed; z-index: 41; pointer-events: none; font: 700 1.7rem/1 var(--hand); text-shadow: 0 2px 0 rgba(0,0,0,.45); will-change: transform, opacity; }
+  .va-st { position: absolute; width: 46px; height: 46px; color: #8b5a1b; opacity: .24; pointer-events: none; animation: vaWob 5.5s ease-in-out infinite alternate; }
+  .va-st svg { width: 100%; height: 100%; display: block; fill: currentColor; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
+  @keyframes vaWob { from { transform: rotate(calc(var(--r) - 6deg)) scale(.96); } to { transform: rotate(calc(var(--r) + 6deg)) scale(1.06); } }
+  .va-div { position: relative; width: min(92vw, 380px); margin: 18px 0; display: flex; align-items: center; gap: 8px; }
+  .va-band { flex: 1; height: 22px; background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='48'%20height='22'%3E%3Crect%20width='48'%20height='22'%20fill='%2316233d'/%3E%3Cg%3E%3Cpath%20d='M12%201L23%2011%2012%2021%201%2011Z'%20fill='%23CE1126'/%3E%3Cpath%20d='M12%205L19%2011%2012%2017%205%2011Z'%20fill='%23FCD116'/%3E%3Cpath%20d='M12%208.5L15.5%2011%2012%2013.5%208.5%2011Z'%20fill='%232F6FD6'/%3E%3C/g%3E%3Cg%3E%3Cpath%20d='M36%201L47%2011%2036%2021%2025%2011Z'%20fill='%232F6FD6'/%3E%3Cpath%20d='M36%205L43%2011%2036%2017%2029%2011Z'%20fill='%23FCD116'/%3E%3Cpath%20d='M36%208.5L39.5%2011%2036%2013.5%2032.5%2011Z'%20fill='%23CE1126'/%3E%3C/g%3E%3C/svg%3E") 0 0 / auto 22px repeat-x; border-radius: 3px; box-shadow: 0 0 0 2px #FCD116, 0 5px 10px rgba(0,0,0,.5); animation: vaWeave 9s linear infinite; }
+  .va-band.r { animation-direction: reverse; }
+  @keyframes vaWeave { to { background-position: 48px 0; } }
+  .va-div b { flex: none; max-width: 56%; text-align: center; padding: 6px 12px; font: 400 1.25rem/1.05 var(--hand); color: #16233d; background: #FCD116; border: 3px solid #16233d; border-radius: 10px 14px 10px 14px; box-shadow: 3px 4px 0 #CE1126; transform: rotate(-2deg); }
+  .va-div .va-acc { position: absolute; left: 50%; top: -30px; width: 54px; margin-left: -27px; opacity: .95; filter: drop-shadow(0 3px 3px rgba(0,0,0,.5)); animation: vaSqueeze 1.8s ease-in-out infinite; }
+  @keyframes vaSqueeze { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.78); } }
   .lk-ht { display: inline-block; font-size: .62em; color: #FF6B8E; text-shadow: none; -webkit-text-stroke: 0; }
   .lk-ht::before { content: attr(data-g); }
   #lock.go .lk-ht { animation: lkBeat 1.5s ease-in-out 1.6s infinite; }
@@ -1970,6 +2031,7 @@
     btn.textContent = T.e; try { localStorage.setItem(KEY, id); } catch (e) {}
     if (id === 'rap') { if (!apOn) armarLampara(); } else quitarLampara();
     rapDecor(id === 'rap');
+    vallDecor(id === 'vallenato');
     rapMusica(id === 'rap');
     quiereAmor = false;   // la canción solo suena en el tema Amor: al llegar, se sube el volumen; al irse, se apaga suavecito
     try { if (id === 'amor') { if (window.musicGo) musicGo(); } else if (window.musicStop) musicStop(); } catch (e) {}
@@ -2096,18 +2158,49 @@
       swap(); return fin([go(wall, [{ opacity: 1 }, { opacity: 0 }], { duration: 500, easing: 'ease-in' })]);
     });
   }
-  // Vallenato: fuelle de acordeón que se abre desde el centro, pliegue por pliegue, y se vuelve a cerrar
+  var BFSVG = function (c, c2) { var w = function (d1, d2) { return '<path d="' + d1 + '" fill="' + c + '" stroke="#3a2a00" stroke-width="1.6"/><path d="' + d2 + '" fill="' + c2 + '" stroke="#3a2a00" stroke-width="1.4"/>'; };
+    return '<svg viewBox="0 0 60 50" aria-hidden="true"><g class="va-wl">' + w('M30 26C22 4 4 4 4 18C4 30 18 34 30 28Z', 'M30 28C16 34 12 48 22 47C28 46 30 36 30 28Z') + '</g><g class="va-wr">' + w('M30 26C38 4 56 4 56 18C56 30 42 34 30 28Z', 'M30 28C44 34 48 48 38 47C32 46 30 36 30 28Z') + '</g><path d="M30 17V40" stroke="#3a2a00" stroke-width="2.6" stroke-linecap="round"/></svg>'; };
+  var BFC = [['#FCD116', '#F2A900'], ['#FFE45C', '#FCD116'], ['#FCD116', '#E8760A'], ['#5C93F0', '#2F6FD6']];
+  function acorde(fr, dur, vol) {   // acorde de acordeón: lengüetas con vibrato y soplo de fuelle
+    try {
+      AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === 'suspended') AC.resume();
+      var t = AC.currentTime, out = AC.createGain(), lp = AC.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.setValueAtTime(900, t); lp.frequency.linearRampToValueAtTime(3200, t + .35); lp.Q.value = .8;
+      out.gain.setValueAtTime(.0001, t); out.gain.exponentialRampToValueAtTime(vol, t + .16); out.gain.setValueAtTime(vol, t + dur * .55); out.gain.exponentialRampToValueAtTime(.0001, t + dur); out.connect(lp); lp.connect(AC.destination);
+      var lfo = AC.createOscillator(), lg = AC.createGain(); lfo.frequency.value = 5.6; lg.gain.value = 7; lfo.connect(lg); lfo.start(t); lfo.stop(t + dur + .1);
+      fr.forEach(function (f, i) { [-6, 6].forEach(function (d) { var o = AC.createOscillator(), g = AC.createGain(); o.type = i % 2 ? 'sawtooth' : 'square'; o.frequency.value = f; o.detune.value = d; lg.connect(o.detune); g.gain.value = .22 / (i * .5 + 1.4); o.connect(g); g.connect(out); o.start(t); o.stop(t + dur + .1); }); });
+      var n = AC.createBuffer(1, Math.floor(AC.sampleRate * .5), AC.sampleRate), d0 = n.getChannelData(0); for (var k = 0; k < d0.length; k++) d0[k] = (Math.random() * 2 - 1) * Math.sin(Math.PI * k / d0.length);
+      var ns = AC.createBufferSource(), nf = AC.createBiquadFilter(), ng = AC.createGain(); ns.buffer = n; nf.type = 'bandpass'; nf.frequency.value = 1400; nf.Q.value = .6; ng.gain.value = .05; ns.connect(nf); nf.connect(ng); ng.connect(AC.destination); ns.start(t);
+    } catch (e) {}
+  }
+  // Vallenato: un acordeón de verdad. Las cajas con botones bajan, el fuelle se estira pliegue por pliegue, sale "¡Ay, hombe!" con mariposas y notas, y se vuelve a cerrar
   function cFuelle(swap) {
-    var n = 11, w = innerWidth / n, cols = ['#243557', '#FCD116', '#243557', '#2F6FD6', '#CE1126'], S = [];
-    for (var i = 0; i < n; i++) {
-      var c = Math.abs(i - (n - 1) / 2), e = mk('top:0;bottom:0;left:' + (i * w - 1).toFixed(1) + 'px;width:' + (w + 2).toFixed(1) + 'px;background:linear-gradient(90deg,rgba(0,0,0,.4),rgba(0,0,0,0) 28%,rgba(255,255,255,.2) 58%,rgba(0,0,0,.35)),' + cols[i % cols.length]);
-      S.push({ e: e, c: c, a: go(e, [{ scale: '0 1' }, { scale: '1 1' }], { duration: 360, delay: c * 48 + rnd(0, 26), easing: 'cubic-bezier(.3,1.35,.5,1)' }) });
+    var W = wipe.clientWidth || innerWidth, H = wipe.clientHeight || innerHeight, n = Math.max(10, Math.min(18, Math.round(W / 30))), w = W / n, BAR = Math.round(Math.max(44, Math.min(70, H * .075))), S = [], i;
+    var face = ['linear-gradient(90deg,#0b1328,#1f3158 42%,#3a58a0 88%,#1a2a50)', 'linear-gradient(90deg,#1a2a50,#3a58a0 14%,#1f3158 62%,#0b1328)'];
+    var wood = 'linear-gradient(180deg,#6b3418,#3a1a0c 55%,#1c0b05)', studs = 'radial-gradient(circle at 50% 50%,#FFF6D0 0 4px,#C99B3C 4.5px 7.5px,#5a3a0a 8px 9px,transparent 9.5px) 0 0/' + Math.round(BAR * .9) + 'px 100% repeat-x';
+    var top = mk('left:0;right:0;top:0;height:' + BAR + 'px;z-index:3;background:' + studs + ',' + wood + ';border-bottom:3px solid #FCD116;box-shadow:0 6px 14px rgba(0,0,0,.5)');
+    var bot = mk('left:0;right:0;bottom:0;height:' + BAR + 'px;z-index:3;background:' + studs + ',' + wood + ';border-top:3px solid #FCD116;box-shadow:0 -6px 14px rgba(0,0,0,.5)');
+    var A1 = [go(top, [{ translate: '0 -' + (BAR + 6) + 'px' }, { translate: '0 0' }], { duration: 380, easing: 'cubic-bezier(.3,1.3,.5,1)' }), go(bot, [{ translate: '0 ' + (BAR + 6) + 'px' }, { translate: '0 0' }], { duration: 380, easing: 'cubic-bezier(.3,1.3,.5,1)' })];
+    acorde([261.63, 329.63, 392, 523.25], 1.3, .15); try { vib([25, 40, 25]); } catch (e) {}
+    for (i = 0; i < n; i++) {
+      var e = mk('top:0;bottom:0;left:' + (i * w).toFixed(1) + 'px;width:' + (w + 1.5).toFixed(1) + 'px;z-index:1;transform-origin:0 50%;background:' + GRAIN + ',' + face[i % 2] + ';box-shadow:' + (i % 3 === 0 ? 'inset -2px 0 0 #FCD116,' : '') + (i % 6 === 2 ? 'inset 2px 0 0 #CE1126,' : '') + 'inset 0 0 22px rgba(0,0,0,.35)');
+      S.push({ e: e, i: i, a: go(e, [{ translate: (-i * w).toFixed(1) + 'px 0', scale: '.22 1' }, { translate: '0 0', scale: '1 1' }], { duration: 560, delay: 120 + (n - 1 - i) * 24, easing: 'cubic-bezier(.2,.9,.25,1.1)' }) });
     }
-    return fin(S.map(function (s) { return s.a; })).then(function () {
-      swap(); var x = palabra('¡ay, hombe!', '#CE1126');
-      return wait(620).then(function () {
-        go(x, [{ opacity: 1 }, { opacity: 0 }], { duration: 160 });
-        return fin(S.map(function (s) { return go(s.e, [{ scale: '1 1' }, { scale: '0 1' }], { duration: 320, delay: s.c * 42 + rnd(0, 20), easing: 'cubic-bezier(.6,0,.3,1)' }); }));
+    return fin(A1.concat(S.map(function (q) { return q.a; }))).then(function () {
+      swap(); acorde([293.66, 392, 493.88, 587.33], .95, .13);
+      var t = mk('left:0;right:0;top:34%;z-index:2;text-align:center;white-space:nowrap;color:#FCD116;font:400 min(5.4rem,17vw)/1 var(--hand);-webkit-text-stroke:2px #16233d;paint-order:stroke fill;text-shadow:3px 3px 0 #CE1126,6px 6px 0 #16233d'); t.style.rotate = '-4deg';
+      Array.from('¡Ay, hombe!').forEach(function (ch, k) { var sp = document.createElement('span'); sp.style.display = 'inline-block'; sp.textContent = ch === ' ' ? ' ' : ch; t.appendChild(sp);
+        go(sp, [{ opacity: 0, transform: 'translateY(46px) scale(.4) rotate(-16deg)' }, { opacity: 1, transform: 'translateY(-12px) scale(1.15) rotate(5deg)', offset: .65 }, { opacity: 1, transform: 'none' }], { duration: 430, delay: k * 42, easing: 'ease-out' }); });
+      var sub = mk('left:0;right:0;top:calc(34% + min(6.4rem,20vw));z-index:2;text-align:center;color:#fff;font:400 min(1.9rem,6vw)/1 var(--hand);text-shadow:2px 2px 0 #16233d'); sub.textContent = 'que suene el acordeón, Ari'; go(sub, [{ opacity: 0, translate: '0 10px' }, { opacity: 1, translate: '0 0' }], { duration: 380, delay: 420 });
+      for (var k = 0; k < 14; k++) {   // mariposas amarillas y notas que salen del centro
+        var isN = k % 3 === 2, f = mk('left:' + (W / 2 - 17) + 'px;top:' + (H * .45) + 'px;z-index:2;width:34px;opacity:0;filter:drop-shadow(0 3px 3px rgba(0,0,0,.4))'), ang = rnd(0, Math.PI * 2), dist = rnd(110, Math.max(W, H) * .55);
+        if (isN) { f.style.cssText += ';font:700 2rem/1 var(--hand);color:' + ['#FFF3C4', '#FCD116', '#fff'][k % 3] + ';text-shadow:0 2px 0 rgba(0,0,0,.5)'; f.textContent = ['♪', '♫', '♬'][k % 3]; } else { var c = BFC[k % BFC.length]; f.innerHTML = BFSVG(c[0], c[1]); }
+        go(f, [{ opacity: 0, transform: 'translate(0,0) scale(.3) rotate(0)' }, { opacity: 1, transform: 'translate(' + (Math.cos(ang) * dist * .45).toFixed(0) + 'px,' + (Math.sin(ang) * dist * .45 - 30).toFixed(0) + 'px) scale(1.1) rotate(' + rnd(-25, 25).toFixed(0) + 'deg)', offset: .35 }, { opacity: 0, transform: 'translate(' + (Math.cos(ang) * dist).toFixed(0) + 'px,' + (Math.sin(ang) * dist - 90).toFixed(0) + 'px) scale(.9) rotate(' + rnd(-50, 50).toFixed(0) + 'deg)' }], { duration: 1250, delay: rnd(0, 260), easing: 'ease-out' });
+      }
+      return wait(1250).then(function () {
+        go(t, [{ opacity: 1 }, { opacity: 0 }], { duration: 160 }); go(sub, [{ opacity: 1 }, { opacity: 0 }], { duration: 160 });
+        var cl = S.map(function (q) { return go(q.e, [{ translate: '0 0', scale: '1 1' }, { translate: (W - q.i * w - w * .22).toFixed(1) + 'px 0', scale: '.22 1' }], { duration: 480, delay: q.i * 22, easing: 'cubic-bezier(.6,0,.35,1)' }); });
+        cl.push(go(top, [{ translate: '0 0' }, { translate: '0 -' + (BAR + 8) + 'px' }], { duration: 380, delay: 260, easing: 'ease-in' }), go(bot, [{ translate: '0 0' }, { translate: '0 ' + (BAR + 8) + 'px' }], { duration: 380, delay: 260, easing: 'ease-in' }));
+        return fin(cl);
       });
     });
   }
@@ -2288,6 +2381,50 @@
     tag.style.fontSize = ''; var av = el.clientWidth - 26, w = tag.offsetWidth;
     if (w > av) tag.style.fontSize = (parseFloat(getComputedStyle(tag).fontSize) * av / w).toFixed(1) + 'px';
   }
+  /* ===== Vallenato: mariposas amarillas, luciérnagas, estrellas, sellos en las cartas, cintas tejidas entre cartas y notas al tocar ===== */
+  var VA_ST = [
+    '<svg viewBox="0 0 60 60"><path d="M30 30C22 6 4 6 6 24C7 34 18 36 30 30C18 40 14 56 24 53C28 52 30 40 30 30ZM30 30C38 6 56 6 54 24C53 34 42 36 30 30C42 40 46 56 36 53C32 52 30 40 30 30Z"/></svg>',
+    '<svg viewBox="0 0 60 60"><path d="M22 44V12L46 8V40" fill="none"/><ellipse cx="16" cy="44" rx="8" ry="6"/><ellipse cx="40" cy="40" rx="8" ry="6"/></svg>',
+    '<svg viewBox="0 0 60 60"><rect x="3" y="14" width="13" height="32" rx="3"/><rect x="44" y="14" width="13" height="32" rx="3"/><path d="M17 17L23 14V46L17 43ZM25 14L31 17V43L25 46ZM33 17L39 14V46L33 43ZM41 15L43 15V45L41 45Z"/></svg>',
+    '<svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="6"/><ellipse cx="30" cy="14" rx="7" ry="10"/><ellipse cx="30" cy="46" rx="7" ry="10"/><ellipse cx="14" cy="30" rx="10" ry="7"/><ellipse cx="46" cy="30" rx="10" ry="7"/></svg>',
+    '<svg viewBox="0 0 60 60"><path d="M5 40C5 30 17 28 19 20C21 10 39 10 41 20C43 28 55 30 55 40C55 47 5 47 5 40Z"/><path d="M12 38H48" stroke="#F8EDC8" stroke-width="3" fill="none"/></svg>'];
+  var VA_DIV = ['¡Ay, hombe, qué belleza!', 'Parranda de a dos', 'Con acordeón y sentimiento', 'Ari, mi Macondo'];
+  var VA_POS = [['right:12px;bottom:10px', 8], ['left:14px;bottom:8px', -10], ['right:14px;top:22px', 12], ['left:auto;right:10px;bottom:12px', -6], ['right:12px;bottom:8px', 6]];
+  var ACC_SVG = '<svg class="va-acc" viewBox="0 0 90 56" aria-hidden="true"><rect x="2" y="6" width="20" height="44" rx="4" fill="#CE1126" stroke="#16233d" stroke-width="3"/><rect x="68" y="6" width="20" height="44" rx="4" fill="#CE1126" stroke="#16233d" stroke-width="3"/><path d="M22 8L32 5V51L22 48ZM34 5L44 8V48L34 51ZM46 8L56 5V51L46 48ZM58 5L68 8V48L58 51Z" fill="#FCD116" stroke="#16233d" stroke-width="2.4" stroke-linejoin="round"/><circle cx="12" cy="18" r="3.4" fill="#FFF3C4"/><circle cx="12" cy="30" r="3.4" fill="#FFF3C4"/><circle cx="12" cy="42" r="3.4" fill="#FFF3C4"/><circle cx="78" cy="18" r="3.4" fill="#FFF3C4"/><circle cx="78" cy="30" r="3.4" fill="#FFF3C4"/></svg>';
+  var vaTimers = [];
+  function vaFly(el, k) {   // cada mariposa cruza la pantalla en zigzag y, al salir, vuelve a entrar por otro lado
+    if (!el.isConnected) return;
+    var W = innerWidth, H = innerHeight, fromL = Math.random() < .5, x0 = fromL ? -50 : W + 50, y0 = rnd(.12, .85) * H, pts = [{ transform: 'translate(' + x0 + 'px,' + y0 + 'px) scale(' + rnd(.8, 1.25).toFixed(2) + ') rotate(' + (fromL ? 12 : -12) + 'deg)', opacity: 0 }];
+    for (var q = 1; q <= 5; q++) { var xx = fromL ? W * q / 5 : W * (1 - q / 5); pts.push({ transform: 'translate(' + xx.toFixed(0) + 'px,' + (y0 + rnd(-110, 110)).toFixed(0) + 'px) scale(' + rnd(.8, 1.25).toFixed(2) + ') rotate(' + rnd(-18, 18).toFixed(0) + 'deg)', opacity: q === 5 ? 0 : .95, offset: q / 5 }); }
+    pts[1].opacity = .95;
+    var a = el.animate(pts, { duration: rnd(15000, 26000), easing: 'ease-in-out', fill: 'forwards' });
+    a.onfinish = function () { vaTimers.push(setTimeout(function () { vaFly(el, k); }, rnd(500, 4000))); };
+  }
+  function vallDecor(on) {
+    document.querySelectorAll('#vaFx, .va-st, .va-div').forEach(function (e) { e.remove(); }); vaTimers.forEach(clearTimeout); vaTimers = [];
+    if (!on) return;
+    var fx = document.createElement('div'); fx.id = 'vaFx'; fx.setAttribute('aria-hidden', 'true'); var h = '', i;
+    for (i = 0; i < 26; i++) h += '<i class="va-star" style="left:' + rnd(2, 98).toFixed(1) + '%;top:' + rnd(1, 46).toFixed(1) + '%;--t:' + rnd(1.6, 4.2).toFixed(1) + 's;--dl:-' + rnd(0, 4).toFixed(1) + 's"></i>';
+    for (i = 0; i < 16; i++) h += '<i class="va-ff" style="left:' + rnd(3, 96).toFixed(1) + '%;top:' + rnd(45, 95).toFixed(1) + '%;--t:' + rnd(5, 10).toFixed(1) + 's;--dl:-' + rnd(0, 9).toFixed(1) + 's;--dx:' + rnd(-60, 60).toFixed(0) + 'px;--dy:' + rnd(-90, -20).toFixed(0) + 'px"></i>';
+    for (i = 0; i < 6; i++) { var c = BFC[i % BFC.length]; h += '<div class="va-bf" data-k="' + i + '">' + BFSVG(c[0], c[1]) + '</div>'; }
+    fx.innerHTML = h; document.body.appendChild(fx);
+    fx.querySelectorAll('.va-bf').forEach(function (b, k) { vaTimers.push(setTimeout(function () { vaFly(b, k); }, 600 + k * 1800)); });
+    var win = $('win'), cards = [].slice.call(win.querySelectorAll(':scope > .letter'));
+    cards.forEach(function (c, k) { var st = document.createElement('span'); st.className = 'va-st'; st.innerHTML = VA_ST[k % VA_ST.length]; st.style.cssText = VA_POS[k % VA_POS.length][0] + ';--r:' + VA_POS[k % VA_POS.length][1] + 'deg'; c.appendChild(st); });
+    VA_DIV.forEach(function (t, k) {
+      var el = document.createElement('div'); el.className = 'va-div'; el.innerHTML = '<i class="va-band"></i><b>' + t + '</b><i class="va-band r"></i>' + ACC_SVG;
+      var ref = cards[2 + k * 2]; if (ref) win.insertBefore(el, ref); else win.appendChild(el);
+    });
+  }
+  document.addEventListener('pointerdown', function (e) {   // al tocar en el tema Vallenato salen notas y maripositas
+    if (actual !== 'vallenato') return;
+    for (var k = 0; k < 5; k++) {
+      var n = document.createElement('span'); n.className = 'va-note'; n.textContent = ['♪', '♫', '♬', '♩', '♪'][k]; n.style.color = ['#FCD116', '#fff', '#FF6B6B', '#5C93F0', '#FFE680'][k];
+      n.style.left = (e.clientX - 10) + 'px'; n.style.top = (e.clientY - 14) + 'px'; document.body.appendChild(n);
+      var dx = rnd(-70, 70), dy = rnd(-130, -60), a = n.animate([{ transform: 'translate(0,0) scale(.5) rotate(0)', opacity: 0 }, { opacity: 1, offset: .2 }, { transform: 'translate(' + dx.toFixed(0) + 'px,' + dy.toFixed(0) + 'px) scale(1.15) rotate(' + rnd(-35, 35).toFixed(0) + 'deg)', opacity: 0 }], { duration: rnd(800, 1300), easing: 'ease-out' });
+      a.onfinish = (function (nn) { return function () { nn.remove(); }; })(n);
+    }
+  }, true);
   function rapDecor(on) {
     document.querySelectorAll('.rd-st, .rd-gh, .rap-wall').forEach(function (e) { e.remove(); });
     if (!on) return;

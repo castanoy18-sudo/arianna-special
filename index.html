@@ -1339,6 +1339,63 @@
   html:not([data-theme]) .lk-names, html[data-theme="amor"] .lk-names { text-shadow: 0 0 10px rgb(var(--c68) / .9), 0 0 28px rgb(var(--c69) / .6); }
   html[data-theme="rap"] .lk-names { font-family: "Sedgwick Ave Display", "Permanent Marker", cursive; color: #FFD400; -webkit-text-stroke: 2px #1a1020; paint-order: stroke fill; text-shadow: 4px 4px 0 #7C4DFF, 8px 8px 0 rgba(0,0,0,.4); }
 
+  /* ===== Ábrelo cuando… y mini juego ===== */
+  .ab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 14px; margin-top: 10px; }
+  .ab-env { position: relative; border: 0; background: none; padding: 0; cursor: pointer; text-align: center; font: 700 1.15rem/1.05 var(--hand); color: var(--ink); -webkit-tap-highlight-color: transparent; transform: rotate(var(--rot)); transition: transform .25s cubic-bezier(.3,1.5,.5,1); }
+  .ab-env:active { transform: rotate(var(--rot)) scale(.94); }
+  .ab-body { position: relative; display: block; aspect-ratio: 1.5; border-radius: 4px; background: linear-gradient(160deg, #F8EBC6, #E7D096); border: 2px solid rgba(110,70,20,.55); box-shadow: 0 5px 10px rgba(0,0,0,.28), inset 0 -10px 14px rgba(120,80,20,.14); overflow: hidden; margin-bottom: 7px; }
+  .ab-body::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top right, transparent 49%, rgba(120,80,20,.28) 49.5% 50.5%, transparent 51%) 0 0 / 50% 100% no-repeat, linear-gradient(to top left, transparent 49%, rgba(120,80,20,.28) 49.5% 50.5%, transparent 51%) 100% 0 / 50% 100% no-repeat; }
+  .ab-flap { position: absolute; left: 0; right: 0; top: 0; height: 66%; background: linear-gradient(180deg, #F0DDA6, #DDC283); clip-path: polygon(0 0, 100% 0, 50% 100%); filter: drop-shadow(0 2px 1px rgba(0,0,0,.3)); }
+  .ab-seal { position: absolute; left: 50%; top: 52%; width: 34px; height: 34px; margin: -17px 0 0 -17px; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ff6b7a, #D42A4D 60%, #8E1730); box-shadow: 0 3px 5px rgba(0,0,0,.4); font-style: normal; font-size: 1.05rem; }
+  .ab-env small { display: block; margin-top: 3px; font: 600 .82rem/1 var(--ui); opacity: .62; }
+  .ab-env.read .ab-body { background: linear-gradient(160deg, #EFE3C4, #DCCDA1); }
+  .ab-env.read .ab-flap { height: 8%; clip-path: none; opacity: .5; }
+  .ab-env.read .ab-seal { background: radial-gradient(circle at 35% 30%, #9be3a0, #3da35a 60%, #1d6a35); }
+  .ab-env.lock { cursor: not-allowed; filter: grayscale(.85) brightness(.9); }
+  .ab-env.lock .ab-seal { background: radial-gradient(circle at 35% 30%, #aaa, #666 60%, #333); }
+  .ab-env.nope { animation: abNope .5s; }
+  @keyframes abNope { 20%, 60% { transform: rotate(var(--rot)) translateX(-6px); } 40%, 80% { transform: rotate(var(--rot)) translateX(6px); } }
+  .ab-count { margin: 16px 0 0; text-align: center; font: 700 1.1rem/1.2 var(--hand); opacity: .75; }
+  #abModal { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; touch-action: none; }
+  #abModal .ab-bd { position: absolute; inset: 0; background: radial-gradient(circle, rgba(10,4,16,.6), rgba(0,0,0,.86)); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+  #abModal .ab-stage { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; max-height: 100%; width: 100%; padding: 18px 0; perspective: 900px; }
+  #abModal .ab-envL { position: absolute; left: 50%; top: 50%; width: min(78vw, 300px); aspect-ratio: 1.5; margin: calc(min(78vw, 300px) / -3) 0 0 calc(min(78vw, 300px) / -2); transform-style: preserve-3d; }
+  .ab-back, .ab-front { position: absolute; inset: 0; border-radius: 6px; }
+  .ab-back { background: linear-gradient(160deg, #E7D096, #CDB070); box-shadow: 0 20px 40px rgba(0,0,0,.6); }
+  .ab-front { background: linear-gradient(to top right, #F1E1B0 49.6%, transparent 50%) 0 0 / 50% 100% no-repeat, linear-gradient(to top left, #F1E1B0 49.6%, transparent 50%) 100% 0 / 50% 100% no-repeat, linear-gradient(0deg, #F6E8BC 0 40%, transparent 40%); border: 2px solid rgba(110,70,20,.5); }
+  .ab-flapL { position: absolute; left: 0; right: 0; top: 0; height: 66%; transform-origin: 50% 0; background: linear-gradient(180deg, #F3E3B0, #DFC585); clip-path: polygon(0 0, 100% 0, 50% 100%); z-index: 3; backface-visibility: visible; }
+  .ab-sealL { position: absolute; left: 50%; top: 48%; width: 54px; height: 54px; margin: -27px 0 0 -27px; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ff6b7a, #D42A4D 60%, #8E1730); box-shadow: 0 4px 8px rgba(0,0,0,.45); font-size: 1.7rem; z-index: 4; }
+  #abModal .ab-paper { z-index: 5; margin: 0; max-height: calc(100vh - 110px); max-height: calc(100dvh - 110px); overflow-y: auto; opacity: 0; transform-origin: 50% 100%; }
+  .ab-paper::-webkit-scrollbar { display: none; }
+  .ab-paper h3 { margin: 0 0 10px; font: 700 1.75rem/1.05 var(--hand); }
+  .ab-paper p.ab-p { margin: 0 0 12px; font: 500 1.42rem/34px var(--hand); }
+  .ab-w { opacity: 0; display: inline-block; animation: abW .55s ease forwards; animation-delay: calc(var(--i) * 48ms + .15s); }
+  @keyframes abW { from { opacity: 0; transform: translateY(6px); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
+  .ab-paper .ab-sg { margin: 4px 0 0; text-align: right; font: 700 1.5rem/1 var(--hand); opacity: 0; animation: abW .7s ease forwards; animation-delay: var(--sd); }
+  #abModal .ab-close { z-index: 6; opacity: 0; }
+  .gm-prev { position: relative; height: 118px; margin: 6px 0 14px; border-radius: 14px; overflow: hidden; background: linear-gradient(180deg, rgba(20,10,40,.88), rgba(70,25,70,.9)); box-shadow: inset 0 0 0 2px rgba(255,255,255,.12), inset 0 -20px 30px rgba(0,0,0,.35); }
+  .gm-prev i { position: absolute; top: -30px; font-style: normal; font-size: 1.7rem; animation: gmFall 3.4s linear var(--d) infinite; }
+  @keyframes gmFall { to { transform: translateY(170px) rotate(40deg); } }
+  .gm-prev b { position: absolute; bottom: 8px; left: 10%; font-size: 2.2rem; animation: gmSway 3.8s ease-in-out infinite alternate; filter: drop-shadow(0 4px 4px rgba(0,0,0,.5)); }
+  @keyframes gmSway { to { left: 78%; } }
+  .gm-best { margin: 14px 0 0; text-align: center; font: 700 1.1rem/1 var(--hand); opacity: .75; }
+  #juego .btn { display: block; margin: 0 auto; }
+  #gmOv { position: fixed; inset: 0; z-index: 70; background: #000; touch-action: none; -webkit-user-select: none; user-select: none; overflow: hidden; }
+  #gmOv canvas { display: block; }
+  #gmOv .gm-x, #gmOv .gm-snd { position: absolute; top: max(14px, env(safe-area-inset-top, 0px)); width: 44px; height: 44px; border-radius: 50%; border: 2px solid rgba(255,255,255,.45); background: rgba(0,0,0,.35); color: #fff; font-size: 1.15rem; display: grid; place-items: center; cursor: pointer; z-index: 3; -webkit-tap-highlight-color: transparent; }
+  #gmOv .gm-x { right: 12px; top: calc(max(14px, env(safe-area-inset-top, 0px)) + 78px); }
+  #gmOv .gm-snd { right: 12px; top: calc(max(14px, env(safe-area-inset-top, 0px)) + 78px + 52px); }
+  .ge-btns .mini.ghost { color: var(--ink); border-color: currentColor; opacity: .8; text-shadow: none; }
+  #gmOv .gm-end { position: absolute; inset: 0; z-index: 2; display: grid; place-items: center; background: rgba(8,3,16,.6); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  #gmOv .gm-end[hidden] { display: none; }
+  #gmOv .ge-card { margin: 0; text-align: center; padding: 34px 22px 24px; }
+  .ge-card h3 { margin: 0 0 4px; font: 700 2rem/1 var(--hand); }
+  .ge-score { font: 700 4.4rem/1 var(--hand); }
+  .ge-score small { display: block; font-size: 1.1rem; opacity: .6; }
+  .ge-rec { margin: 6px 0 0; font: 700 1.3rem/1 var(--hand); color: #D42A4D; }
+  .ge-msg { margin: 12px 0 18px; font: 500 1.3rem/1.25 var(--hand); }
+  .ge-btns { display: flex; gap: 10px; justify-content: center; }
+
   /* ===== VALLENATO (remake): atardecer en el Caribe, papel de iraca con banda de sombrero vueltiao, mochila arhuaca, mariposas amarillas y acordeón ===== */
   html[data-theme="vallenato"]::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
     background: radial-gradient(circle at 27% 6%, #FFF3C4 0 11px, rgba(255,243,196,.34) 12px 26px, rgba(255,243,196,.1) 27px 58px, transparent 66px),
@@ -1803,6 +1860,26 @@
     <h2>Logros desbloqueados</h2>
     <div class="achs" id="achs"></div>
     <div class="rcount" id="achCount"></div>
+  </div>
+
+
+  <!-- Ábrelo cuando… -->
+  <div class="letter card abre" id="abre" style="transform: rotate(.7deg)">
+    <span class="tape"></span>
+    <h2>Ábrelo cuando…</h2>
+    <p class="tl-sub">una cartita pa' cada momento</p>
+    <div class="ab-grid" id="abGrid"></div>
+    <p class="ab-count" id="abCount"></p>
+  </div>
+
+  <!-- Mini juego -->
+  <div class="letter card juego" id="juego" style="transform: rotate(-.8deg)">
+    <span class="tape"></span>
+    <h2>Atrapa mi cariño</h2>
+    <p class="tl-sub">agarra todo lo que te quiero antes de que se acabe el tiempo. Ojo con los corazones rotos.</p>
+    <div class="gm-prev" aria-hidden="true"><i style="left:12%;--d:0s">❤️</i><i style="left:30%;--d:.9s">🦋</i><i style="left:48%;--d:1.7s">💔</i><i style="left:66%;--d:.4s">🎵</i><i style="left:84%;--d:1.3s">🌟</i><b>💌</b></div>
+    <button class="btn yes" id="gmPlay" type="button">Jugar</button>
+    <p class="gm-best" id="gmBest"></p>
   </div>
 
 
@@ -2442,7 +2519,7 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { rapFit(el); });
     });
   }
-  function intentaApagon() { if (apArmed && actual === 'rap' && !busy && !apOn && !$('win').hidden && $('win').scrollTop >= apThr && performance.now() >= (window.letterEnd || 0)) { apArmed = false; apagon(); } }   // no se va la luz mientras la primera carta se está escribiendo
+  function intentaApagon() { if (apArmed && actual === 'rap' && !busy && !apOn && !window.ovOpen && !$('win').hidden && $('win').scrollTop >= apThr && performance.now() >= (window.letterEnd || 0)) { apArmed = false; apagon(); } }   // no se va la luz mientras la primera carta se está escribiendo
   $('win').addEventListener('scroll', intentaApagon, { passive: true }); setInterval(intentaApagon, 700);
   /* ===== Rap: la canción (Como Yotas, de Penyair) vive en su propio reproductor (ver más abajo). Aquí solo se le avisa cuándo entrar y salir del tema ===== */
   function rapMusica(on) { try { if (on) { if (window.rapGo) rapGo(); } else if (window.rapStop) rapStop(); } catch (e) {} }
@@ -3891,6 +3968,243 @@
   }, 500);
   document.addEventListener('visibilitychange', function () { if (!document.hidden && theme() === 'rap') { setPlaying(!A.paused && !A.ended); kick(); } });
   times();
+})();
+</script>
+<script>
+/* ===== Ábrelo cuando… (cartas) y mini juego "Atrapa mi cariño" ===== */
+(function () {
+  'use strict';
+  var $ = function (i) { return document.getElementById(i); }, rnd = function (a, b) { return a + Math.random() * (b - a); };
+  var grid = $('abGrid'); if (!grid) return;
+  var PROBAR = /probar/.test(location.hash);   // abre la página con #probar al final para ver todas las cartas sin esperar fechas
+
+  /* ------------------------------------------------------------------
+     TUS CARTAS. Cambia aquí lo que quieras: el texto de cada una, el "cuando", el emoji.
+     Cada párrafo es un string. "abre" es la fecha desde la que se puede abrir (mes 0 = enero, o sea 10 = noviembre). Sin "abre", está disponible ya.
+     ------------------------------------------------------------------ */
+  var FIRMA = 'Alex';
+  var ABRELO = [
+    { id: 'extrano', e: '🥺', cuando: 'me extrañes', t: [
+      'Ari, si estás leyendo esto es porque me extrañas. Y yo a ti, aunque no esté ahí para decírtelo.',
+      'Ponte una canción, la de Penyair, la que quieras, y acuérdate del parquesito y del atardecer que vimos ese jueves. Yo ahí estaba pensando que no quería que se acabara el día.',
+      'Ya nos vemos, cachetes. Un abrazo largo ya te lo debo.'] },
+    { id: 'brava', e: '😤', cuando: 'estés brava conmigo', t: [
+      'Ya sé, la embarré. Antes de que me digas algo: perdón.',
+      'No te lo digo por quedar bien, te lo digo porque no me gusta que estés brava conmigo. Dame un ratico, que yo pienso en qué fallé y lo arreglo.',
+      'Y cuando se te pase me escribes, o te escribo yo, lo que pase primero.'] },
+    { id: 'dormir', e: '🌙', cuando: 'no puedas dormir', t: [
+      'Son las tantas y no puedes dormir, te conozco. Respira.',
+      'Lo que te da vueltas en la cabeza de noche siempre se ve más grande de lo que es. Mañana va a ser un día normal.',
+      'Mira, yo te conocí un domingo a las 9:49 de la noche. O sea que la noche también me ha traído cosas buenas.',
+      'Cierra los ojos, piensa en algo que te dé risa. Buenas noches, mi vida.'] },
+    { id: 'mal', e: '🫂', cuando: 'te sientas mal', t: [
+      'No tienes que estar bien todo el tiempo, Ari. Si hoy fue un día malo, fue un día malo y ya. Mañana es otro.',
+      'Lo que sí quiero que sepas es que no estás sola con eso. Me puedes contar o no contarme nada y solo pedirme que me quede. Yo me quedo.',
+      'Eres de las personas más bonitas que conozco, y lo digo por cómo eres, no solo por cómo te ves.'] },
+    { id: 'risa', e: '😂', cuando: 'quieras reírte', t: [
+      'Ok, te toca risa. Piensa en cuando intentaste decir que no en la página y el botón se te escapaba.',
+      'Ese botón estaba hecho pa\' que no pudieras, y tú ahí intentando. No te me pongas brava, es que fue lo mejor.',
+      'Ríete un rato, que cuando te ríes se te ve toda la cara.'] },
+    { id: 'dudas', e: '💪', cuando: 'dudes de ti', t: [
+      'Hoy dudaste de ti, y yo sé que eso pasa. Pero te voy a decir lo que veo yo.',
+      'Veo a alguien que se ríe fácil, que se acuerda de las cosas, que me hace querer ser mejor, y que a la semana de conocernos me dijo que sí.',
+      'Si yo vi todo eso en una semana, imagínate lo que veo ahora. Créeme, en esto no me equivoco.'] },
+    { id: 'mes', e: '🎉', cuando: 'cumplamos 1 mes', abre: new Date(2026, 10, 18), t: [
+      'Un mes, mi vida. Acuérdate que al principio decíamos "llevamos una semana". Pues ya llevamos un mes y sigo igual de contento que el jueves del atardecer.',
+      'Gracias por las películas, por el play, por aguantarme. Lo que viene lo quiero contigo.',
+      'Hoy pídeme lo que quieras, que te lo debo.'] },
+    { id: 'cien', e: '💯', cuando: 'cumplamos 100 días', abre: new Date(2027, 0, 26), t: [
+      '100 días, Ari. Parece poco y a la vez no me acuerdo cómo era antes.',
+      'Si estás leyendo esto, seguimos juntos y eso era todo lo que quería que pasara.',
+      'Te quiero más que el día que me dijiste que sí. Y ese día ya te quería harto.'] }
+  ];
+
+  /* ---------- estado ---------- */
+  var KEY = 'ari_abrelo', read = [];
+  try { read = JSON.parse(localStorage.getItem(KEY)) || []; } catch (e) {}
+  function saveRead() { try { localStorage.setItem(KEY, JSON.stringify(read)); } catch (e) {} }
+  function locked(L) { return !PROBAR && L.abre && new Date() < L.abre; }
+  function daysTo(L) { return Math.max(1, Math.ceil((L.abre - new Date()) / 864e5)); }
+  function vib(p) { try { if (window.vibrar) window.vibrar(p); } catch (e) {} }
+
+  function render() {
+    grid.innerHTML = ABRELO.map(function (L, i) {
+      var lk = locked(L), rd = read.indexOf(L.id) > -1;
+      return '<button type="button" class="ab-env' + (lk ? ' lock' : '') + (rd ? ' read' : '') + '" data-i="' + i + '" style="--rot:' + ((i % 2 ? 1 : -1) * (1 + i % 3 * .6)).toFixed(1) + 'deg"><span class="ab-body"><i class="ab-flap"></i><i class="ab-seal">' + (lk ? '🔒' : rd ? '✓' : L.e) + '</i></span>cuando ' + L.cuando
+        + '<small>' + (lk ? 'se abre en ' + daysTo(L) + (daysTo(L) === 1 ? ' día' : ' días') : rd ? 'ya la leíste' : 'sin abrir') + '</small></button>';
+    }).join('');
+    var disp = ABRELO.filter(function (L) { return !locked(L); }), n = disp.filter(function (L) { return read.indexOf(L.id) > -1; }).length;
+    $('abCount').textContent = n === disp.length ? (disp.length === ABRELO.length ? 'Las abriste todas 🥹' : 'Abriste todas las de ahora. Faltan las que se abren con el tiempo') : n + ' de ' + disp.length + ' abiertas';
+  }
+  render();
+  grid.addEventListener('click', function (e) {
+    var b = e.target.closest('.ab-env'); if (!b) return; var L = ABRELO[+b.dataset.i];
+    if (locked(L)) { b.classList.remove('nope'); void b.offsetWidth; b.classList.add('nope'); vib([30, 40, 30]); return; }
+    abrir(L, b);
+  });
+
+  /* ---------- sonido de papel ---------- */
+  var AC = null;
+  function swish(f0, f1, d, v) {
+    try {
+      AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === 'suspended') AC.resume();
+      var t = AC.currentTime, n = AC.createBuffer(1, Math.floor(AC.sampleRate * d), AC.sampleRate), a = n.getChannelData(0); for (var i = 0; i < a.length; i++) a[i] = (Math.random() * 2 - 1) * Math.sin(Math.PI * i / a.length);
+      var s = AC.createBufferSource(), f = AC.createBiquadFilter(), g = AC.createGain(); s.buffer = n; f.type = 'bandpass'; f.Q.value = .7; f.frequency.setValueAtTime(f0, t); f.frequency.exponentialRampToValueAtTime(f1, t + d); g.gain.value = v; s.connect(f); f.connect(g); g.connect(AC.destination); s.start(t);
+    } catch (e) {}
+  }
+
+  /* ---------- la carta se abre ---------- */
+  var busy = false;
+  function abrir(L, btn) {
+    if (busy || window.ovOpen) return; busy = true; window.ovOpen = true; vib([20]);
+    var m = document.createElement('div'); m.id = 'abModal'; var words = 0, body = L.t.map(function (par) { return '<p class="ab-p">' + par.split(' ').map(function (w) { return '<span class="ab-w" style="--i:' + (words++) + '">' + w + '</span>'; }).join(' ') + '</p>'; }).join('');
+    m.innerHTML = '<div class="ab-bd"></div><div class="ab-stage"><div class="ab-envL"><i class="ab-back"></i><i class="ab-flapL"></i><i class="ab-front"></i><span class="ab-sealL">' + L.e + '</span></div>'
+      + '<div class="paper ab-paper"><span class="tape"></span><h3>Cuando ' + L.cuando + '</h3>' + body + '<p class="ab-sg" style="--sd:' + (words * .048 + .5).toFixed(2) + 's">' + FIRMA + '</p></div><button class="mini ab-close" type="button">Guardarla</button></div>';
+    document.body.appendChild(m);
+    var q = function (c) { return m.querySelector(c); }, go = function (el, fr, o) { o.fill = 'both'; return el.animate(fr, o); }, env = q('.ab-envL'), flap = q('.ab-flapL'), paper = q('.ab-paper'), cl = q('.ab-close'), bd = q('.ab-bd'), seal = q('.ab-sealL');
+    go(bd, [{ opacity: 0 }, { opacity: 1 }], { duration: 300 });
+    swish(500, 1800, .35, .05);
+    go(env, [{ transform: 'translateY(90vh) rotate(-14deg) scale(.7)' }, { transform: 'translateY(-14px) rotate(3deg) scale(1.03)', offset: .75 }, { transform: 'none' }], { duration: 640, easing: 'cubic-bezier(.3,.9,.4,1)' }).finished.then(function () {
+      vib([15]); go(seal, [{ transform: 'scale(1)' }, { transform: 'scale(1.25)', offset: .3 }, { transform: 'scale(0)', opacity: 0 }], { duration: 380, easing: 'ease-in' });
+      swish(2400, 900, .22, .04);
+      return go(flap, [{ transform: 'rotateX(0)' }, { transform: 'rotateX(180deg)' }], { duration: 520, delay: 120, easing: 'cubic-bezier(.4,0,.2,1)' }).finished;
+    }).then(function () {
+      flap.style.zIndex = 0; swish(300, 1200, .5, .06);
+      go(env, [{ transform: 'none', opacity: 1 }, { transform: 'translateY(60vh) rotate(6deg)', opacity: 0 }], { duration: 620, delay: 120, easing: 'cubic-bezier(.5,0,.8,.4)' });
+      var em = (window.TH && TH.emo) || ['❤️', '💖'];
+      for (var k = 0; k < 14; k++) { var h = document.createElement('span'); h.textContent = em[k % em.length]; h.style.cssText = 'position:fixed;z-index:71;pointer-events:none;left:50%;top:48%;font-size:' + rnd(18, 32).toFixed(0) + 'px'; document.body.appendChild(h);
+        h.animate([{ transform: 'translate(-50%,0) scale(.3)', opacity: 0 }, { opacity: 1, offset: .2 }, { transform: 'translate(' + rnd(-160, 160).toFixed(0) + 'px,' + rnd(-300, -120).toFixed(0) + 'px) rotate(' + rnd(-40, 40).toFixed(0) + 'deg) scale(1)', opacity: 0 }], { duration: rnd(1100, 1800), delay: rnd(0, 300), easing: 'ease-out' }).onfinish = (function (x) { return function () { x.remove(); }; })(h); }
+      return go(paper, [{ opacity: 0, transform: 'translateY(120px) scale(.45) rotate(-5deg)' }, { opacity: 1, transform: 'translateY(-14px) scale(1.02) rotate(.6deg)', offset: .7 }, { opacity: 1, transform: 'translateY(0) scale(1) rotate(-1.2deg)' }], { duration: 760, delay: 220, easing: 'cubic-bezier(.25,.9,.35,1)' }).finished;
+    }).then(function () {
+      go(cl, [{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: 400, delay: Math.min(5000, words * 48 + 500) });
+    });
+    var closed = false;
+    function cerrar() {
+      if (closed) return; closed = true;
+      if (read.indexOf(L.id) < 0) { read.push(L.id); saveRead(); }
+      swish(900, 300, .3, .04);
+      Promise.all([go(paper, [{ opacity: 1 }, { opacity: 0, transform: 'translateY(40px) scale(.92)' }], { duration: 320 }).finished, go(cl, [{ opacity: 1 }, { opacity: 0 }], { duration: 200 }).finished, go(bd, [{ opacity: 1 }, { opacity: 0 }], { duration: 360 }).finished]).then(function () { m.remove(); busy = false; window.ovOpen = false; render(); });
+    }
+    cl.addEventListener('click', cerrar); bd.addEventListener('click', function () { if (cl.style.opacity !== '0' && cl.getAnimations().length && cl.getAnimations()[0].currentTime > 300) cerrar(); });
+  }
+
+  /* =====================  MINI JUEGO  ===================== */
+  var BEST = 'ari_juego_best', best = 0; try { best = parseInt(localStorage.getItem(BEST), 10) || 0; } catch (e) {}
+  function showBest() { $('gmBest').textContent = best ? 'tu récord: ' + best + ' puntos' : 'todavía no tienes récord'; }
+  showBest();
+  var MSG = [[60, 'Ni modo, cachetes, hay que practicar. Igual te quiero, ¿otra vez?'], [150, 'Eso estuvo bien. Se nota que sabes agarrar lo que es tuyo 😏'], [300, 'Uy, ya casi me ganas. Y eso que yo hice el juego.'], [1e9, 'Ya no te puedo enseñar nada más. Eres la mejor, mi vida. Te debo un helado.']];
+  $('gmPlay').addEventListener('click', jugar);
+
+  function jugar() {
+    if (window.ovOpen) return; window.ovOpen = true;
+    var T = window.TH || {}, bg = T.bg || ['#2a1530', '#1a0d24', '#0f0716'], pool = (T.emo && T.emo.length) ? T.emo : ['❤️', '💖', '💕'], pet = T.pet || ['#FF8FA3', '#FFD54A', '#fff'];
+    var ov = document.createElement('div'); ov.id = 'gmOv';
+    ov.innerHTML = '<canvas></canvas><button class="gm-x" type="button" aria-label="Salir">✕</button><button class="gm-snd" type="button" aria-label="Sonido">🔊</button><div class="gm-end" hidden></div>';
+    document.body.appendChild(ov); ov.animate([{ opacity: 0, transform: 'scale(1.05)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: 'ease-out' });
+    var cv = ov.querySelector('canvas'), cx = cv.getContext('2d'), W = 0, H = 0, dpr = 1, HAND = getComputedStyle(document.documentElement).getPropertyValue('--hand') || 'cursive', snd = true, AC2 = null;
+    try { AC2 = new (window.AudioContext || window.webkitAudioContext)(); if (AC2.resume) AC2.resume(); } catch (e) {}
+    function tone(f, d, ty, v, sl) { if (!snd || !AC2) return; try { var o = AC2.createOscillator(), g = AC2.createGain(), t = AC2.currentTime; o.type = ty || 'sine'; o.frequency.setValueAtTime(f, t); if (sl) o.frequency.exponentialRampToValueAtTime(sl, t + d); g.gain.setValueAtTime(v || .09, t); g.gain.exponentialRampToValueAtTime(.0001, t + d); o.connect(g); g.connect(AC2.destination); o.start(t); o.stop(t + d + .02); } catch (e) {} }
+    var NOTES = [523, 587, 659, 784, 880, 988, 1047, 1175];
+    function size() { dpr = Math.min(devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); cv.style.width = W + 'px'; cv.style.height = H + 'px'; cx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    size();
+    var TOP = /iPhone|iPad/.test(navigator.userAgent) ? 50 : 20, PW = 84, DUR = 45;
+    var S = { px: W / 2, tx: W / 2, left: DUR, score: 0, lives: 3, streak: 0, mult: 1, boost: 0, shake: 0, flash: 0, sq: 0, items: [], parts: [], pops: [], spawn: .4, time: 0, phase: 'count', cd: 3.4, goldCd: 7, over: false, dir: 0, comboPulse: 0 };
+    var dust = []; for (var d = 0; d < 34; d++) dust.push({ x: Math.random(), y: Math.random(), r: rnd(.8, 2.6), v: rnd(.01, .04) });
+    function py() { return H - Math.max(86, H * .13); }
+    function pop(x, y, txt, col, sz) { S.pops.push({ x: x, y: y, t: 0, txt: txt, col: col || '#fff', sz: sz || 24 }); }
+    function burst(x, y, n, big) { for (var i = 0; i < n; i++) { var a = rnd(0, 6.283), v = rnd(60, big ? 380 : 230); S.parts.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 80, life: 0, max: rnd(.5, 1.1), r: rnd(2, big ? 6 : 4.5), c: pet[i % pet.length] }); } }
+    function spawn() {
+      var badP = Math.min(.3, .12 + S.time * .0042), r = Math.random(), kind = 'good', ch = pool[(Math.random() * pool.length) | 0];
+      if (S.goldCd <= 0 && r > .94) { kind = 'gold'; ch = '🌟'; S.goldCd = rnd(9, 14); } else if (r < badP) { kind = 'bad'; ch = '💔'; }
+      var sz = rnd(36, 46); S.items.push({ x: rnd(sz, W - sz), y: -sz, vy: (150 + S.time * 3.6) * rnd(.9, 1.25), sz: sz, ch: ch, kind: kind, rot: rnd(-.4, .4), vr: rnd(-1.2, 1.2), ph: rnd(0, 6.28), wob: rnd(8, 26) });
+    }
+    function loseLife() { S.lives--; S.streak = 0; S.mult = 1; S.shake = .45; S.flash = .5; tone(150, .35, 'sawtooth', .12, 60); vib([80]); if (S.lives <= 0) fin(); }
+    function update(dt) {
+      var cdX = S.dir * dt * 780; if (S.dir) S.tx = Math.max(PW / 2, Math.min(W - PW / 2, S.tx + cdX));
+      S.px += (S.tx - S.px) * Math.min(1, dt * 16); S.px = Math.max(PW / 2, Math.min(W - PW / 2, S.px));
+      S.shake = Math.max(0, S.shake - dt); S.flash = Math.max(0, S.flash - dt); S.sq = Math.max(0, S.sq - dt * 4); S.comboPulse = Math.max(0, S.comboPulse - dt * 3);
+      dust.forEach(function (p) { p.y -= p.v * dt; if (p.y < -.02) { p.y = 1.02; p.x = Math.random(); } });
+      if (S.phase === 'count') { S.cd -= dt; var sec = Math.ceil(S.cd); if (S.lastSec !== sec && sec <= 3 && sec >= 1) { S.lastSec = sec; tone(440 + (3 - sec) * 110, .18, 'triangle', .1); } if (S.cd <= 0) { S.phase = 'play'; tone(880, .3, 'square', .08, 1320); S.ya = .8; } }
+      else if (S.phase === 'play') {
+        S.ya = Math.max(0, (S.ya || 0) - dt); S.time += dt; S.left -= dt; S.goldCd -= dt; S.boost = Math.max(0, S.boost - dt);
+        if (S.left <= 0) { fin(); return; }
+        S.spawn -= dt; if (S.spawn <= 0) { spawn(); S.spawn = Math.max(.25, .7 - S.time * .0095) * rnd(.8, 1.2); }
+        var slow = S.boost > 0 ? .78 : 1, y0 = py();
+        for (var i = S.items.length - 1; i >= 0; i--) {
+          var it = S.items[i]; it.y += it.vy * dt * slow; it.rot += it.vr * dt; it.x += Math.sin(S.time * 2.2 + it.ph) * it.wob * dt;
+          if (S.boost > 0 && it.kind !== 'bad') it.x += (S.px - it.x) * dt * 2.4;
+          if (it.y > y0 - 18 && it.y < y0 + 34 && Math.abs(it.x - S.px) < PW / 2 + it.sz * .3) {
+            S.items.splice(i, 1);
+            if (it.kind === 'bad') { burst(it.x, it.y, 12); pop(it.x, it.y - 20, '−1 ❤', '#ff6b7a', 26); loseLife(); if (S.over) return; }
+            else {
+              S.streak++; S.mult = Math.min(5, 1 + Math.floor(S.streak / 5)); S.sq = 1; var base = it.kind === 'gold' ? 50 : 10, pts = base * S.mult * (S.boost > 0 ? 2 : 1);
+              if (it.kind === 'gold') { S.boost = 6; burst(it.x, it.y, 34, true); pop(S.px, y0 - 60, '¡DOBLE!', '#FFD54A', 34); tone(660, .12, 'triangle', .1); setTimeout(function () { tone(880, .12, 'triangle', .1); }, 90); setTimeout(function () { tone(1320, .22, 'triangle', .1); }, 180); vib([20, 30, 20]); }
+              else { burst(it.x, it.y, 9); tone(NOTES[Math.min(7, S.streak % 8)] || 523, .14, 'sine', .1); }
+              if (S.streak > 0 && S.streak % 5 === 0) { S.comboPulse = 1; pop(S.px, y0 - 90, 'x' + S.mult + ' combo', '#FF8FA3', 28); tone(1046, .2, 'triangle', .09, 1568); vib([15]); }
+              S.score += pts; pop(it.x, it.y - 20, '+' + pts, '#fff', 22);
+            }
+          } else if (it.y > H + 50) { S.items.splice(i, 1); if (it.kind !== 'bad' && S.streak > 0) { S.streak = 0; S.mult = 1; } }
+        }
+      }
+      for (var j = S.parts.length - 1; j >= 0; j--) { var p = S.parts[j]; p.life += dt; p.vy += 620 * dt; p.x += p.vx * dt; p.y += p.vy * dt; if (p.life > p.max) S.parts.splice(j, 1); }
+      for (var k = S.pops.length - 1; k >= 0; k--) { var q = S.pops[k]; q.t += dt; if (q.t > .9) S.pops.splice(k, 1); }
+    }
+    function rr(x, y, w, h, r) { cx.beginPath(); cx.moveTo(x + r, y); cx.arcTo(x + w, y, x + w, y + h, r); cx.arcTo(x + w, y + h, x, y + h, r); cx.arcTo(x, y + h, x, y, r); cx.arcTo(x, y, x + w, y, r); cx.closePath(); }
+    function draw() {
+      var g = cx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, bg[0]); g.addColorStop(.55, bg[1] || bg[0]); g.addColorStop(1, bg[2] || bg[1] || bg[0]); cx.fillStyle = g; cx.fillRect(0, 0, W, H);
+      cx.save(); if (S.shake > 0) cx.translate(rnd(-1, 1) * S.shake * 14, rnd(-1, 1) * S.shake * 14);
+      dust.forEach(function (p) { cx.globalAlpha = .25; cx.fillStyle = '#fff'; cx.beginPath(); cx.arc(p.x * W, p.y * H, p.r, 0, 6.283); cx.fill(); }); cx.globalAlpha = 1;
+      if (S.boost > 0) { var gl = cx.createRadialGradient(S.px, py(), 10, S.px, py(), 190); gl.addColorStop(0, 'rgba(255,213,74,.5)'); gl.addColorStop(1, 'rgba(255,213,74,0)'); cx.fillStyle = gl; cx.fillRect(S.px - 200, py() - 200, 400, 400); }
+      cx.textAlign = 'center'; cx.textBaseline = 'middle';
+      S.items.forEach(function (it) { cx.save(); cx.translate(it.x, it.y); cx.rotate(it.rot); cx.font = it.sz + 'px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",serif'; if (it.kind === 'gold') { cx.shadowColor = '#FFD54A'; cx.shadowBlur = 22; } else if (it.kind === 'bad') { cx.shadowColor = '#000'; cx.shadowBlur = 8; } cx.fillText(it.ch, 0, 0); cx.restore(); });
+      var y0 = py(); cx.fillStyle = 'rgba(0,0,0,.3)'; cx.beginPath(); cx.ellipse(S.px, y0 + 34, 38, 8, 0, 0, 6.283); cx.fill();
+      cx.save(); cx.translate(S.px, y0); cx.scale(1 + S.sq * .22, 1 - S.sq * .18); cx.font = '58px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",serif'; cx.fillText('💌', 0, 0); cx.restore();
+      S.parts.forEach(function (p) { var a = 1 - p.life / p.max; cx.globalAlpha = Math.max(0, a); cx.fillStyle = p.c; cx.beginPath(); cx.arc(p.x, p.y, p.r * a + .5, 0, 6.283); cx.fill(); }); cx.globalAlpha = 1;
+      S.pops.forEach(function (q) { var a = 1 - q.t / .9; cx.globalAlpha = Math.max(0, a); cx.font = '700 ' + q.sz + 'px ' + HAND; cx.lineWidth = 4; cx.strokeStyle = 'rgba(0,0,0,.55)'; cx.strokeText(q.txt, q.x, q.y - q.t * 60); cx.fillStyle = q.col; cx.fillText(q.txt, q.x, q.y - q.t * 60); }); cx.globalAlpha = 1;
+      cx.restore();
+      if (S.flash > 0) { cx.fillStyle = 'rgba(255,40,70,' + (S.flash * .5) + ')'; cx.fillRect(0, 0, W, H); }
+      // HUD
+      var bw = W - 40, fr = Math.max(0, S.left / DUR); cx.fillStyle = 'rgba(255,255,255,.18)'; rr(20, TOP, bw, 10, 5); cx.fill();
+      cx.fillStyle = fr > .25 ? '#FFD54A' : '#FF5C7A'; if (fr > 0) { rr(20, TOP, Math.max(10, bw * fr), 10, 5); cx.fill(); }
+      cx.textAlign = 'left'; cx.font = '700 40px ' + HAND; cx.lineWidth = 5; cx.strokeStyle = 'rgba(0,0,0,.5)'; cx.strokeText(S.score, 22, TOP + 44); cx.fillStyle = '#fff'; cx.fillText(S.score, 22, TOP + 44);
+      if (S.mult > 1) { cx.save(); cx.translate(24, TOP + 82); cx.scale(1 + S.comboPulse * .3, 1 + S.comboPulse * .3); cx.font = '700 24px ' + HAND; cx.fillStyle = '#FF8FA3'; cx.strokeText('combo x' + S.mult, 0, 0); cx.fillText('combo x' + S.mult, 0, 0); cx.restore(); }
+      cx.textAlign = 'right'; cx.font = '26px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",serif'; var hs = ''; for (var l = 0; l < 3; l++) hs += l < S.lives ? '❤️' : '🖤'; cx.fillText(hs, W - 20 - 0, TOP + 42);
+      if (S.boost > 0) { cx.textAlign = 'center'; cx.font = '700 22px ' + HAND; cx.fillStyle = '#FFD54A'; cx.strokeText('¡puntos dobles! ' + Math.ceil(S.boost), W / 2, TOP + 44); cx.fillText('¡puntos dobles! ' + Math.ceil(S.boost), W / 2, TOP + 44); }
+      cx.textAlign = 'center';
+      if (S.phase === 'count') { var sec = Math.max(1, Math.ceil(S.cd)), fp = S.cd - Math.floor(S.cd), sc = 1 + fp * .7; cx.save(); cx.translate(W / 2, H * .4); cx.scale(sc, sc); cx.globalAlpha = Math.min(1, .3 + (1 - fp)); cx.font = '700 120px ' + HAND; cx.lineWidth = 8; cx.strokeStyle = 'rgba(0,0,0,.5)'; var tt = S.cd > 3 ? '' : String(sec); cx.strokeText(tt, 0, 0); cx.fillStyle = '#fff'; cx.fillText(tt, 0, 0); cx.restore(); cx.font = '700 26px ' + HAND; cx.fillStyle = '#fff'; cx.globalAlpha = .9; cx.fillText('desliza para mover tu carta y atrapa lo bonito', W / 2, H * .55); cx.fillText('evita los 💔', W / 2, H * .55 + 34); cx.globalAlpha = 1; }
+      if (S.phase === 'play' && S.ya > 0) { cx.save(); cx.globalAlpha = Math.min(1, S.ya * 2); cx.translate(W / 2, H * .4); cx.scale(1 + (1 - S.ya / .8) * .6, 1 + (1 - S.ya / .8) * .6); cx.font = '700 90px ' + HAND; cx.lineWidth = 8; cx.strokeStyle = 'rgba(0,0,0,.5)'; cx.strokeText('¡YA!', 0, 0); cx.fillStyle = '#FFD54A'; cx.fillText('¡YA!', 0, 0); cx.restore(); }
+    }
+    var raf = 0, last = performance.now(), alive = true;
+    function frame(now) { if (!alive) return; var dt = Math.min(.05, (now - last) / 1000); last = now; update(dt); draw(); raf = requestAnimationFrame(frame); }
+    raf = requestAnimationFrame(frame);
+    function fin() {
+      if (S.over) return; S.over = true; S.phase = 'over';
+      var rec = S.score > best; if (rec) { best = S.score; try { localStorage.setItem(BEST, best); } catch (e) {} showBest(); }
+      var msg = MSG.filter(function (m) { return S.score < m[0]; })[0][1];
+      tone(523, .18, 'triangle', .1); setTimeout(function () { tone(659, .18, 'triangle', .1); }, 150); setTimeout(function () { tone(784, .35, 'triangle', .1); }, 300);
+      setTimeout(function () {
+        var e = ov.querySelector('.gm-end'); e.hidden = false;
+        e.innerHTML = '<div class="paper ge-card"><span class="tape"></span><h3>' + (S.lives <= 0 ? 'Se rompieron los corazones' : '¡Se acabó el tiempo!') + '</h3><div class="ge-score">' + S.score + '<small>puntos</small></div>' + (rec ? '<p class="ge-rec">¡Nuevo récord!</p>' : '') + '<p class="ge-msg">' + msg + '</p><div class="ge-btns"><button class="btn yes" type="button" data-a="again">Otra vez</button><button class="mini ghost" type="button" data-a="exit">Salir</button></div></div>';
+        e.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300 }); e.firstChild.animate([{ transform: 'translateY(60px) scale(.8) rotate(-6deg)', opacity: 0 }, { transform: 'translateY(0) scale(1.03) rotate(-1deg)', opacity: 1, offset: .7 }, { transform: 'rotate(-1.2deg)', opacity: 1 }], { duration: 560, easing: 'cubic-bezier(.3,1.1,.4,1)', fill: 'both' });
+        if (rec || S.score >= 150) { burst(W / 2, H * .4, 60, true); S.phase = 'over'; vib([40, 40, 80]); }
+      }, 500);
+    }
+    function salir(again) {
+      alive = false; cancelAnimationFrame(raf); removeEventListener('resize', size); removeEventListener('keydown', kd); removeEventListener('keyup', ku); document.removeEventListener('visibilitychange', vis);
+      try { if (AC2 && AC2.close) AC2.close(); } catch (e) {}
+      ov.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220 }).onfinish = function () { ov.remove(); window.ovOpen = false; if (again) setTimeout(jugar, 30); };
+    }
+    function move(e) { S.tx = e.clientX; }
+    cv.addEventListener('pointerdown', function (e) { S.tx = e.clientX; try { cv.setPointerCapture(e.pointerId); } catch (_) {} });
+    cv.addEventListener('pointermove', function (e) { if (e.buttons || e.pointerType === 'touch' || e.pointerType === 'pen' || e.pointerType === 'mouse') move(e); });
+    function kd(e) { if (e.key === 'ArrowLeft' || e.key === 'a') S.dir = -1; else if (e.key === 'ArrowRight' || e.key === 'd') S.dir = 1; else if (e.key === 'Escape') salir(false); }
+    function ku(e) { if (['ArrowLeft', 'a', 'ArrowRight', 'd'].indexOf(e.key) > -1) S.dir = 0; }
+    function vis() { last = performance.now(); }
+    addEventListener('resize', size); addEventListener('keydown', kd); addEventListener('keyup', ku); document.addEventListener('visibilitychange', vis);
+    ov.querySelector('.gm-x').addEventListener('click', function () { salir(false); });
+    ov.querySelector('.gm-snd').addEventListener('click', function (e) { snd = !snd; e.currentTarget.textContent = snd ? '🔊' : '🔇'; });
+    ov.querySelector('.gm-end').addEventListener('click', function (e) { var b = e.target.closest('[data-a]'); if (!b) return; salir(b.dataset.a === 'again'); });
+  }
 })();
 </script>
 <!-- Como Yotas · Penyair (Tiro Libre 2), recortada desde 0:09 hasta el final, en base64. El reproductor del tema Rap la arma en memoria: no hay que subir ningún archivo de audio -->

@@ -2411,12 +2411,13 @@
   }
   function cambiar(id) {
     cerrar(); if (id === actual || busy) return;
+    var enFinal = !$('win').hidden, aplic = function (x) { if (enFinal) { try { $('win').hidden = true; } catch (e) {} } aplicar(x); };   // si estaba en la pantalla final, el tema nuevo se ve sin ella y al terminar la página vuelve al inicio (así no se arruina la sorpresa de los otros temas)
     if (id === 'amor') { quiereAmor = true; try { if (window.musicPrime) musicPrime(); } catch (e) {} }   // el toque en el menú es el permiso para que suene
     if (id === 'rap') { try { if (window.rapPrime) rapPrime(); } catch (e) {} }   // igual en Rap: el toque en el menú es el permiso para que suene Como Yotas
-    if (!wipe.animate) { aplicar(id); return; }   // las animaciones van siempre, aunque Windows tenga "reducir animaciones"
+    if (!wipe.animate) { aplic(id); if (enFinal) location.reload(); return; }   // las animaciones van siempre, aunque Windows tenga "reducir animaciones"
     busy = true; wipe.textContent = ''; wipe.hidden = false;
-    var fin_ = function () { wipe.hidden = true; wipe.textContent = ''; busy = false; };
-    ({ amor: cSolapa, rap: cRap, vallenato: cFuelle, salsa: cClave })[id](function () { aplicar(id); }).then(fin_, function () { aplicar(id); fin_(); });
+    var fin_ = function () { wipe.hidden = true; wipe.textContent = ''; busy = false; if (enFinal) location.reload(); };
+    ({ amor: cSolapa, rap: cRap, vallenato: cFuelle, salsa: cClave })[id](function () { aplic(id); }).then(fin_, function () { aplic(id); fin_(); });
   }
   /* ===== Modo rap: en cualquier momento se va la luz, aparece "Tranquila, Ari, tengo lámpara" y baja una lámpara que alumbra lo que ella va deslizando ===== */
   var ap = null, apArmed = false, apThr = 0, apOn = false;
@@ -3382,7 +3383,7 @@
       if (hoy) { const t = fl => (parseFloat(fl.style.getPropertyValue('--d')) + 2.2) * 1000; setTimeout(() => { const h = hoy.querySelector('.hit'); burstAt(h, 26, 'heart'); burstAt(h, 14, 'spark'); if (window.vibrar) window.vibrar([20, 30, 20]); }, t(hoy)); }
     }
     const todas = [].slice.call(svg.querySelectorAll('.fl')).sort((a, b) => +a.getAttribute('data-i') - +b.getAttribute('data-i'));
-    $('jdReplay').addEventListener('click', () => { cap.classList.remove('on'); crecer(todas, todas[todas.length - 1]); });
+    $('jdReplay').addEventListener('click', () => { cap.classList.remove('on'); svg.classList.add('vis'); try { svg.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {} setTimeout(() => { svg.classList.add('vis'); crecer(todas, todas[todas.length - 1]); }, 500); });   // antes crecían con la pantalla en otro lado y no se veía nada
     let primera = true;
     new IntersectionObserver(es => es.forEach(e => {
       svg.classList.toggle('vis', e.isIntersecting);

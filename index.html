@@ -1572,7 +1572,22 @@
   .lk-hint { min-height: 3.1em; max-width: 310px; margin: 0; font: 500 1.2rem/1.1 var(--hand); color: rgb(var(--c40)); opacity: .95; }
   .lk-hint small { display: block; margin-top: 3px; font-size: 1.05rem; color: rgb(var(--c11)); opacity: .8; }
   .lk-help { background: none; border: 0; color: rgb(var(--c11)); opacity: .7; font: 600 .95rem var(--ui); text-decoration: underline; padding: 6px; cursor: pointer; }
-  .lk-enter { margin-top: 4px; padding: 14px 28px; border: 0; border-radius: 16px; font: 700 1.2rem var(--ui); color: #fff; cursor: pointer; touch-action: manipulation; background: rgb(var(--c42)); box-shadow: 3px 4px 0 rgb(var(--c43)); animation: softPulse 1.6s ease-in-out infinite; }
+  .lk-enter { --b1: 255px 18px 225px 18px / 18px 225px 18px 255px; --b2: 235px 24px 245px 14px / 14px 245px 22px 235px; --b3: 248px 15px 232px 21px / 21px 232px 15px 248px; --nc: #FF8FA3;
+    position: relative; display: inline-flex; align-items: center; gap: 9px; margin-top: 30px; padding: 13px 26px 14px; border: 3px solid #7a1f3d; border-radius: var(--b1); background: #FFF3E4; color: #7a1f3d;
+    font: 700 1.55rem/1 var(--hand); cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; box-shadow: 4px 5px 0 #E8476A, 0 14px 22px rgba(0,0,0,.35); rotate: -2deg;
+    animation: leBoil 1.1s steps(1) infinite, softPulse 2.6s ease-in-out infinite; }
+  @keyframes leBoil { 0% { border-radius: var(--b1); translate: 0 0; } 34% { border-radius: var(--b2); translate: .6px -.5px; } 67% { border-radius: var(--b3); translate: -.5px .6px; } }
+  .lk-enter:active { translate: 2px 3px; box-shadow: 1px 2px 0 #E8476A; }
+  .le-note { position: absolute; left: -8px; top: -33px; font: 700 1.2rem/1 var(--hand); font-style: normal; color: var(--nc); rotate: -7deg; white-space: nowrap; pointer-events: none; text-shadow: 0 1px 0 rgba(0,0,0,.4); }
+  .le-arr { position: absolute; left: 70px; top: -34px; width: 40px; height: 32px; fill: none; stroke: var(--nc); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; pointer-events: none; animation: leDraw 3.6s ease-in-out infinite; }
+  @keyframes leDraw { 0% { stroke-dashoffset: 1; } 35%, 82% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: -1; } }
+  .le-h { width: 22px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; animation: leBeat 1.5s ease-in-out infinite; }
+  @keyframes leBeat { 0%, 100% { transform: scale(1) rotate(-6deg); } 40% { transform: scale(1.22) rotate(4deg); } }
+  html[data-theme="rap"] .lk-enter { --b1: 3px 8px 4px 9px; --b2: 6px 5px 3px 10px; --b3: 4px 9px 6px 6px; --nc: #3DF2FF; font: 400 1.4rem/1 "Permanent Marker", "Caveat Brush", cursive; text-transform: uppercase; letter-spacing: .02em; color: #1a1020; background: #FFD400; border-color: #1a1020; box-shadow: 5px 6px 0 #1a1020, 8px 9px 0 #FF4081; }
+  html[data-theme="rap"] .lk-enter:active { box-shadow: 2px 3px 0 #1a1020, 3px 4px 0 #FF4081; }
+  html[data-theme="vallenato"] .lk-enter { --b1: 4px 12px 5px 14px / 12px 5px 14px 4px; --b2: 6px 10px 4px 15px / 11px 6px 13px 5px; --b3: 5px 13px 6px 11px / 13px 4px 12px 6px; --nc: #FCD116; background: #F5E6B8; color: #16233d; border-color: #16233d; box-shadow: 4px 5px 0 #CE1126, 0 14px 22px rgba(0,0,0,.4); }
+  html[data-theme="vallenato"] .lk-enter::before { content: ""; position: absolute; right: 14px; top: -11px; width: 44px; height: 16px; rotate: 7deg; background: linear-gradient(180deg, rgba(255,255,255,.35), transparent 55%), repeating-linear-gradient(90deg, #FCD116 0 10px, #2F6FD6 10px 20px, #CE1126 20px 30px); clip-path: polygon(0 0, 100% 0, 96% 50%, 100% 100%, 0 100%, 4% 50%); }
+  html[data-theme="salsa"] .lk-enter { --b1: 12px 16px 13px 17px; --b2: 14px 13px 16px 12px; --b3: 13px 17px 12px 15px; --nc: #FFC145; background: #FDF3DC; color: #0f3433; border-color: #0f3433; outline: 2px dashed #E63946; outline-offset: -9px; box-shadow: 4px 5px 0 #FF5A1F, 0 14px 22px rgba(0,0,0,.4); }
   #lock.known .lk-dots, #lock.known .lk-pad, #lock.known .lk-hint { display: none; }
   #lock:not(.known) .lk-enter { display: none; }
   .env.arrive { animation: envArrive 1.15s cubic-bezier(.2,1.15,.3,1) backwards; }
@@ -1801,7 +1816,7 @@
     </div>
     <p class="lk-hint" id="lkHint"></p>
     <button class="lk-help" id="lkHelp" type="button" hidden>No me acuerdo 🙈</button>
-    <button class="lk-enter" id="lkEnter" type="button">Abrir mi carta 💌</button>
+    <button class="lk-enter" id="lkEnter" type="button"><i class="le-note">es pa’ ti</i><svg class="le-arr" viewBox="0 0 70 56" aria-hidden="true"><path pathLength="1" d="M6 6C8 30 24 46 52 44M43 34L54 44 42 52"/></svg><span class="le-t">abrir mi carta</span><svg class="le-h" viewBox="0 0 30 28" aria-hidden="true"><path d="M15 25C4 17 2 9 8 5C12 3 15 7 15 9C15 7 18 3 22 5C28 9 26 17 15 25Z"/><path d="M10 8C8 10 8 13 10 15"/></svg></button>
   </div>
   <div class="lk-flash" id="lkFlash"></div>
 </main>

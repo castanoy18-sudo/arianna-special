@@ -1396,6 +1396,67 @@
   .ge-msg { margin: 12px 0 18px; font: 500 1.3rem/1.25 var(--hand); }
   .ge-btns { display: flex; gap: 10px; justify-content: center; }
 
+  /* ===== SALSA (remake): salón de baile de noche, reflectores, pista de damero, cartel retro de concierto, tiras de bombillos y neón ===== */
+  html[data-theme="salsa"]::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(60% 34% at 50% 102%, rgba(255,110,40,.5), rgba(230,57,70,.2) 50%, transparent 78%),
+      radial-gradient(30% 22% at 12% 22%, rgba(0,209,193,.2), transparent 70%), radial-gradient(28% 20% at 90% 36%, rgba(230,57,70,.18), transparent 70%), radial-gradient(26% 18% at 70% 10%, rgba(255,193,69,.14), transparent 70%),
+      repeating-linear-gradient(100deg, rgba(255,255,255,.018) 0 3px, transparent 3px 11px),
+      linear-gradient(180deg, #050d0d 0%, #0a1f1d 40%, #12312d 78%, #1d3b34 100%); }
+  html[data-theme="salsa"]::after { content: ""; position: fixed; left: -30%; right: -30%; bottom: 0; height: 38vh; z-index: -1; pointer-events: none;
+    background: repeating-conic-gradient(#e0a93e 0 25%, #1c1008 0 50%) 0 0 / 96px 96px; transform: perspective(280px) rotateX(62deg); transform-origin: 50% 100%;
+    -webkit-mask-image: linear-gradient(to top, #000 4%, rgba(0,0,0,.55) 40%, transparent 92%); mask-image: linear-gradient(to top, #000 4%, rgba(0,0,0,.55) 40%, transparent 92%); opacity: .8; }
+  html[data-theme="salsa"] ::selection { background: #FFC145; color: #123a3b; }
+  html[data-theme="salsa"] .paper, html[data-theme="salsa"] .letter { background:
+      repeating-linear-gradient(180deg, rgba(190,60,40,.6) 0 5px, transparent 5px 11px) 31px 0 / 2px 100% no-repeat,
+      linear-gradient(0deg, #E63946 0 5px, #FFC145 5px 10px, #00B8A9 10px 15px, transparent 15px) 0 100% / 100% 15px no-repeat,
+      radial-gradient(circle, rgba(255,90,31,.12) 0 1.5px, transparent 2px) 0 0 / 9px 9px,
+      url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='260'%20height='260'%3E%3Cfilter%20id='c'%20x='0'%20y='0'%20width='100%25'%20height='100%25'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='.9'%20numOctaves='2'%20seed='3'/%3E%3CfeColorMatrix%20values='0%200%200%200%20.5%20%200%200%200%200%20.32%20%200%200%200%200%20.15%20%200%200%200%20.35%20-.08'/%3E%3C/filter%3E%3Crect%20width='260'%20height='260'%20filter='url(%23c)'/%3E%3C/svg%3E"), linear-gradient(180deg, #FDF3DC, #F4E3BD);
+    border-radius: 3px 5px 3px 6px; box-shadow: inset 0 0 0 2px rgba(150,70,20,.18), 0 3px 0 #9b4a14, 0 0 0 2px rgba(255,193,69,.5), 0 22px 40px rgba(0,0,0,.62), 0 0 40px rgba(255,90,31,.12); }
+  html[data-theme="salsa"] .paper::before, html[data-theme="salsa"] .letter::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 15px; pointer-events: none; border-radius: 3px 5px 0 0;
+    background: repeating-conic-gradient(#102a28 0 25%, #FFC145 0 50%) 0 0 / 15px 15px; box-shadow: 0 2px 0 rgba(0,0,0,.3); }
+  html[data-theme="salsa"] .tape { display: block; width: 100px; height: 24px; margin-left: -50px; top: -13px; opacity: .95; box-shadow: none; clip-path: polygon(0 0, 100% 0, 97% 50%, 100% 100%, 0 100%, 3% 50%);
+    background: radial-gradient(circle, rgba(255,255,255,.85) 0 2px, transparent 2.6px) 0 0 / 10px 10px, linear-gradient(180deg, #19cdbd, #00A99C); }
+  html[data-theme="salsa"] .letter h2 { display: inline-block; padding-bottom: 12px; color: #0f3433; text-shadow: 2px 2px 0 rgba(255,193,69,.7);
+    background: radial-gradient(circle, #FF5A1F 0 3px, transparent 3.6px) 0 100% / 14px 9px repeat-x; }
+  html[data-theme="salsa"] .name, html[data-theme="salsa"] .lk-names { color: #FFF4D6; -webkit-text-stroke: 0; text-shadow: 0 0 6px #fff, 0 0 16px #FF5A1F, 0 0 34px #FF5A1F, 0 0 64px #E63946; animation: saNeon 4.2s infinite; }
+  @keyframes saNeon { 0%, 18%, 22%, 62%, 66%, 100% { opacity: 1; } 20%, 64% { opacity: .72; } 21% { opacity: .95; } }
+  html[data-theme="salsa"] .btn { letter-spacing: .01em; }
+  html[data-theme="salsa"] .yes, html[data-theme="salsa"] .yes.hot, html[data-theme="salsa"] .yes.big { color: #fff; text-shadow: 0 2px 0 rgba(120,20,10,.55); border: 3px solid #FFC145; border-radius: 40px;
+    background: linear-gradient(180deg, #FF7A3D, #E63946 75%); box-shadow: 0 6px 0 #8f1d24, 0 0 0 3px rgba(255,193,69,.35), 0 12px 26px rgba(230,57,70,.5), 0 0 22px rgba(255,90,31,.55), inset 0 2px 0 rgba(255,255,255,.55); }
+  html[data-theme="salsa"] .yes:active { box-shadow: 0 2px 0 #8f1d24, 0 0 0 3px rgba(255,193,69,.35), 0 0 14px rgba(255,90,31,.5); }
+  html[data-theme="salsa"] .no { color: #fff; text-shadow: 0 2px 0 rgba(0,70,64,.6); border: 3px solid #FFC145; border-radius: 40px; background: linear-gradient(180deg, #25d6c6, #00A99C); box-shadow: 0 5px 0 #00685f, 0 10px 20px rgba(0,0,0,.4); }
+  html[data-theme="salsa"] .mini { color: #fff; text-shadow: 0 2px 0 rgba(120,30,10,.5); border: 3px solid #FFC145; border-radius: 30px; background: linear-gradient(180deg, #FF8A4A, #FF5A1F); box-shadow: 0 4px 0 #9a3208, 0 8px 14px rgba(0,0,0,.4); }
+  html[data-theme="salsa"] .mini:active { box-shadow: 0 1px 0 #9a3208; }
+  html[data-theme="salsa"] .mini.ghost { background: rgba(255,255,255,.05); border: 3px dashed rgba(255,193,69,.85); box-shadow: none; color: #FFC145; text-shadow: none; }
+  html[data-theme="salsa"] .chip { background: #FDF3DC; color: #0f3433; border: 2.5px solid #0f3433; border-radius: 20px; box-shadow: 3px 4px 0 #0f3433; }
+  html[data-theme="salsa"] .chip.on { background: #FFC145; box-shadow: 3px 4px 0 #E63946; }
+  html[data-theme="salsa"] .note { background: #FFC145; color: #0f3433; border: 3px solid #0f3433; border-radius: 12px; box-shadow: 5px 6px 0 #E63946; }
+  html[data-theme="salsa"] .seal { border-radius: 50%; color: #FFE9B8; text-shadow: 0 2px 0 rgba(0,0,0,.5);
+    background: radial-gradient(circle, #FF5A1F 0 17px, #1a0f0a 18px 19px, transparent 19.5px), conic-gradient(from 20deg, rgba(255,255,255,.2), transparent 20%, rgba(255,255,255,.14) 50%, transparent 72%, rgba(255,255,255,.2)), repeating-radial-gradient(circle, #0b0706 0 2px, #231712 2px 4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,.6), 0 0 0 3px #FFC145, 0 0 26px rgba(255,90,31,.55); }
+  html[data-theme="salsa"] .seal::after { border-color: rgba(255,255,255,.12); }
+  /* decorado (lo arma salsaDecor en JS) */
+  #saFx { position: fixed; inset: 0; z-index: 20; pointer-events: none; overflow: hidden; }
+  .sa-sp { position: absolute; top: -20px; width: min(56vw, 380px); height: 120vh; transform-origin: 50% 0; mix-blend-mode: screen; will-change: transform;
+    clip-path: polygon(45% 0, 55% 0, 100% 100%, 0 100%); background: linear-gradient(180deg, var(--c), transparent 82%); animation: saSweep var(--t) ease-in-out var(--dl) infinite alternate; }
+  @keyframes saSweep { from { transform: rotate(var(--a0)); } to { transform: rotate(var(--a1)); } }
+  .sa-nt { position: absolute; bottom: -40px; font: 700 var(--sz)/1 var(--hand); color: var(--c); opacity: 0; text-shadow: 0 0 10px var(--c); animation: saRise var(--t) linear var(--dl) infinite; }
+  @keyframes saRise { 0% { transform: translate(0,0) rotate(-12deg); opacity: 0; } 10% { opacity: .85; } 50% { transform: translate(var(--sw), -55vh) rotate(14deg); } 90% { opacity: .6; } 100% { transform: translate(calc(var(--sw) * -.6), -112vh) rotate(-10deg); opacity: 0; } }
+  .sa-bk { position: absolute; border-radius: 50%; background: radial-gradient(circle, var(--c), transparent 70%); opacity: 0; animation: saBk var(--t) ease-in-out var(--dl) infinite; }
+  @keyframes saBk { 0%, 100% { opacity: 0; transform: scale(.7); } 50% { opacity: .5; transform: scale(1.15) translateY(-14px); } }
+  .sa-ring { position: fixed; z-index: 41; pointer-events: none; width: 40px; height: 40px; margin: -20px 0 0 -20px; border-radius: 50%; border: 3px solid var(--c); box-shadow: 0 0 14px var(--c), inset 0 0 10px var(--c); }
+  .sa-spk { position: fixed; z-index: 41; pointer-events: none; font: 700 1.5rem/1 var(--hand); text-shadow: 0 0 8px currentColor; }
+  .sa-st { position: absolute; width: 46px; height: 46px; color: #c2410c; opacity: .27; pointer-events: none; animation: saWob 1.3s ease-in-out infinite alternate; }
+  .sa-st svg { width: 100%; height: 100%; display: block; fill: currentColor; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; }
+  @keyframes saWob { from { transform: rotate(calc(var(--r) - 9deg)) translateY(2px); } to { transform: rotate(calc(var(--r) + 9deg)) translateY(-3px); } }
+  .sa-div { position: relative; width: min(94vw, 390px); height: 98px; margin: 14px 0; }
+  .sa-div svg { position: absolute; left: 0; top: 0; width: 100%; height: 66px; overflow: visible; }
+  .sa-div svg path { fill: none; stroke: #0b1413; stroke-width: 2.4; }
+  .sa-bulb { position: absolute; width: 16px; height: 22px; margin: -2px 0 0 -8px; border-radius: 50% 50% 48% 48% / 40% 40% 60% 60%; background: var(--c); box-shadow: 0 0 10px 3px var(--c), 0 0 26px 8px var(--c); animation: saBulb 1.5s ease-in-out var(--dl) infinite; }
+  .sa-bulb::before { content: ""; position: absolute; left: 4px; top: -7px; width: 8px; height: 8px; background: #2a2a2a; border-radius: 2px 2px 0 0; }
+  @keyframes saBulb { 0%, 100% { opacity: .35; filter: brightness(.7); } 45%, 60% { opacity: 1; filter: brightness(1.35); } }
+  .sa-div b { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%) rotate(-1.5deg); white-space: nowrap; padding: 6px 18px; font: 400 1.3rem/1 var(--hand); color: #FFF4D6; background: #E63946; border: 3px dotted #FFC145; border-radius: 12px; box-shadow: 0 0 16px rgba(230,57,70,.7), 3px 5px 0 rgba(0,0,0,.4); text-shadow: 0 0 8px rgba(255,255,255,.6); }
+
   /* ===== VALLENATO (remake): atardecer en el Caribe, papel de iraca con banda de sombrero vueltiao, mochila arhuaca, mariposas amarillas y acordeón ===== */
   html[data-theme="vallenato"]::before { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
     background: radial-gradient(circle at 27% 6%, #FFF3C4 0 11px, rgba(255,243,196,.34) 12px 26px, rgba(255,243,196,.1) 27px 58px, transparent 66px),
@@ -1867,7 +1928,7 @@
   <div class="letter card abre" id="abre" style="transform: rotate(.7deg)">
     <span class="tape"></span>
     <h2>Ábrelo cuando…</h2>
-    <p class="tl-sub">una cartita pa' cada momento</p>
+    <p class="tl-sub">una carta pa' cada momento</p>
     <div class="ab-grid" id="abGrid"></div>
     <p class="ab-count" id="abCount"></p>
   </div>
@@ -1875,8 +1936,8 @@
   <!-- Mini juego -->
   <div class="letter card juego" id="juego" style="transform: rotate(-.8deg)">
     <span class="tape"></span>
-    <h2>Atrapa mi cariño</h2>
-    <p class="tl-sub">agarra todo lo que te quiero antes de que se acabe el tiempo. Ojo con los corazones rotos.</p>
+    <h2>Atrapa los corazones</h2>
+    <p class="tl-sub">agarra los corazones antes de que se acabe el tiempo. Los rotos no.</p>
     <div class="gm-prev" aria-hidden="true"><i style="left:12%;--d:0s">❤️</i><i style="left:30%;--d:.9s">🦋</i><i style="left:48%;--d:1.7s">💔</i><i style="left:66%;--d:.4s">🎵</i><i style="left:84%;--d:1.3s">🌟</i><b>💌</b></div>
     <button class="btn yes" id="gmPlay" type="button">Jugar</button>
     <p class="gm-best" id="gmBest"></p>
@@ -2086,7 +2147,7 @@
 <script>
 /* ===== Temas: amor, rap, vallenato y salsa. Cambian colores, fondo, fuente, efectos y los títulos/botones principales ===== */
 (function () {
-  var KEY = 'ari_tema', root = document.documentElement, TEMAS = {"amor": {"n": "Amor", "e": "💌", "glyph": "♥", "emo": ["❤️", "💖", "💕"], "pet": ["#E8476A", "#FF8FA3", "#C2185B", "#FFB3C1", "#F06292"], "spark": ["#FFE3EA", "#FFD27A", "#fff", "#FF8FA3"], "heart": ["#E8476A", "#FF8FA3", "#F06292", "#fff"], "fire": [["#FFD27A", "#fff", "#FFB347"], ["#FF8FA3", "#fff", "#E8476A"], ["#9FE7FF", "#fff", "#B49BFF"]], "wave": ["#FF8FB1", "#FFB347", "#FFE08A"], "fh": ["#FF8FA3", "#E8476A", "#FFB3C1"], "bg": ["#5A2147", "#26122F", "#150A1F"], "txt": {}}, "rap": {"n": "Rap", "e": "🎤", "glyph": "♪", "emo": ["🎤", "🎧", "🔥", "⭐"], "pet": ["#FFD400", "#B388FF", "#7C4DFF", "#FFF176", "#FF4081"], "spark": ["#FFF59D", "#FFD400", "#fff", "#B388FF"], "heart": ["#FFD400", "#B388FF", "#7C4DFF", "#fff"], "fire": [["#FFD400", "#fff", "#B388FF"], ["#7C4DFF", "#fff", "#FFD400"], ["#FF4081", "#fff", "#FFF176"]], "wave": ["#B388FF", "#FFD400", "#FFF59D"], "fh": ["#FFD400", "#B388FF", "#FFF59D"], "bg": ["#392853", "#1A162B", "#0F0D1C"], "txt": {"pre": "Esto va pa’", "tap": "dale al sello", "more": "Hay más, sigue bajando", "bk": "Nuestra historia, tal cual", "ach": "Lo que te has ganado", "razones": "Razones pa’ quererte", "otra": "Otra más", "cita": "Nuestra primera cita, tú decides", "replay": "Otra vez"}}, "vallenato": {"n": "Vallenato", "e": "🪗", "glyph": "♫", "emo": ["🪗", "🎶", "🌻", "🎵"], "pet": ["#FCD116", "#2F6FD6", "#CE1126", "#FFE680", "#5C8DFF"], "spark": ["#FFF3B0", "#FCD116", "#fff", "#5C8DFF"], "heart": ["#CE1126", "#FCD116", "#2F6FD6", "#fff"], "fire": [["#FCD116", "#fff", "#CE1126"], ["#2F6FD6", "#fff", "#FCD116"], ["#CE1126", "#fff", "#FFE680"]], "wave": ["#5C8DFF", "#FCD116", "#FF6B6B"], "fh": ["#FCD116", "#5C8DFF", "#FF6B6B"], "bg": ["#243557", "#13202E", "#0B151E"], "txt": {"pre": "Tienes una serenata para", "tap": "toca el sello pa’ arrancar", "more": "Sigue la parranda, desliza", "bk": "Nuestra historia en versos", "since": "Cantando hace", "ach": "Condecoraciones", "buzon": "Buzón de versos", "razones": "Razones pa’ cantarte", "otra": "Otro verso", "cita": "Nuestra primera serenata", "replay": "Otra vez la canción"}}, "salsa": {"n": "Salsa", "e": "💃", "glyph": "♬", "emo": ["💃", "🎺", "🥁", "🎶"], "pet": ["#FF5A1F", "#FFC145", "#00B8A9", "#E63946", "#FFD166"], "spark": ["#FFE8B0", "#FFC145", "#fff", "#00D1C1"], "heart": ["#E63946", "#FF5A1F", "#FFC145", "#fff"], "fire": [["#FFC145", "#fff", "#FF5A1F"], ["#00D1C1", "#fff", "#FFC145"], ["#E63946", "#fff", "#FFD166"]], "wave": ["#00D1C1", "#FFC145", "#FF5A1F"], "fh": ["#FFC145", "#FF5A1F", "#00D1C1"], "bg": ["#275254", "#152C29", "#0C1D1A"], "txt": {"pre": "Tienes un son para", "tap": "toca el sello y a bailar", "more": "Sigue el son, desliza", "bk": "Nuestra historia al son", "since": "Bailando hace", "ach": "Trofeos de la pista", "buzon": "Buzón con sabor", "razones": "Razones pa’ bailarte", "otra": "Otro paso", "cita": "Nuestra primera noche de baile", "replay": "Otra vez, que suene"}}}, ORDEN = ['amor', 'rap', 'vallenato', 'salsa'], busy = false;
+  var KEY = 'ari_tema', root = document.documentElement, TEMAS = {"amor": {"n": "Amor", "e": "💌", "glyph": "♥", "emo": ["❤️", "💖", "💕"], "pet": ["#E8476A", "#FF8FA3", "#C2185B", "#FFB3C1", "#F06292"], "spark": ["#FFE3EA", "#FFD27A", "#fff", "#FF8FA3"], "heart": ["#E8476A", "#FF8FA3", "#F06292", "#fff"], "fire": [["#FFD27A", "#fff", "#FFB347"], ["#FF8FA3", "#fff", "#E8476A"], ["#9FE7FF", "#fff", "#B49BFF"]], "wave": ["#FF8FB1", "#FFB347", "#FFE08A"], "fh": ["#FF8FA3", "#E8476A", "#FFB3C1"], "bg": ["#5A2147", "#26122F", "#150A1F"], "txt": {}}, "rap": {"n": "Rap", "e": "🎤", "glyph": "♪", "emo": ["🎤", "🎧", "🔥", "⭐"], "pet": ["#FFD400", "#B388FF", "#7C4DFF", "#FFF176", "#FF4081"], "spark": ["#FFF59D", "#FFD400", "#fff", "#B388FF"], "heart": ["#FFD400", "#B388FF", "#7C4DFF", "#fff"], "fire": [["#FFD400", "#fff", "#B388FF"], ["#7C4DFF", "#fff", "#FFD400"], ["#FF4081", "#fff", "#FFF176"]], "wave": ["#B388FF", "#FFD400", "#FFF59D"], "fh": ["#FFD400", "#B388FF", "#FFF59D"], "bg": ["#392853", "#1A162B", "#0F0D1C"], "txt": {"pre": "Esto va pa’", "tap": "dale al sello", "more": "Hay más, sigue bajando", "bk": "Nuestra historia, tal cual", "ach": "Lo que te has ganado", "razones": "Razones pa’ quererte", "otra": "Otra más", "cita": "Nuestra primera cita, tú decides", "replay": "Otra vez"}}, "vallenato": {"n": "Vallenato", "e": "🪗", "glyph": "♫", "emo": ["🪗", "🎶", "🌻", "🎵"], "pet": ["#FCD116", "#2F6FD6", "#CE1126", "#FFE680", "#5C8DFF"], "spark": ["#FFF3B0", "#FCD116", "#fff", "#5C8DFF"], "heart": ["#CE1126", "#FCD116", "#2F6FD6", "#fff"], "fire": [["#FCD116", "#fff", "#CE1126"], ["#2F6FD6", "#fff", "#FCD116"], ["#CE1126", "#fff", "#FFE680"]], "wave": ["#5C8DFF", "#FCD116", "#FF6B6B"], "fh": ["#FCD116", "#5C8DFF", "#FF6B6B"], "bg": ["#243557", "#13202E", "#0B151E"], "txt": {"pre": "Esta va pa’", "tap": "toca el sello", "more": "Hay más, desliza", "bk": "Nuestra historia", "since": "Llevamos", "ach": "Lo que has ganado", "buzon": "Buzón", "razones": "Razones pa’ quererte", "otra": "Otra más", "cita": "Nuestra primera cita", "replay": "Otra vez"}}, "salsa": {"n": "Salsa", "e": "💃", "glyph": "♬", "emo": ["💃", "🎺", "🥁", "🎶"], "pet": ["#FF5A1F", "#FFC145", "#00B8A9", "#E63946", "#FFD166"], "spark": ["#FFE8B0", "#FFC145", "#fff", "#00D1C1"], "heart": ["#E63946", "#FF5A1F", "#FFC145", "#fff"], "fire": [["#FFC145", "#fff", "#FF5A1F"], ["#00D1C1", "#fff", "#FFC145"], ["#E63946", "#fff", "#FFD166"]], "wave": ["#00D1C1", "#FFC145", "#FF5A1F"], "fh": ["#FFC145", "#FF5A1F", "#00D1C1"], "bg": ["#275254", "#152C29", "#0C1D1A"], "txt": {"pre": "Esto es pa’", "tap": "toca el sello", "more": "Hay más, desliza", "bk": "Nuestra historia", "since": "Llevamos", "ach": "Lo que has ganado", "buzon": "Buzón", "razones": "Razones pa’ quererte", "otra": "Otra más", "cita": "Nuestra primera cita", "replay": "Otra vez"}}}, ORDEN = ['amor', 'rap', 'vallenato', 'salsa'], busy = false;
   var $ = function (i) { return document.getElementById(i); };
   var TEXTOS = [
     ['pre', function () { return document.querySelector('#intro .pre'); }], ['tap', function () { return document.querySelector('#intro .tap'); }],
@@ -2109,6 +2170,7 @@
     if (id === 'rap') { if (!apOn) armarLampara(); } else quitarLampara();
     rapDecor(id === 'rap');
     vallDecor(id === 'vallenato');
+    salsaDecor(id === 'salsa');
     rapMusica(id === 'rap');
     quiereAmor = false;   // la canción solo suena en el tema Amor: al llegar, se sube el volumen; al irse, se apaga suavecito
     try { if (id === 'amor') { if (window.musicGo) musicGo(); } else if (window.musicStop) musicStop(); } catch (e) {}
@@ -2267,7 +2329,7 @@
       var t = mk('left:0;right:0;top:34%;z-index:2;text-align:center;white-space:nowrap;color:#FCD116;font:400 min(5.4rem,17vw)/1 var(--hand);-webkit-text-stroke:2px #16233d;paint-order:stroke fill;text-shadow:3px 3px 0 #CE1126,6px 6px 0 #16233d'); t.style.rotate = '-4deg';
       Array.from('¡Ay, hombe!').forEach(function (ch, k) { var sp = document.createElement('span'); sp.style.display = 'inline-block'; sp.textContent = ch === ' ' ? ' ' : ch; t.appendChild(sp);
         go(sp, [{ opacity: 0, transform: 'translateY(46px) scale(.4) rotate(-16deg)' }, { opacity: 1, transform: 'translateY(-12px) scale(1.15) rotate(5deg)', offset: .65 }, { opacity: 1, transform: 'none' }], { duration: 430, delay: k * 42, easing: 'ease-out' }); });
-      var sub = mk('left:0;right:0;top:calc(34% + min(6.4rem,20vw));z-index:2;text-align:center;color:#fff;font:400 min(1.9rem,6vw)/1 var(--hand);text-shadow:2px 2px 0 #16233d'); sub.textContent = 'que suene el acordeón, Ari'; go(sub, [{ opacity: 0, translate: '0 10px' }, { opacity: 1, translate: '0 0' }], { duration: 380, delay: 420 });
+      var sub = mk('left:0;right:0;top:calc(34% + min(6.4rem,20vw));z-index:2;text-align:center;color:#fff;font:400 min(1.9rem,6vw)/1 var(--hand);text-shadow:2px 2px 0 #16233d'); sub.textContent = 'ahí vamos'; go(sub, [{ opacity: 0, translate: '0 10px' }, { opacity: 1, translate: '0 0' }], { duration: 380, delay: 420 });
       for (var k = 0; k < 14; k++) {   // mariposas amarillas y notas que salen del centro
         var isN = k % 3 === 2, f = mk('left:' + (W / 2 - 17) + 'px;top:' + (H * .45) + 'px;z-index:2;width:34px;opacity:0;filter:drop-shadow(0 3px 3px rgba(0,0,0,.4))'), ang = rnd(0, Math.PI * 2), dist = rnd(110, Math.max(W, H) * .55);
         if (isN) { f.style.cssText += ';font:700 2rem/1 var(--hand);color:' + ['#FFF3C4', '#FCD116', '#fff'][k % 3] + ';text-shadow:0 2px 0 rgba(0,0,0,.5)'; f.textContent = ['♪', '♫', '♬'][k % 3]; } else { var c = BFC[k % BFC.length]; f.innerHTML = BFSVG(c[0], c[1]); }
@@ -2281,18 +2343,57 @@
       });
     });
   }
-  // Salsa: cintas inclinadas que suben siguiendo el ritmo de la clave 3-2, con un rebotico al llegar
+  function claveHit(at, vol) {   // palito de clave: dos golpes secos de madera
+    try {
+      AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === 'suspended') AC.resume();
+      var t = AC.currentTime + at, o = AC.createOscillator(), g = AC.createGain(), f = AC.createBiquadFilter(); o.type = 'triangle'; o.frequency.setValueAtTime(2300, t); o.frequency.exponentialRampToValueAtTime(1650, t + .05);
+      f.type = 'bandpass'; f.frequency.value = 2000; f.Q.value = 3; g.gain.setValueAtTime(vol || .3, t); g.gain.exponentialRampToValueAtTime(.0001, t + .13); o.connect(f); f.connect(g); g.connect(AC.destination); o.start(t); o.stop(t + .16);
+    } catch (e) {}
+  }
+  function fanfare() {   // golpe de trompetas + conga
+    try {
+      AC = AC || new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === 'suspended') AC.resume();
+      var t0 = AC.currentTime, lp = AC.createBiquadFilter(), out = AC.createGain(); lp.type = 'lowpass'; lp.Q.value = 2; out.gain.value = .13; lp.connect(out); out.connect(AC.destination);
+      [[0, 523.25, .13], [.15, 659.25, .13], [.3, 784, .75]].forEach(function (n, k) {
+        [1, 1.004].forEach(function (dt) { var o = AC.createOscillator(), g = AC.createGain(), t = t0 + n[0]; o.type = 'sawtooth'; o.frequency.value = n[1] * dt;
+          lp.frequency.setValueAtTime(700, t); lp.frequency.exponentialRampToValueAtTime(3600, t + .08); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.5, t + .02); g.gain.setValueAtTime(.5, t + n[2] * .75); g.gain.exponentialRampToValueAtTime(.0001, t + n[2] + .05);
+          if (k === 2) { var lf = AC.createOscillator(), lg = AC.createGain(); lf.frequency.value = 6; lg.gain.value = 6; lf.connect(lg); lg.connect(o.detune); lf.start(t); lf.stop(t + n[2] + .1); }
+          o.connect(g); g.connect(lp); o.start(t); o.stop(t + n[2] + .08); });
+      });
+      [0, .15, .3].forEach(function (d) { var o = AC.createOscillator(), g = AC.createGain(), t = t0 + d; o.type = 'sine'; o.frequency.setValueAtTime(230, t); o.frequency.exponentialRampToValueAtTime(95, t + .16); g.gain.setValueAtTime(.4, t); g.gain.exponentialRampToValueAtTime(.0001, t + .2); o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t + .22); });
+    } catch (e) {}
+  }
+  // Salsa: telón rojo de teatro que se cierra a golpe de clave 3-2, ¡A bailar! en neón con trompetas y confeti, y el telón se abre
   function cClave(swap) {
-    var n = 5, w = innerWidth / n, hit = [0, 210, 420, 700, 840], cols = ['#E63946', '#FFC145', '#00B8A9', '#FF5A1F', '#152C29'], S = [];
-    for (var i = 0; i < n; i++) {
-      var e = mk('top:-12%;height:124%;left:' + (i * w - w * .45).toFixed(0) + 'px;width:' + (w * 1.9).toFixed(0) + 'px;background:' + GRAIN + ',' + cols[i] + ';transform:skewX(-10deg)');
-      S.push({ e: e, i: i, a: go(e, [{ translate: '0 112%' }, { translate: '0 0' }], { duration: 400, delay: Math.max(0, hit[i] + rnd(-12, 12)), easing: 'cubic-bezier(.2,1.35,.4,1)' }) });
+    var W = wipe.clientWidth || innerWidth, H = wipe.clientHeight || innerHeight, HIT = [0, 210, 420, 700, 840], TOT = 1180, ST = 'cubic-bezier(.2,1.5,.4,1)';
+    var vel = 'repeating-linear-gradient(90deg,rgba(0,0,0,.38) 0 7px,rgba(255,255,255,.07) 7px 15px,rgba(0,0,0,.22) 15px 24px),linear-gradient(90deg,#6e0d1a,#c4182f 50%,#6e0d1a)';
+    function panel(left) {
+      var e = mk((left ? 'left:0;' : 'right:0;') + 'top:0;bottom:0;width:calc(50% + 2px);z-index:2;background:' + vel + ';box-shadow:inset ' + (left ? '-' : '') + '5px 0 0 #FFC145,' + (left ? '8' : '-8') + 'px 0 22px rgba(0,0,0,.5)');
+      var fr = document.createElement('div'); fr.style.cssText = 'position:absolute;left:0;right:0;bottom:0;height:22px;background:repeating-linear-gradient(90deg,#FFC145 0 4px,#b57e14 4px 6px,transparent 6px 9px);border-top:3px solid #FFC145'; e.appendChild(fr); return e;
     }
-    return fin(S.map(function (s) { return s.a; })).then(function () {
-      swap(); var x = palabra('¡a bailar!', '#00B8A9');
-      return wait(560).then(function () {
-        go(x, [{ opacity: 1 }, { opacity: 0 }], { duration: 160 });
-        return fin(S.map(function (s) { return go(s.e, [{ translate: '0 0' }, { translate: '0 -115%' }], { duration: 380, delay: Math.max(0, hit[s.i] * .75 + rnd(-10, 10)), easing: 'cubic-bezier(.6,0,.3,1)' }); }));
+    var L = panel(true), R = panel(false), val = mk('left:0;right:0;top:0;height:58px;z-index:5;background:linear-gradient(180deg,#5c0b17,#a8142a);border-bottom:4px solid #FFC145;box-shadow:0 8px 16px rgba(0,0,0,.5)');
+    var sc = document.createElement('div'); sc.style.cssText = 'position:absolute;left:0;right:0;top:100%;height:24px;background:radial-gradient(circle at 50% 0,#a8142a 0 15px,transparent 16px) 0 0/36px 24px repeat-x'; val.appendChild(sc);
+    var fl = mk('inset:0;z-index:4;background:radial-gradient(circle at 50% 40%,rgba(255,225,150,.7),transparent 66%);opacity:0');
+    function steps(sign) { var fr = [], i; for (i = 0; i < 5; i++) { fr.push({ translate: (sign * (100 - 20 * i)) + '% 0', offset: HIT[i] / TOT, easing: 'linear' }); fr.push({ translate: (sign * (100 - 20 * (i + 1))) + '% 0', offset: (HIT[i] + 120) / TOT, easing: 'linear' }); fr[fr.length - 2].easing = ST; } fr.push({ translate: '0 0', offset: 1 }); return fr; }
+    var ff = []; HIT.forEach(function (h) { ff.push({ opacity: 0, offset: h / TOT }, { opacity: .85, offset: (h + 40) / TOT }, { opacity: 0, offset: (h + 115) / TOT }); }); ff.push({ opacity: 0, offset: 1 });
+    HIT.forEach(function (h, k) { claveHit(h / 1000, k === 4 ? .4 : .3); }); try { vib([20, 20, 20, 20, 20]); } catch (e) {}
+    return fin([go(L, steps(-1), { duration: TOT, easing: 'linear' }), go(R, steps(1), { duration: TOT, easing: 'linear' }), go(fl, ff, { duration: TOT }), go(val, [{ translate: '0 -120%' }, { translate: '0 0' }], { duration: 420, easing: 'cubic-bezier(.3,1.3,.5,1)' })]).then(function () {
+      swap(); fanfare(); try { vib([30, 40, 30, 40, 90]); } catch (e) {}
+      var t = mk('left:0;right:0;top:36%;z-index:6;text-align:center;white-space:nowrap;font:400 min(5.8rem,18vw)/1 var(--hand);color:#FFF4D6;text-shadow:0 0 8px #fff,0 0 22px #FF5A1F,0 0 46px #FF5A1F,0 0 86px #E63946'); t.textContent = '¡A bailar!'; t.style.rotate = '-4deg';
+      go(t, [{ opacity: 0, scale: '.4' }, { opacity: 1, scale: '1.18', offset: .35 }, { opacity: .6, scale: '1.05', offset: .5 }, { opacity: 1, scale: '1.1', offset: .6 }, { opacity: .75, scale: '1.04', offset: .75 }, { opacity: 1, scale: '1.08' }], { duration: 900, easing: 'ease-out' });
+      [['#FFE9B0', -24, 22], ['#33e0d0', 10, -18], ['#ff7a8a', 28, -26]].forEach(function (b, k) {
+        var sp = mk('left:' + (18 + k * 30) + '%;top:-30px;width:' + Math.round(W * .42) + 'px;height:' + Math.round(H * 1.15) + 'px;z-index:3;margin-left:-' + Math.round(W * .21) + 'px;transform-origin:50% 0;mix-blend-mode:screen;clip-path:polygon(45% 0,55% 0,100% 100%,0 100%);background:linear-gradient(180deg,' + b[0] + 'bb,transparent 85%)');
+        go(sp, [{ rotate: b[1] + 'deg', opacity: 0 }, { opacity: 1, offset: .2 }, { rotate: b[2] + 'deg', opacity: .85 }], { duration: 1500, easing: 'ease-in-out' });
+      });
+      var COL = ['#E63946', '#FFC145', '#00D1C1', '#FF5A1F', '#fff', '#ff7ab6'];
+      for (var k = 0; k < 54; k++) {
+        var c = mk('left:' + rnd(0, 100).toFixed(1) + '%;top:-24px;width:' + rnd(7, 12).toFixed(0) + 'px;height:' + rnd(12, 20).toFixed(0) + 'px;z-index:7;background:' + COL[k % COL.length] + ';border-radius:2px');
+        go(c, [{ transform: 'translate(0,0) rotate(0) rotateX(0)', opacity: 1 }, { transform: 'translate(' + rnd(-90, 90).toFixed(0) + 'px,' + (H + 50) + 'px) rotate(' + rnd(-540, 540).toFixed(0) + 'deg) rotateX(' + rnd(360, 900).toFixed(0) + 'deg)', opacity: 1 }], { duration: rnd(1300, 2300), delay: rnd(0, 550), easing: 'cubic-bezier(.3,.1,.5,1)' });
+      }
+      return wait(1250).then(function () {
+        go(t, [{ opacity: 1 }, { opacity: 0 }], { duration: 220 });
+        var op = function (side) { return go(side, [{ translate: '0 0' }, { translate: (side === L ? '-' : '') + '102% 0' }], { duration: 820, delay: 120, easing: 'cubic-bezier(.55,0,.2,1)' }); };
+        return fin([op(L), op(R), go(val, [{ translate: '0 0' }, { translate: '0 -130%' }], { duration: 520, delay: 360, easing: 'ease-in' })]);
       });
     });
   }
@@ -2465,7 +2566,7 @@
     '<svg viewBox="0 0 60 60"><rect x="3" y="14" width="13" height="32" rx="3"/><rect x="44" y="14" width="13" height="32" rx="3"/><path d="M17 17L23 14V46L17 43ZM25 14L31 17V43L25 46ZM33 17L39 14V46L33 43ZM41 15L43 15V45L41 45Z"/></svg>',
     '<svg viewBox="0 0 60 60"><circle cx="30" cy="30" r="6"/><ellipse cx="30" cy="14" rx="7" ry="10"/><ellipse cx="30" cy="46" rx="7" ry="10"/><ellipse cx="14" cy="30" rx="10" ry="7"/><ellipse cx="46" cy="30" rx="10" ry="7"/></svg>',
     '<svg viewBox="0 0 60 60"><path d="M5 40C5 30 17 28 19 20C21 10 39 10 41 20C43 28 55 30 55 40C55 47 5 47 5 40Z"/><path d="M12 38H48" stroke="#F8EDC8" stroke-width="3" fill="none"/></svg>'];
-  var VA_DIV = ['¡Ay, hombe, qué belleza!', 'Parranda de a dos', 'Con acordeón y sentimiento', 'Ari, mi Macondo'];
+  var VA_DIV = ['Ay, hombe', 'Tú y yo', 'Mi parte favorita', 'Alex + Ari'];
   var VA_POS = [['right:12px;bottom:10px', 8], ['left:14px;bottom:8px', -10], ['right:14px;top:22px', 12], ['left:auto;right:10px;bottom:12px', -6], ['right:12px;bottom:8px', 6]];
   var ACC_SVG = '<svg class="va-acc" viewBox="0 0 90 56" aria-hidden="true"><rect x="2" y="6" width="20" height="44" rx="4" fill="#CE1126" stroke="#16233d" stroke-width="3"/><rect x="68" y="6" width="20" height="44" rx="4" fill="#CE1126" stroke="#16233d" stroke-width="3"/><path d="M22 8L32 5V51L22 48ZM34 5L44 8V48L34 51ZM46 8L56 5V51L46 48ZM58 5L68 8V48L58 51Z" fill="#FCD116" stroke="#16233d" stroke-width="2.4" stroke-linejoin="round"/><circle cx="12" cy="18" r="3.4" fill="#FFF3C4"/><circle cx="12" cy="30" r="3.4" fill="#FFF3C4"/><circle cx="12" cy="42" r="3.4" fill="#FFF3C4"/><circle cx="78" cy="18" r="3.4" fill="#FFF3C4"/><circle cx="78" cy="30" r="3.4" fill="#FFF3C4"/></svg>';
   var vaTimers = [];
@@ -2501,6 +2602,46 @@
       var dx = rnd(-70, 70), dy = rnd(-130, -60), a = n.animate([{ transform: 'translate(0,0) scale(.5) rotate(0)', opacity: 0 }, { opacity: 1, offset: .2 }, { transform: 'translate(' + dx.toFixed(0) + 'px,' + dy.toFixed(0) + 'px) scale(1.15) rotate(' + rnd(-35, 35).toFixed(0) + 'deg)', opacity: 0 }], { duration: rnd(800, 1300), easing: 'ease-out' });
       a.onfinish = (function (nn) { return function () { nn.remove(); }; })(n);
     }
+  }, true);
+  /* ===== Salsa: reflectores, notas que suben, luces bokeh, sellos de instrumentos, tiras de bombillos y clave al tocar ===== */
+  var SA_ST = [
+    '<svg viewBox="0 0 60 60"><path d="M4 27H30L55 12V48L30 33H4Z"/><rect x="13" y="19" width="5" height="9"/><circle cx="8" cy="30" r="3"/></svg>',
+    '<svg viewBox="0 0 60 60"><ellipse cx="30" cy="11" rx="15" ry="5"/><path d="M15 11L20 53H40L45 11Z"/><path d="M17 25H43M19 39H41" stroke="#FDF3DC" stroke-width="3.5" fill="none"/></svg>',
+    '<svg viewBox="0 0 60 60"><circle cx="20" cy="18" r="10"/><rect x="18" y="26" width="4" height="27" rx="2"/><circle cx="42" cy="22" r="10"/><rect x="40" y="30" width="4" height="23" rx="2"/></svg>',
+    '<svg viewBox="0 0 60 60"><path d="M10 50L46 14M18 54L54 18" stroke-width="7" stroke-linecap="round" fill="none"/></svg>',
+    '<svg viewBox="0 0 60 60"><path d="M22 44V12L46 8V40" fill="none" stroke-width="3"/><ellipse cx="16" cy="44" rx="8" ry="6"/><ellipse cx="40" cy="40" rx="8" ry="6"/></svg>',
+    '<svg viewBox="0 0 60 60"><path d="M30 5L37 23 56 24 41 36 46 55 30 44 14 55 19 36 4 24 23 23Z"/></svg>'];
+  var SA_POS = [['right:12px;bottom:14px', 8], ['left:14px;bottom:12px', -10], ['right:14px;top:24px', 12], ['right:12px;bottom:12px', -6], ['left:16px;bottom:10px', 6], ['right:10px;bottom:16px', -12]];
+  var SA_DIV = ['¡Dale!', 'Pa’ la pista', 'Baila conmigo', 'Alex + Ari'];
+  var SA_COL = ['#FFC145', '#FF5A1F', '#00D1C1', '#E63946'];
+  var saPat = [1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0], saStep = 0, saN = 0;
+  function salsaDecor(on) {
+    document.querySelectorAll('#saFx, .sa-st, .sa-div').forEach(function (e) { e.remove(); });
+    if (!on) return;
+    var fx = document.createElement('div'); fx.id = 'saFx'; fx.setAttribute('aria-hidden', 'true'), h = '', i;
+    var SP = [['rgba(255,236,190,.38)', 12, 6.5, -24, 18], ['rgba(40,224,208,.3)', 52, 8.5, 20, -22], ['rgba(255,110,140,.3)', 86, 7.5, -16, 26]];
+    var h = ''; SP.forEach(function (q) { h += '<i class="sa-sp" style="left:calc(' + q[1] + '% - min(28vw,190px));--c:' + q[0] + ';--t:' + q[2] + 's;--dl:-' + rnd(0, 5).toFixed(1) + 's;--a0:' + q[3] + 'deg;--a1:' + q[4] + 'deg"></i>'; });
+    for (var i = 0; i < 9; i++) h += '<i class="sa-bk" style="left:' + rnd(-4, 96).toFixed(0) + '%;top:' + rnd(38, 92).toFixed(0) + '%;width:' + rnd(40, 110).toFixed(0) + 'px;height:' + rnd(40, 110).toFixed(0) + 'px;--c:' + ['rgba(255,193,69,.5)', 'rgba(0,209,193,.45)', 'rgba(230,57,70,.45)', 'rgba(255,90,31,.45)'][i % 4] + ';--t:' + rnd(5, 10).toFixed(1) + 's;--dl:-' + rnd(0, 9).toFixed(1) + 's"></i>';
+    for (i = 0; i < 12; i++) h += '<i class="sa-nt" style="left:' + rnd(2, 96).toFixed(0) + '%;--sz:' + rnd(18, 34).toFixed(0) + 'px;--c:' + SA_COL[i % 4] + ';--t:' + rnd(12, 22).toFixed(1) + 's;--dl:-' + rnd(0, 18).toFixed(1) + 's;--sw:' + rnd(-50, 50).toFixed(0) + 'px">' + ['♪', '♫', '♬', '♩'][i % 4] + '</i>';
+    fx.innerHTML = h; document.body.appendChild(fx);
+    var win = $('win'), cards = [].slice.call(win.querySelectorAll(':scope > .letter'));
+    cards.forEach(function (c, k) { var st = document.createElement('span'); st.className = 'sa-st'; st.innerHTML = SA_ST[k % SA_ST.length]; st.style.cssText = SA_POS[k % SA_POS.length][0] + ';--r:' + SA_POS[k % SA_POS.length][1] + 'deg'; c.appendChild(st); });
+    SA_DIV.forEach(function (t, k) {
+      var el = document.createElement('div'); el.className = 'sa-div'; var bs = '';
+      for (var n = 0; n < 9; n++) { var u = .06 + n * .11, x = u * 100, y = (8 + 124 * u * (1 - u)) / 60 * 100 * .66; bs += '<i class="sa-bulb" style="left:' + x.toFixed(1) + '%;top:calc(' + y.toFixed(1) + '% + 2px);--c:' + SA_COL[(n + k) % 4] + ';--dl:' + (n * .17).toFixed(2) + 's"></i>'; }
+      el.innerHTML = '<svg viewBox="0 0 380 60" preserveAspectRatio="none"><path d="M0 8Q190 70 380 8"/></svg>' + bs + '<b>' + t + '</b>';
+      var ref = cards[2 + k * 2]; if (ref) win.insertBefore(el, ref); else win.appendChild(el);
+    });
+  }
+  document.addEventListener('pointerdown', function (e) {   // en Salsa, cada toque es un golpe de clave 3-2 y salen ondas y chispas
+    if (actual !== 'salsa') return;
+    var c = SA_COL[saN++ % 4], r = document.createElement('i'); r.className = 'sa-ring'; r.style.cssText = 'left:' + e.clientX + 'px;top:' + e.clientY + 'px;--c:' + c; document.body.appendChild(r);
+    r.animate([{ transform: 'scale(.3)', opacity: 1 }, { transform: 'scale(3.2)', opacity: 0 }], { duration: 700, easing: 'ease-out' }).onfinish = function () { r.remove(); };
+    for (var k = 0; k < 6; k++) {
+      var sp = document.createElement('span'); sp.className = 'sa-spk'; sp.textContent = ['✦', '♪', '♬', '✦', '♫', '✧'][k]; sp.style.color = SA_COL[(k + saN) % 4]; sp.style.left = (e.clientX - 8) + 'px'; sp.style.top = (e.clientY - 10) + 'px'; document.body.appendChild(sp);
+      var a = rnd(0, 6.283), d = rnd(40, 110); sp.animate([{ transform: 'translate(0,0) scale(.6)', opacity: 1 }, { transform: 'translate(' + (Math.cos(a) * d).toFixed(0) + 'px,' + (Math.sin(a) * d - 30).toFixed(0) + 'px) scale(1.2) rotate(' + rnd(-60, 60).toFixed(0) + 'deg)', opacity: 0 }], { duration: rnd(600, 1000), easing: 'ease-out' }).onfinish = (function (x) { return function () { x.remove(); }; })(sp);
+    }
+    do { saStep = (saStep + 1) % saPat.length; } while (!saPat[saStep]); claveHit(0, .22);   // el patrón 3-2 va avanzando con cada toque
   }, true);
   function rapDecor(on) {
     document.querySelectorAll('.rd-st, .rd-gh, .rap-wall').forEach(function (e) { e.remove(); });
@@ -3985,37 +4126,37 @@
   var FIRMA = 'Alex';
   var ABRELO = [
     { id: 'extrano', e: '🥺', cuando: 'me extrañes', t: [
-      'Ari, si estás leyendo esto es porque me extrañas. Y yo a ti, aunque no esté ahí para decírtelo.',
-      'Ponte una canción, la de Penyair, la que quieras, y acuérdate del parquesito y del atardecer que vimos ese jueves. Yo ahí estaba pensando que no quería que se acabara el día.',
-      'Ya nos vemos, cachetes. Un abrazo largo ya te lo debo.'] },
+      'Ari, si estás leyendo esto es porque me extrañas. Yo también te extraño, aunque no esté ahí.',
+      'Ponte una canción de Penyair o la que quieras y acuérdate del parquesito, cuando vimos el atardecer. Yo ahí no quería que se acabara el día.',
+      'Ya nos vemos, cachetes. Te debo un abrazo largo.'] },
     { id: 'brava', e: '😤', cuando: 'estés brava conmigo', t: [
-      'Ya sé, la embarré. Antes de que me digas algo: perdón.',
-      'No te lo digo por quedar bien, te lo digo porque no me gusta que estés brava conmigo. Dame un ratico, que yo pienso en qué fallé y lo arreglo.',
-      'Y cuando se te pase me escribes, o te escribo yo, lo que pase primero.'] },
+      'Ya sé, la embarré. Perdón.',
+      'No me gusta que estés brava conmigo. Dame un ratico y pienso bien qué hice mal.',
+      'Cuando se te pase me escribes, o te escribo yo, lo que pase primero.'] },
     { id: 'dormir', e: '🌙', cuando: 'no puedas dormir', t: [
-      'Son las tantas y no puedes dormir, te conozco. Respira.',
-      'Lo que te da vueltas en la cabeza de noche siempre se ve más grande de lo que es. Mañana va a ser un día normal.',
-      'Mira, yo te conocí un domingo a las 9:49 de la noche. O sea que la noche también me ha traído cosas buenas.',
-      'Cierra los ojos, piensa en algo que te dé risa. Buenas noches, mi vida.'] },
+      'Son las tantas y no puedes dormir, te conozco.',
+      'Lo que te da vueltas en la cabeza de noche siempre se ve más grande de lo que es. Mañana todo va a estar más tranquilo.',
+      'Yo te conocí un domingo a las 9:49 de la noche, así que la noche también me ha traído cosas buenas.',
+      'Cierra los ojos y piensa en algo que te dé risa. Buenas noches, mi vida.'] },
     { id: 'mal', e: '🫂', cuando: 'te sientas mal', t: [
-      'No tienes que estar bien todo el tiempo, Ari. Si hoy fue un día malo, fue un día malo y ya. Mañana es otro.',
-      'Lo que sí quiero que sepas es que no estás sola con eso. Me puedes contar o no contarme nada y solo pedirme que me quede. Yo me quedo.',
-      'Eres de las personas más bonitas que conozco, y lo digo por cómo eres, no solo por cómo te ves.'] },
+      'No tienes que estar bien todo el tiempo. Si hoy fue un día malo, fue un día malo y ya, mañana es otro.',
+      'No estás sola con eso. Si quieres me cuentas, y si no, solo dime que me quede ahí un rato. Me quedo.',
+      'Te quiero harto, Ari.'] },
     { id: 'risa', e: '😂', cuando: 'quieras reírte', t: [
-      'Ok, te toca risa. Piensa en cuando intentaste decir que no en la página y el botón se te escapaba.',
-      'Ese botón estaba hecho pa\' que no pudieras, y tú ahí intentando. No te me pongas brava, es que fue lo mejor.',
+      'Ok, te toca risa. Acuérdate cuando intentaste decir que no en la página y el botón se te escapaba.',
+      'Ese botón estaba hecho para eso y tú ahí intentando. No te me pongas brava, estuvo muy gracioso.',
       'Ríete un rato, que cuando te ríes se te ve toda la cara.'] },
     { id: 'dudas', e: '💪', cuando: 'dudes de ti', t: [
-      'Hoy dudaste de ti, y yo sé que eso pasa. Pero te voy a decir lo que veo yo.',
-      'Veo a alguien que se ríe fácil, que se acuerda de las cosas, que me hace querer ser mejor, y que a la semana de conocernos me dijo que sí.',
-      'Si yo vi todo eso en una semana, imagínate lo que veo ahora. Créeme, en esto no me equivoco.'] },
+      'Hoy dudaste de ti. Eso le pasa a todo el mundo, a mí también.',
+      'Yo te veo diferente: te ríes fácil, te acuerdas de las cosas, y a la semana de conocernos me dijiste que sí. Eso no lo hace cualquiera.',
+      'Si en una semana vi todo eso, imagínate ahora.'] },
     { id: 'mes', e: '🎉', cuando: 'cumplamos 1 mes', abre: new Date(2026, 10, 18), t: [
-      'Un mes, mi vida. Acuérdate que al principio decíamos "llevamos una semana". Pues ya llevamos un mes y sigo igual de contento que el jueves del atardecer.',
-      'Gracias por las películas, por el play, por aguantarme. Lo que viene lo quiero contigo.',
-      'Hoy pídeme lo que quieras, que te lo debo.'] },
+      'Un mes, mi vida. Al principio decíamos "llevamos una semana", y ya vamos por un mes.',
+      'Gracias por las películas, por el play y por aguantarme. Lo que viene lo quiero contigo.',
+      'Hoy pídeme lo que quieras.'] },
     { id: 'cien', e: '💯', cuando: 'cumplamos 100 días', abre: new Date(2027, 0, 26), t: [
-      '100 días, Ari. Parece poco y a la vez no me acuerdo cómo era antes.',
-      'Si estás leyendo esto, seguimos juntos y eso era todo lo que quería que pasara.',
+      '100 días, Ari. Parece poco, pero ya no me acuerdo cómo era antes.',
+      'Si estás leyendo esto es porque seguimos juntos, y eso era lo que quería.',
       'Te quiero más que el día que me dijiste que sí. Y ese día ya te quería harto.'] }
   ];
 
@@ -4092,7 +4233,7 @@
   var BEST = 'ari_juego_best', best = 0; try { best = parseInt(localStorage.getItem(BEST), 10) || 0; } catch (e) {}
   function showBest() { $('gmBest').textContent = best ? 'tu récord: ' + best + ' puntos' : 'todavía no tienes récord'; }
   showBest();
-  var MSG = [[60, 'Ni modo, cachetes, hay que practicar. Igual te quiero, ¿otra vez?'], [150, 'Eso estuvo bien. Se nota que sabes agarrar lo que es tuyo 😏'], [300, 'Uy, ya casi me ganas. Y eso que yo hice el juego.'], [1e9, 'Ya no te puedo enseñar nada más. Eres la mejor, mi vida. Te debo un helado.']];
+  var MSG = [[60, 'Uy, toca practicar jaja. Igual te quiero, dale otra vez'], [150, 'Estuvo bien, mi vida'], [300, 'Uy casi me ganas, y eso que yo hice el juego'], [1e9, 'Ya ni yo te gano. Te debo un helado']];
   $('gmPlay').addEventListener('click', jugar);
 
   function jugar() {
@@ -4171,7 +4312,7 @@
       cx.textAlign = 'right'; cx.font = '26px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",serif'; var hs = ''; for (var l = 0; l < 3; l++) hs += l < S.lives ? '❤️' : '🖤'; cx.fillText(hs, W - 20 - 0, TOP + 42);
       if (S.boost > 0) { cx.textAlign = 'center'; cx.font = '700 22px ' + HAND; cx.fillStyle = '#FFD54A'; cx.strokeText('¡puntos dobles! ' + Math.ceil(S.boost), W / 2, TOP + 44); cx.fillText('¡puntos dobles! ' + Math.ceil(S.boost), W / 2, TOP + 44); }
       cx.textAlign = 'center';
-      if (S.phase === 'count') { var sec = Math.max(1, Math.ceil(S.cd)), fp = S.cd - Math.floor(S.cd), sc = 1 + fp * .7; cx.save(); cx.translate(W / 2, H * .4); cx.scale(sc, sc); cx.globalAlpha = Math.min(1, .3 + (1 - fp)); cx.font = '700 120px ' + HAND; cx.lineWidth = 8; cx.strokeStyle = 'rgba(0,0,0,.5)'; var tt = S.cd > 3 ? '' : String(sec); cx.strokeText(tt, 0, 0); cx.fillStyle = '#fff'; cx.fillText(tt, 0, 0); cx.restore(); cx.font = '700 26px ' + HAND; cx.fillStyle = '#fff'; cx.globalAlpha = .9; cx.fillText('desliza para mover tu carta y atrapa lo bonito', W / 2, H * .55); cx.fillText('evita los 💔', W / 2, H * .55 + 34); cx.globalAlpha = 1; }
+      if (S.phase === 'count') { var sec = Math.max(1, Math.ceil(S.cd)), fp = S.cd - Math.floor(S.cd), sc = 1 + fp * .7; cx.save(); cx.translate(W / 2, H * .4); cx.scale(sc, sc); cx.globalAlpha = Math.min(1, .3 + (1 - fp)); cx.font = '700 120px ' + HAND; cx.lineWidth = 8; cx.strokeStyle = 'rgba(0,0,0,.5)'; var tt = S.cd > 3 ? '' : String(sec); cx.strokeText(tt, 0, 0); cx.fillStyle = '#fff'; cx.fillText(tt, 0, 0); cx.restore(); cx.font = '700 26px ' + HAND; cx.fillStyle = '#fff'; cx.globalAlpha = .9; cx.fillText('mueve la carta con el dedo', W / 2, H * .55); cx.fillText('los 💔 no', W / 2, H * .55 + 34); cx.globalAlpha = 1; }
       if (S.phase === 'play' && S.ya > 0) { cx.save(); cx.globalAlpha = Math.min(1, S.ya * 2); cx.translate(W / 2, H * .4); cx.scale(1 + (1 - S.ya / .8) * .6, 1 + (1 - S.ya / .8) * .6); cx.font = '700 90px ' + HAND; cx.lineWidth = 8; cx.strokeStyle = 'rgba(0,0,0,.5)'; cx.strokeText('¡YA!', 0, 0); cx.fillStyle = '#FFD54A'; cx.fillText('¡YA!', 0, 0); cx.restore(); }
     }
     var raf = 0, last = performance.now(), alive = true;
@@ -4184,7 +4325,7 @@
       tone(523, .18, 'triangle', .1); setTimeout(function () { tone(659, .18, 'triangle', .1); }, 150); setTimeout(function () { tone(784, .35, 'triangle', .1); }, 300);
       setTimeout(function () {
         var e = ov.querySelector('.gm-end'); e.hidden = false;
-        e.innerHTML = '<div class="paper ge-card"><span class="tape"></span><h3>' + (S.lives <= 0 ? 'Se rompieron los corazones' : '¡Se acabó el tiempo!') + '</h3><div class="ge-score">' + S.score + '<small>puntos</small></div>' + (rec ? '<p class="ge-rec">¡Nuevo récord!</p>' : '') + '<p class="ge-msg">' + msg + '</p><div class="ge-btns"><button class="btn yes" type="button" data-a="again">Otra vez</button><button class="mini ghost" type="button" data-a="exit">Salir</button></div></div>';
+        e.innerHTML = '<div class="paper ge-card"><span class="tape"></span><h3>' + (S.lives <= 0 ? 'Te quedaste sin vidas' : '¡Se acabó el tiempo!') + '</h3><div class="ge-score">' + S.score + '<small>puntos</small></div>' + (rec ? '<p class="ge-rec">¡Nuevo récord!</p>' : '') + '<p class="ge-msg">' + msg + '</p><div class="ge-btns"><button class="btn yes" type="button" data-a="again">Otra vez</button><button class="mini ghost" type="button" data-a="exit">Salir</button></div></div>';
         e.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300 }); e.firstChild.animate([{ transform: 'translateY(60px) scale(.8) rotate(-6deg)', opacity: 0 }, { transform: 'translateY(0) scale(1.03) rotate(-1deg)', opacity: 1, offset: .7 }, { transform: 'rotate(-1.2deg)', opacity: 1 }], { duration: 560, easing: 'cubic-bezier(.3,1.1,.4,1)', fill: 'both' });
         if (rec || S.score >= 150) { burst(W / 2, H * .4, 60, true); S.phase = 'over'; vib([40, 40, 80]); }
       }, 500);
